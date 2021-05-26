@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=PT+Mono&display=swap');
+
+/* Font families for the site */
+/* font-family: 'Fredoka One', cursive; < Headings
+font-family: 'PT Mono', monospace; < Everything else */
+
+body {
+    font-family: 'PT Mono', monospace;
+}
+
+.navbar-brand {
+    font-family: 'Fredoka One', cursive;
+}
+
+.card h5 {
+    font-family: 'Fredoka One', cursive;
+}
+
+h2 {
+    font-family: 'Fredoka One', cursive;
+}
+
+p, h2, .navbar-nav, .nav-link, .navbar-brand, h5 {
+    color: #d9d9d9;
+}
+    
+.navbar {
+background-color: #322f3d;
+}
+    
+.card {
+    background-color: #87556f;
+    box-shadow: #503654 9px 10px 0px 0px;
+}
+
+.main-container {
+    background-color: #4b5d67;
+    background-image: url(../images/bottom_background.png), url(../images/top_background.png);
+    background-repeat: no-repeat;
+    background-position: bottom, top;
+}
+
+.footer-container {
+    background-color: #59405c;
+}
