@@ -1,0 +1,94 @@
+<!doctype html>
+<!-- Created by Michael Dijk -->
+<!-- Milestone 3 project, Code Institute -->
+<!-- App build with Flask, MongoDB Atlas, Bootstrap and some Googleness -->
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+	<!-- Own CSS -->
+	<link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}">
+	
+    <title>My WebDev Story</title>
+  </head>
+  <body>
+
+<!-- Start of header (navbar) -->
+<header>
+	<nav class="navbar navbar-expand-lg">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" href="#">MWDS</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+	      <ul class="navbar-nav ms-auto">
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Home</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Profile</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">New Story</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Login</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Register</a>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+</header>
+<!-- End of header (navbar) -->
+
+<!-- Start main content -->
+<main>
+	<!-- Start main Container -->
+	<!-- Placed container inside container, as fluid container contains full-width background colour for sections -->
+	<div class="container-fluid main-container">
+		<!-- Start article container -->
+			<div class="container">
+                <!-- Start block content -->
+                {% block content %}
+                {% endblock %}
+                <!-- End block content -->
+			</div>
+		<!-- End article container -->
+	</div>
+	<!-- End main Container -->
+</main>
+<!-- End main content -->
+
+<!-- Start Footer -->
+<footer>
+	<div class="container-fluid footer-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<h2>MyWebDev Story</h2>
+					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur vel sit consequuntur beatae at cumque nemo velit nostrum, quis accusantium voluptate tempore a optio soluta porro perferendis sapiente molestiae, earum.</p>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<h2>Our Socials</h2>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae voluptatibus, error laborum ullam neque aliquid iste delectus deleniti, esse saepe eligendi non totam excepturi iure rerum perspiciatis pariatur quibusdam accusantium?</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- End Footer -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+  </body>
+</html>
