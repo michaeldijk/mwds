@@ -6,6 +6,7 @@ font-family: 'PT Mono', monospace; < Everything else */
 
 body {
     font-family: 'PT Mono', monospace;
+    background-color: #59405c;
 }
 
 .navbar-brand {
