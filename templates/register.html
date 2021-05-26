@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Created by Michael Dijk -->
+<!-- Milestone 3 project, Code Institute -->
+<!-- App build with Flask, MongoDB Atlas, Bootstrap and some Googleness -->
+
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
+		<div class="card h-100">
+			<div class="card-body">
+				<h5 class="card-title">Register an account</h5>
+				<p>To post messages to MWDS, you need to create an account, to post comments, you also need to have an account.</p>
+				<p>Use the form below, to register, to start using MWDS.</p>
+				<form action="" class="row">
+					<div class="row">
+						<div class="col-sm-12 col-lg-6">
+							Your Email Address:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							<input type="email" placeholder="Enter your email">
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-sm-12 col-lg-6">
+							Your Password:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							<input type="password" placeholder="Enter your password">
+						</div>
+					</div>
+					<div class="col-12 pt-3">
+						<input type="submit" value="Create my account" class="btn btn-primary">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
