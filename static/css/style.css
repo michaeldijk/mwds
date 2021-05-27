@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=PT+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=PT+Mono&Source+Code+Pro:ital,wght@1,900&display=swap');
 
 /* Font families for the site */
 /* font-family: 'Fredoka One', cursive; < Headings
+/* font-family: 'Source Code Pro', monospace; weight: 900
 font-family: 'PT Mono', monospace; < Everything else */
 
 body {
@@ -10,7 +11,10 @@ body {
 }
 
 .navbar-brand {
-    font-family: 'Fredoka One', cursive;
+    /* font-family: 'Fredoka One', cursive; */
+    font-family: 'Source Code Pro', monospace; 
+    font-weight: 900;
+    font-size: 30px;
 }
 
 .navbar-collapse {
@@ -27,11 +31,13 @@ body {
 }
 
 .card h5 {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Source Code Pro', monospace; 
+    font-weight: 900;
 }
 
 h2 {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Source Code Pro', monospace; 
+    font-weight: 900;
 }
 
 p, h2, .navbar-nav, .nav-link, .navbar-brand, h5 {
@@ -60,4 +66,13 @@ background-color: #322f3d;
 
 .alert {
     color: yellow;
+}
+
+.profile-list {
+    list-style: none;
+    padding: 0 0 0 0;
+}
+
+.profile-list li {
+    padding-top: 5px;
 }
