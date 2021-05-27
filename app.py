@@ -54,11 +54,33 @@ def new_story():
     return render_template("new_story.html", languages=languages)
 
 
+# Edit story template route - coming from profile page
 @app.route("/edit_story/<story_id>", methods=["GET", "POST"])
 def edit_story(story_id):
+    # If form is submitted, then post the following values
+    if request.method == "POST":
+        submit = {
+            "username": session["user"],
+            "language_name": request.form.get("language_name"),
+            "story_title": request.form.get("story_title"),
+            "story_description": request.form.get("story_description")
+        }
+        mongo.db.stories.update({"_id": ObjectId(story_id)},submit)
+        flash("Story has succesfully been updated!")
+        return redirect(url_for("profile", username=session["user"]))
+    
+    # if page is opened, find values, and post to form
     story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
     languages = mongo.db.languages.find().sort("language_name", 1)
     return render_template("edit_story.html", story=story, languages=languages)
+
+
+# delete story template route - coming from profile page
+@app.route("/delete_story/<story_id>")
+def delete_story(story_id):
+    mongo.db.stories.remove({"_id": ObjectId(story_id)})
+    flash("Story succesfully removed from database!")
+    return redirect(url_for("profile", username=session["user"]))
 
 
 # Login template route
