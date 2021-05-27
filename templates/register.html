@@ -12,7 +12,7 @@
 				<h5 class="card-title">Register an account</h5>
 				<p>To post messages to MWDS, you need to create an account, to post comments, you also need to have an account.</p>
 				<p>Use the form below, to register, to start using MWDS.</p>
-				<em><p class="alert"><i class="fas fa-exclamation-triangle"></i> Username & Password can only contain a-z characters, and numbers.</p></em>
+				<em><p class="alert"><i class="fas fa-exclamation-triangle"></i> Username & Password can only contain a-z characters, and numbers, and exist out of five characters or more.</p></em>
 				<form method="POST" action="{{ url_for("register") }}" class="row">
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
@@ -31,7 +31,11 @@
 						</div>
 					</div>
 					<div class="col-12 pt-3">
-						<input type="submit" value="Create my account" class="btn btn-primary">
+						<input type="submit" value="Create my account" class="btn btn-primary"> 
+					</div>
+					<div class="col-12 pt-3">
+						<p>Already registered?</p>
+						<a href="{{ url_for("login") }}" class="btn btn-primary">Log In to your account</a>
 					</div>
 				</form>
 			</div>
