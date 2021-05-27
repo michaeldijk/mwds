@@ -115,7 +115,8 @@ def logout():
 # New story template route
 @app.route("/new_story")
 def new_story():
-    return render_template("new_story.html")
+    languages = mongo.db.languages.find().sort("language_name", 1)
+    return render_template("new_story.html", languages=languages)
 
 
 # run app, with environment variables from env.py local,
