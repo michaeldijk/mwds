@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Created by Michael Dijk -->
+<!-- Milestone 3 project, Code Institute -->
+<!-- App build with Flask, MongoDB Atlas, Bootstrap and some Googleness -->
+
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
+		<div class="card h-100">
+			<div class="card-body">
+				<h5 class="card-title">Login to your account</h5>
+				<p>Login to your account, to post new stories, comment on users their stories, and update your profile.</p>
+				<form method="POST" action="{{ url_for("login") }}" class="row">
+					<div class="row">
+						<div class="col-sm-12 col-lg-6">
+							Your Username:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							<input type="username" name="username" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Enter your username" minlength="5" maxlength="15" required>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-sm-12 col-lg-6">
+							Your Password:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							<input type="password" name="password" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Enter your password" minlength="5" maxlength="15" required>
+						</div>
+					</div>
+					<div class="col-12 pt-3">
+						<input type="submit" value="Log In" class="btn btn-primary"> 
+					</div>
+					<div class="col-12 pt-3">
+						<p>Not yet registered?</p>
+						<a href="{{ url_for("register") }}" class="btn btn-primary">Register an account</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
