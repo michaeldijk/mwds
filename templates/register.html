@@ -12,13 +12,14 @@
 				<h5 class="card-title">Register an account</h5>
 				<p>To post messages to MWDS, you need to create an account, to post comments, you also need to have an account.</p>
 				<p>Use the form below, to register, to start using MWDS.</p>
+				<em><p class="alert"><i class="fas fa-exclamation-triangle"></i> Username & Password can only contain a-z characters, and numbers.</p></em>
 				<form method="POST" action="{{ url_for("register") }}" class="row">
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
 							Your Username:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="username" name="username" placeholder="Enter your username">
+							<input type="username" name="username" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Enter your username" minlength="5" maxlength="15" required>
 						</div>
 					</div>
 					<div class="row pt-3">
@@ -26,7 +27,7 @@
 							Your Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="password" name="password" placeholder="Enter your password">
+							<input type="password" name="password" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Enter your password" minlength="5" maxlength="15" required>
 						</div>
 					</div>
 					<div class="col-12 pt-3">
