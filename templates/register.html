@@ -12,13 +12,13 @@
 				<h5 class="card-title">Register an account</h5>
 				<p>To post messages to MWDS, you need to create an account, to post comments, you also need to have an account.</p>
 				<p>Use the form below, to register, to start using MWDS.</p>
-				<form action="" class="row">
+				<form method="POST" action="{{ url_for("register") }}" class="row">
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
-							Your Email Address:
+							Your Username:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="email" placeholder="Enter your email">
+							<input type="username" name="username" placeholder="Enter your username">
 						</div>
 					</div>
 					<div class="row pt-3">
@@ -26,7 +26,7 @@
 							Your Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="password" placeholder="Enter your password">
+							<input type="password" name="password" placeholder="Enter your password">
 						</div>
 					</div>
 					<div class="col-12 pt-3">
