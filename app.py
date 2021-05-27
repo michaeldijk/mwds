@@ -1,6 +1,7 @@
 import os
 from flask import (Flask, flash, render_template, 
                     redirect, request, session, url_for)
+import flask
 from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -35,6 +36,26 @@ def get_stories():
 # Register template route
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if request.method == "POST":
+        # check if username already is present in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        # if existing user check comes back with username from db, 
+        # then flash message to user, and open register again
+        if existing_user:
+            flash("Username is already present, please choose another one...")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+        
+        session["user"] = request.form.get("username").lower()
+        flash("Registration Succesful, welcome to the club!")
+    
     return render_template("register.html")
 
 
