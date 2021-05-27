@@ -10,17 +10,16 @@
 		<div class="card h-100">
 			<div class="card-body">
 				<h5 class="card-title">Post a new story</h5>
-				<form class="row">
+				<form method="POST" action="" class="row">
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
 							Select language discussed:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<select id="cars" name="cars" required>
-								<option value="volvo">Volvo</option>
-								<option value="saab">Saab</option>
-								<option value="fiat">Fiat</option>
-								<option value="audi">Audi</option>
+							<select id="language_name" name="language_name" required>
+								{% for language in languages %}
+                    				<option value="{{ language.language_name }}">{{ language.language_name }}</option>
+                				{% endfor %}
 							</select>
 						</div>
 					</div>
@@ -29,13 +28,13 @@
 							Story Title:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="text" name="xxx" placeholder="Enter Title" minlength="5" maxlength="55" required>
+							<input type="text" id="story_title" name="story_title" placeholder="Enter Title" minlength="5" maxlength="55" required>
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							Story:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<textarea name="message" rows="10" cols="30">The cat was playing in the garden.</textarea>
+							<textarea id="story_description" name="story_description" rows="10" cols="30">The cat was playing in the garden.</textarea>
 						</div>
 					</div>
 					<div class="col-12 pt-3">
