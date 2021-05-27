@@ -56,6 +56,7 @@ def register():
         
         session["user"] = request.form.get("username").lower()
         flash("Registration Succesful, welcome to the club!")
+        return redirect(url_for("profile", username=session["user"]))
     
     return render_template("register.html")
 
@@ -74,6 +75,7 @@ def login():
                 existing_user["password"], request.form.get("password")): 
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(request.form.get("username")))
+                return redirect(url_for("profile", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -84,6 +86,14 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
+
+# profile template route
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username):
+    # grab the session users username from the db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    return render_template("profile.html", username=username)
 
 
 # run app, with environment variables from env.py local, otherwise from settings in Heroku
