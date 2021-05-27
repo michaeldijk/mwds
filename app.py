@@ -147,7 +147,7 @@ def profile(username):
     if session["user"]:
         # Find stories written by user, and return to page
         stories_written = mongo.db.stories.find({"username": session["user"]}).sort("_id", -1)
-        return render_template("profile.html", stories_written=stories_written)
+        return render_template("profile.html", stories_written=stories_written, username=username)
 
     return redirect(url_for("login"))
 
