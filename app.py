@@ -1,13 +1,12 @@
 import os
 import re
-from flask import (Flask, flash, render_template, 
-                    redirect, request, session, url_for)
+from flask import (Flask, flash, render_template,
+                   redirect, request, session, url_for)
 import flask
 from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-
 
 
 # if local env. import env.py, otherwise not
@@ -26,12 +25,15 @@ app.secret_key = os.environ.get("SECRET_KEY")
 # Setup instance of PyMongo linking to Flask App
 mongo = PyMongo(app)
 
+
 # Default route (index/homepage)
 @app.route("/")
-@app.route("/get_stories") # stories route (goes to homepage)
+@app.route("/get_stories")  # stories route (goes to homepage)
 def get_stories():
-    stories = mongo.db.stories.find() # find stories db, and assign it to variable stories
-    return render_template("stories.html", stories=stories) # use variable stories, and assign it to stories
+    # find stories db, and assign it to variable stories
+    stories = mongo.db.stories.find()
+    # use variable stories, and assign it to stories
+    return render_template("stories.html", stories=stories)
 
 
 # Register template route
@@ -42,7 +44,7 @@ def register():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
-        # if existing user check comes back with username from db, 
+        # if existing user check comes back with username from db,
         # then flash message to user, and open register again
         if existing_user:
             flash("Username is already present, please choose another one...")
@@ -53,11 +55,11 @@ def register():
             "password": generate_password_hash(request.form.get("password"))
         }
         mongo.db.users.insert_one(register)
-        
+
         session["user"] = request.form.get("username").lower()
         flash("Registration Succesful, welcome to the club!")
         return redirect(url_for("profile", username=session["user"]))
-    
+
     return render_template("register.html")
 
 
@@ -68,11 +70,11 @@ def login():
         # check if username is present in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-        
+
         if existing_user:
             # ensure the password matches from db and user's input
-            if check_password_hash(
-                existing_user["password"], request.form.get("password")): 
+            if check_password_hash(existing_user["password"],
+                                   request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(request.form.get("username")))
                 return redirect(url_for("profile", username=session["user"]))
@@ -87,13 +89,14 @@ def login():
 
     return render_template("login.html")
 
+
 # profile template route
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session users username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    
+
     if session["user"]:
         return render_template("profile.html", username=username)
 
@@ -106,17 +109,20 @@ def logout():
     # remove user from session cookie
     flash("You have succesfully been logged out!")
     session.pop("user")
-    return redirect(url_for ("login"))
+    return redirect(url_for("login"))
 
 
+# New story template route
 @app.route("/new_story")
 def new_story():
     return render_template("new_story.html")
 
 
-# run app, with environment variables from env.py local, otherwise from settings in Heroku
+# run app, with environment variables from env.py local,
+# otherwise from settings in Heroku
 if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"), 
+    app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
+            # don't forget to change debug = false
+            # later onwards, when testing is complete
             debug=True)
-            # don't forget to change debug = false later onwards, when testing is complete
