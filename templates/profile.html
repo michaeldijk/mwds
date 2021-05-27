@@ -12,9 +12,13 @@
 				<h5 class="card-title"><em>{{ username }}'s</em> Profile </h5>
 				<h6>Current stories posted:</h6>
 				<ul>
-					{% for stories in stories_written %}
-                    				<option value="{{ stories.story_title }}">{{ stories.story_title }}</option>
-					{% endfor %}
+					{% if stories_written.username ==  username %}
+						{% for stories in stories_written %}
+										<option value="{{ stories.story_title }}">{{ stories.story_title }}</option>
+						{% endfor %}
+					{% else %}
+						<li>No stories written yet..</li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
