@@ -93,7 +93,20 @@ def profile(username):
     # grab the session users username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("profile.html", username=username)
+    
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return redirect(url_for("login"))
+
+
+# logout template route
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    flash("You have succesfully been logged out!")
+    session.pop("user")
+    return redirect(url_for ("login"))
 
 
 # run app, with environment variables from env.py local, otherwise from settings in Heroku
