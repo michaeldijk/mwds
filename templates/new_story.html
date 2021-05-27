@@ -10,7 +10,7 @@
 		<div class="card h-100">
 			<div class="card-body">
 				<h5 class="card-title">Post a new story</h5>
-				<form method="POST" action="" class="row">
+				<form method="POST" action="{{ url_for("new_story") }}" class="row">
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
 							Select language discussed:
@@ -34,7 +34,7 @@
 							Story:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<textarea id="story_description" name="story_description" rows="10" cols="30">The cat was playing in the garden.</textarea>
+							<textarea id="story_description" name="story_description" rows="10" cols="30" placeholder="The cat was coding an app in the garden."></textarea>
 						</div>
 					</div>
 					<div class="col-12 pt-3">
