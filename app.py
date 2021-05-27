@@ -59,6 +59,11 @@ def register():
     return render_template("register.html")
 
 
+# Login template route
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    return render_template("login.html")
+
 # run app, with environment variables from env.py local, otherwise from settings in Heroku
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), 
