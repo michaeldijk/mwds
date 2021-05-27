@@ -57,3 +57,7 @@ background-color: #322f3d;
 .footer-container {
     background-color: #59405c;
 }
+
+.alert {
+    color: yellow;
+}
