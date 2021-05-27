@@ -113,8 +113,19 @@ def logout():
 
 
 # New story template route
-@app.route("/new_story")
+@app.route("/new_story", methods=["GET", "POST"])
 def new_story():
+    if request.method == "POST":
+        story = {
+            "username": session["user"],
+            "language_name": request.form.get("language_name"),
+            "story_title": request.form.get("story_title"),
+            "story_description": request.form.get("story_description")
+        }
+        mongo.db.stories.insert_one(story)
+        flash("Story succesfully submitted!!")
+        return redirect(url_for("get_stories"))
+
     languages = mongo.db.languages.find().sort("language_name", 1)
     return render_template("new_story.html", languages=languages)
 
