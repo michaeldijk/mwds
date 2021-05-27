@@ -36,31 +36,29 @@ def get_stories():
     return render_template("stories.html", stories=stories)
 
 
-# Register template route
-@app.route("/register", methods=["GET", "POST"])
-def register():
+# New story template route
+@app.route("/new_story", methods=["GET", "POST"])
+def new_story():
     if request.method == "POST":
-        # check if username already is present in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
-
-        # if existing user check comes back with username from db,
-        # then flash message to user, and open register again
-        if existing_user:
-            flash("Username is already present, please choose another one...")
-            return redirect(url_for("register"))
-
-        register = {
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+        story = {
+            "username": session["user"],
+            "language_name": request.form.get("language_name"),
+            "story_title": request.form.get("story_title"),
+            "story_description": request.form.get("story_description")
         }
-        mongo.db.users.insert_one(register)
+        mongo.db.stories.insert_one(story)
+        flash("Story succesfully submitted!!")
+        return redirect(url_for("get_stories"))
 
-        session["user"] = request.form.get("username").lower()
-        flash("Registration Succesful, welcome to the club!")
-        return redirect(url_for("profile", username=session["user"]))
+    languages = mongo.db.languages.find().sort("language_name", 1)
+    return render_template("new_story.html", languages=languages)
 
-    return render_template("register.html")
+
+@app.route("/edit_story/<story_id>", methods=["GET", "POST"])
+def edit_story(story_id):
+    story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
+    languages = mongo.db.languages.find().sort("language_name", 1)
+    return render_template("edit_story.html", story=story, languages=languages)
 
 
 # Login template route
@@ -90,6 +88,33 @@ def login():
     return render_template("login.html")
 
 
+# Register template route
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        # check if username already is present in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        # if existing user check comes back with username from db,
+        # then flash message to user, and open register again
+        if existing_user:
+            flash("Username is already present, please choose another one...")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+
+        session["user"] = request.form.get("username").lower()
+        flash("Registration Succesful, welcome to the club!")
+        return redirect(url_for("profile", username=session["user"]))
+
+    return render_template("register.html")
+
+
 # profile template route
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
@@ -112,24 +137,6 @@ def logout():
     flash("You have succesfully been logged out!")
     session.pop("user")
     return redirect(url_for("login"))
-
-
-# New story template route
-@app.route("/new_story", methods=["GET", "POST"])
-def new_story():
-    if request.method == "POST":
-        story = {
-            "username": session["user"],
-            "language_name": request.form.get("language_name"),
-            "story_title": request.form.get("story_title"),
-            "story_description": request.form.get("story_description")
-        }
-        mongo.db.stories.insert_one(story)
-        flash("Story succesfully submitted!!")
-        return redirect(url_for("get_stories"))
-
-    languages = mongo.db.languages.find().sort("language_name", 1)
-    return render_template("new_story.html", languages=languages)
 
 
 # run app, with environment variables from env.py local,
