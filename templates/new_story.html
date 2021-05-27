@@ -12,6 +12,7 @@
 				<h5 class="card-title">Post a new story</h5>
 				<form method="POST" action="{{ url_for("new_story") }}" class="row">
 					<div class="row">
+						<!-- Start col language selection -->
 						<div class="col-sm-12 col-lg-6">
 							Select language discussed:
 						</div>
@@ -22,24 +23,31 @@
                 				{% endfor %}
 							</select>
 						</div>
+						<!-- End col language selection -->
 					</div>
 					<div class="row pt-3">
+						<!-- Start col Story title field -->
 						<div class="col-sm-12 col-lg-6">
 							Story Title:
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							<input type="text" id="story_title" name="story_title" placeholder="Enter Title" minlength="5" maxlength="55" required>
 						</div>
+						<!-- End col Story title field -->
+						<!-- Start col Story Description field -->
 						<div class="col-sm-12 col-lg-6">
 							Story:
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							<textarea id="story_description" name="story_description" rows="10" cols="30" placeholder="The cat was coding an app in the garden."></textarea>
 						</div>
+						<!-- End col Story Description field -->
 					</div>
+					<!-- Start col Submit button -->
 					<div class="col-12 pt-3">
 						<input type="submit" value="Submit Story" class="btn btn-primary"> 
 					</div>
+					<!-- End col Submit button -->
 				</form>
 			</div>
 		</div>
