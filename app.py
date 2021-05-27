@@ -109,6 +109,11 @@ def logout():
     return redirect(url_for ("login"))
 
 
+@app.route("/new_story")
+def new_story():
+    return render_template("new_story.html")
+
+
 # run app, with environment variables from env.py local, otherwise from settings in Heroku
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), 
