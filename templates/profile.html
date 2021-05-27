@@ -11,10 +11,10 @@
 			<div class="card-body">
 				<h5 class="card-title"><em>{{ username }}'s</em> Profile </h5>
 				<h6>Current stories posted:</h6>
-				<ul>
+				<ul class="profile-list">
 					{% if stories_written.username ==  username %}
 						{% for stories in stories_written %}
-										<option value="{{ stories.story_title }}">{{ stories.story_title }}</option>
+										<li><a href="#" class="btn btn-primary btn-sm">Edit</a> <a href="#" class="btn btn-danger btn-sm">Delete</a> - {{ stories.story_title }}</li>
 						{% endfor %}
 					{% else %}
 						<li>No stories written yet..</li>
