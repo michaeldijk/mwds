@@ -17,6 +17,33 @@
 		{% endfor %}
 		<!-- End error message username -->
 
+		<!-- Start error email address -->
+		{% for error in form.email_address.errors %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<h2 class="text-danger">{{ error }}</h2>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		{% endfor %}
+		<!-- End error email address -->
+
+		<!-- Start error about me -->
+		{% for error in form.about_me.errors %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<h2 class="text-danger">{{ error }}</h2>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		{% endfor %}
+		<!-- End error about me -->
+
+		<!-- Start error avatar -->
+		{% for error in form.avatar.errors %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<h2 class="text-danger">{{ error }}</h2>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		{% endfor %}
+		<!-- End error avatar -->
+		
 		<!-- Start error Password -->
 		{% for error in form.password.errors %}
 			<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -56,7 +83,15 @@
 							{{ form.username }}
 						</div>
 					</div>
-					<div class="row pt-3">
+					<div class="row">
+						<div class="col-sm-12 col-lg-6">
+							Your Email Address:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.email_address }}
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-12 col-lg-6">
 							Your Password:
 						</div>
@@ -64,12 +99,28 @@
 							{{ form.password }}
 						</div>
 					</div>
-					<div class="row pt-3">
+					<div class="row">
 						<div class="col-sm-12 col-lg-6">
 							Confirm Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							{{ form.password_confirm }}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 col-lg-6">
+							About Yourself:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.about_me }}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 col-lg-6">
+							Your Avatar:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.avatar }}
 						</div>
 					</div>
 					<div class="col-12 pt-3">
