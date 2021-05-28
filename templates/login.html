@@ -12,12 +12,13 @@
 				<h5 class="card-title">Login to your account</h5>
 				<p>Login to your account, to post new stories, comment on users their stories, and update your profile.</p>
 				<form method="POST" action="{{ url_for("login") }}" class="row">
+					{{ form.hidden_tag() }}
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
 							Your Username:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="username" name="username" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Enter your username" minlength="5" maxlength="15" required>
+							{{ form.username }}
 						</div>
 					</div>
 					<div class="row pt-3">
@@ -25,11 +26,11 @@
 							Your Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="password" name="password" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Enter your password" minlength="5" maxlength="15" required>
+							{{ form.password }}
 						</div>
 					</div>
 					<div class="col-12 pt-3">
-						<input type="submit" value="Log In" class="btn btn-primary"> 
+						{{ form.submit(class_="btn btn-primary") }}
 					</div>
 					<div class="col-12 pt-3">
 						<p>Forgot Password?</p>
