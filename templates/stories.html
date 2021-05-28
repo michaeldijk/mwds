@@ -7,17 +7,24 @@
 
 <div class="row pt-3 pb-3">
 	{% for story in stories|sort(reverse=true, attribute="_id") %}
-		  <div class="col-sm-12 col-lg-6 p-3">
-			<div class="card h-100">
-				<div class="card-body">
-					<h5 class="card-title">{{ story.story_title }}</h5>
-					<p>Posted by: <em>{{ story.username }}</em></p>
-					<p>Main language discussed: <em>{{ story.language_name }}</em></p>
-					<p class="card-text">{{ story.story_description }}</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
+			<div class="col-sm-12 col-lg-6 p-3">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title">{{ story.story_title }}</h5>
+						<div class="row">
+							<div class="col-3">
+								<img src="https://www.web2present.com/wp-content/uploads/2017/02/no-avatar-350x350.jpg" alt="My Avatar" class="avatar">
+							</div>
+							<div class="col-9">
+								<p>Posted by: <em>{{ story.username }}</em></p>
+								<p>Main language discussed: <em>{{ story.language_name }}</em></p>
+							</div>
+						</div>
+						<p class="card-text">{{ story.story_description }}</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					</div>
 				</div>
 			</div>
-		  </div>
 	  {% endfor %}	
 </div>
 {% endblock %}
