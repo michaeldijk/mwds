@@ -4,7 +4,6 @@
 <!-- Created by Michael Dijk -->
 <!-- Milestone 3 project, Code Institute -->
 <!-- App build with Flask, MongoDB Atlas, Bootstrap and some Googleness -->
-<!-- Test push for new Branch -->
 
 <div class="row justify-content-center pt-3 pb-3">
 	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
@@ -15,12 +14,16 @@
 				<p>Use the form below, to register, to start using MWDS.</p>
 				<em><p class="alert"><i class="fas fa-exclamation-triangle"></i> Username & Password can only contain a-z characters, and numbers, and exist out of five characters or more.</p></em>
 				<form method="POST" action="{{ url_for("register") }}" class="row">
+					{{ form.hidden_tag() }}
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
 							Your Username:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="username" name="username" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Enter your username" minlength="5" maxlength="15" required>
+							{{ form.username(size=32) }}<br>
+							{% for error in form.username.errors %}
+            					<span style="color: red;">[{{ error }}]</span>
+							{% endfor %}
 						</div>
 					</div>
 					<div class="row pt-3">
@@ -28,11 +31,25 @@
 							Your Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="password" name="password" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Enter your password" minlength="5" maxlength="15" required>
+							{{ form.password(size=32) }}<br>
+							{% for error in form.password.errors %}
+            					<span style="color: red;">[{{ error }}]</span>
+            				{% endfor %}
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-sm-12 col-lg-6">
+							Confirm Password:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.password_confirm(size=32) }}<br>
+							{% for error in form.password_confirm.errors %}
+            					<span style="color: red;">[{{ error }}]</span>
+            				{% endfor %}
 						</div>
 					</div>
 					<div class="col-12 pt-3">
-						<input type="submit" value="Create my account" class="btn btn-primary"> 
+						{{ form.submit(class_="btn btn-primary") }}
 					</div>
 					<div class="col-12 pt-3">
 						<p>Already registered?</p>
