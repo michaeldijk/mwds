@@ -7,7 +7,7 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm
+from forms import RegisterForm, LoginForm
 
 
 # if local env. import env.py, otherwise not
@@ -87,17 +87,17 @@ def delete_story(story_id):
 # Login template route
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
+    form = LoginForm()
+    if form.validate_on_submit():
         # check if username is present in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+        existing_user = mongo.db.users.find_one({"username": form.username.data.lower()})
 
         if existing_user:
             # ensure the password matches from db and user's input
             if check_password_hash(existing_user["password"],
-                                   request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
-                flash("Welcome, {}".format(request.form.get("username")))
+                                   form.password.data):
+                session["user"] = form.username.data.lower()
+                flash("Welcome, {}".format(form.username.data))
                 return redirect(url_for("profile", username=session["user"]))
             else:
                 # invalid password match
@@ -108,7 +108,7 @@ def login():
             flash("Username does not exist, please register!")
             return redirect(url_for("login"))
 
-    return render_template("login.html")
+    return render_template("login.html", form=form)
 
 
 # Register template route
