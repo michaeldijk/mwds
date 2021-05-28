@@ -5,6 +5,39 @@
 <!-- Milestone 3 project, Code Institute -->
 <!-- App build with Flask, MongoDB Atlas, Bootstrap and some Googleness -->
 
+<!-- Start error messages Form -->
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
+		<!-- Start error message username -->
+		{% for error in form.username.errors %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<h2 class="text-danger">{{ error }}</h2>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+		<!-- End error message username -->
+
+		<!-- Start error Password -->
+		{% for error in form.password.errors %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<h2 class="text-danger">{{ error }}</h2>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+		<!-- End error Password -->
+
+		<!-- Start error Password Confirm -->
+		{% for error in form.password_confirm.errors %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<h2 class="text-danger">{{ error }}</h2>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+		<!-- End error Password Confirm -->
+	</div>
+</div>
+<!-- End error messages Form -->
+
 <div class="row justify-content-center pt-3 pb-3">
 	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
 		<div class="card h-100">
@@ -20,10 +53,7 @@
 							Your Username:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							{{ form.username(size=32) }}<br>
-							{% for error in form.username.errors %}
-            					<span style="color: red;">[{{ error }}]</span>
-							{% endfor %}
+							{{ form.username }}
 						</div>
 					</div>
 					<div class="row pt-3">
@@ -31,10 +61,7 @@
 							Your Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							{{ form.password(size=32) }}<br>
-							{% for error in form.password.errors %}
-            					<span style="color: red;">[{{ error }}]</span>
-            				{% endfor %}
+							{{ form.password }}
 						</div>
 					</div>
 					<div class="row pt-3">
@@ -42,10 +69,7 @@
 							Confirm Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							{{ form.password_confirm(size=32) }}<br>
-							{% for error in form.password_confirm.errors %}
-            					<span style="color: red;">[{{ error }}]</span>
-            				{% endfor %}
+							{{ form.password_confirm }}
 						</div>
 					</div>
 					<div class="col-12 pt-3">
