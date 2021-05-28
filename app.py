@@ -66,10 +66,10 @@ def edit_story(story_id):
             "story_title": request.form.get("story_title"),
             "story_description": request.form.get("story_description")
         }
-        mongo.db.stories.update({"_id": ObjectId(story_id)},submit)
+        mongo.db.stories.update({"_id": ObjectId(story_id)}, submit)
         flash("Story has succesfully been updated!")
         return redirect(url_for("profile", username=session["user"]))
-    
+
     # if page is opened, find values, and post to form
     story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
     languages = mongo.db.languages.find().sort("language_name", 1)
@@ -90,7 +90,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         # check if username is present in db
-        existing_user = mongo.db.users.find_one({"username": form.username.data.lower()})
+        existing_user = mongo.db.users.find_one(
+            {"username": form.username.data.lower()})
 
         if existing_user:
             # ensure the password matches from db and user's input
@@ -117,13 +118,14 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         # check if username is already present in db
-        existing_user = mongo.db.users.find_one({"username": form.username.data.lower()})
+        existing_user = mongo.db.users.find_one(
+            {"username": form.username.data.lower()})
         # if existing user check comes back with username from db,
         # then flash message to user, and open register again
         if existing_user:
             flash("Username is already present, please choose another one...")
             return redirect(url_for("register"))
-        
+
         register = {
             "username": form.username.data.lower(),
             "password": generate_password_hash(form.password.data)
@@ -143,11 +145,16 @@ def profile(username):
     # grab the session users username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    avatar = mongo.db.users.find_one(
+        {"username": session["user"]})["avatar"]
+    about_me = mongo.db.users.find_one(
+        {"username": session["user"]})["about_me"]
 
     if session["user"]:
         # Find stories written by user, and return to page
-        stories_written = mongo.db.stories.find({"username": session["user"]}).sort("_id", -1)
-        return render_template("profile.html", stories_written=stories_written, username=username)
+        stories_written = mongo.db.stories.find(
+            {"username": session["user"]}).sort("_id", -1)
+        return render_template("profile.html", stories_written=stories_written, username=username, about_me=about_me, avatar=avatar)
 
     return redirect(url_for("login"))
 
