@@ -33,8 +33,11 @@ mongo = PyMongo(app)
 def get_stories():
     # find stories db, and assign it to variable stories
     stories = mongo.db.stories.find()
+    # Ed Bradley, CI lead, helped me find a solution to filtering user avatars against stories written.
+    users = list(mongo.db.users.find())
     # use variable stories, and assign it to stories
-    return render_template("stories.html", stories=stories)
+    # user variable users, assign it to users, to find avatars from users
+    return render_template("stories.html", stories=stories, users=users)
 
 
 # New story template route
@@ -128,7 +131,11 @@ def register():
 
         register = {
             "username": form.username.data.lower(),
-            "password": generate_password_hash(form.password.data)
+            "email_address": form.email_address.data.lower(),
+            "about_me": form.about_me.data.lower() or None,
+            "avatar": form.avatar.data.lower(),
+            "password": generate_password_hash(form.password.data),
+
         }
         mongo.db.users.insert_one(register)
 
