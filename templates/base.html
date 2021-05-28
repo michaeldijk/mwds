@@ -74,6 +74,7 @@
 				<!-- Start flash messages -->
 				<div class="row justify-content-center pt-3 pb-3">
 					<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
+						<!-- Start flashed messages -->
 							{% with messages = get_flashed_messages() %}
 								{% if messages %}
 										{% for message in messages %}
@@ -84,6 +85,7 @@
 										{% endfor %}
 								{% endif %}
 							{% endwith %}
+						<!-- End flashed messages -->
 					</div>
 				</div>
 				<!-- End flash messages -->
