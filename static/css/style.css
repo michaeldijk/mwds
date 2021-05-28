@@ -30,9 +30,10 @@ body {
     box-shadow: unset;
 }
 
-.card h5 {
+.card h4 {
     font-family: 'Source Code Pro', monospace; 
     font-weight: 900;
+    color: #FFFFFF;
 }
 
 h2 {
@@ -80,4 +81,15 @@ background-color: #322f3d;
 .avatar {
     max-width: 170px;
     height: auto;
+    border-radius: .25rem;
+}
+
+.avatar-stories {
+    max-width: 60px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.avatar-posted-by {
+    margin: 0;
 }
