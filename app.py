@@ -7,6 +7,7 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from forms import RegisterForm
 
 
 # if local env. import env.py, otherwise not
@@ -113,28 +114,27 @@ def login():
 # Register template route
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == "POST":
-        # check if username already is present in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
-
+    form = RegisterForm()
+    if form.validate_on_submit():
+        # check if username is already present in db
+        existing_user = mongo.db.users.find_one({"username": form.username.data.lower()})
         # if existing user check comes back with username from db,
         # then flash message to user, and open register again
         if existing_user:
             flash("Username is already present, please choose another one...")
             return redirect(url_for("register"))
-
+        
         register = {
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "username": form.username.data.lower(),
+            "password": generate_password_hash(form.password.data)
         }
         mongo.db.users.insert_one(register)
 
-        session["user"] = request.form.get("username").lower()
+        session["user"] = form.username.data.lower()
         flash("Registration Succesful, welcome to the club!")
         return redirect(url_for("profile", username=session["user"]))
 
-    return render_template("register.html")
+    return render_template("register.html", form=form)
 
 
 # profile template route
