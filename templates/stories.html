@@ -10,18 +10,25 @@
 			<div class="col-sm-12 col-lg-6 p-3">
 				<div class="card h-100">
 					<div class="card-body">
-						<h5 class="card-title">{{ story.story_title }}</h5>
 						<div class="row">
-							<div class="col-3">
-								<img src="https://www.web2present.com/wp-content/uploads/2017/02/no-avatar-350x350.jpg" alt="My Avatar" class="avatar">
+							<div class="col-2">
+								<!-- Ed Bradley, CI lead, helped me solve the link between story/avatar -->
+								{% for user in users if user.username == story.username %}
+                                        <img src="{{ user.avatar }}" class="avatar-stories" />
+                                    {% endfor %}
 							</div>
-							<div class="col-9">
-								<p>Posted by: <em>{{ story.username }}</em></p>
+							<div class="col-10">
+								<p class="avatar-posted-by">Posted by: <em>{{ story.username }}</em></p>
 								<p>Main language discussed: <em>{{ story.language_name }}</em></p>
 							</div>
 						</div>
-						<p class="card-text">{{ story.story_description }}</p>
-						<a href="#" class="btn btn-primary">Go somewhere</a>
+						<h5 class="card-title">{{ story.story_title }}</h5>
+						<!-- 
+							Found help for the excerpt, on  
+							https://stackoverflow.com/questions/26030590/how-do-i-provide-a-blog-excerpt-without-having-to-show-html-code-using-jinja2-te 
+						-->
+						<p class="card-text">{{ story.story_description|truncate(200, True) }}</p> 
+						<a href="#" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
 					</div>
 				</div>
 			</div>
