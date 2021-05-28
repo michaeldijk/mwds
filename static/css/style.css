@@ -76,3 +76,8 @@ background-color: #322f3d;
 .profile-list li {
     padding-top: 5px;
 }
+
+.avatar {
+    max-width: 170px;
+    height: auto;
+}
