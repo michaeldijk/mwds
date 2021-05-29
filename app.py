@@ -28,8 +28,9 @@ mongo = PyMongo(app)
 
 
 # Default route (index/homepage)
+# stories route (goes to homepage)
 @app.route("/")
-@app.route("/get_stories")  # stories route (goes to homepage)
+@app.route("/get_stories")  
 def get_stories():
     # find stories db, and assign it to variable stories
     stories = mongo.db.stories.find()
