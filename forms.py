@@ -17,7 +17,8 @@ class RegisterForm(FlaskForm):
                                                    NoneOf(["admin", "root", "superuser", "adminaccount", "Administrator", "administrator"], message="Username is not permitted", values_formatter=None)])
     email_address = StringField("Email Address", validators=[DataRequired(), Email(
         message="Please type a correct email address", granular_message=False, check_deliverability=False, allow_smtputf8=True, allow_empty_local=False)])
-    about_me = StringField("About Yourself", validators=[Optional(), Length(min=10, max=150, message="About yourself, minimum 10 characters, max 150 characters.")])
+    about_me = StringField("About Yourself", validators=[Optional(), Length(
+        min=10, max=150, message="About yourself, minimum 10 characters, max 150 characters.")])
     avatar = StringField("Your Avatar", validators=[DataRequired(),
                                                     Length(
         min=5, max=150, message="Avatar URL Maximum 150 characters."),
