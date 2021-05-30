@@ -70,10 +70,10 @@
 	<div class="container-fluid main-container">
 		<div class="container">
 		<!-- Start article container -->
-				<!-- Start flash messages -->
+				{# Start flashed messages row/column #}
 				<div class="row justify-content-center pt-3 pb-3">
 					<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
-						<!-- Start flashed messages -->
+						{# Start flashed messages #}
 							{% with messages = get_flashed_messages() %}
 								{% if messages %}
 										{% for message in messages %}
@@ -84,16 +84,15 @@
 										{% endfor %}
 								{% endif %}
 							{% endwith %}
-						<!-- End flashed messages -->
+						{# End flashed messages #}
 					</div>
 				</div>
-				<!-- End flash messages -->
+				{# End flashed messages row/column #}
 
-                <!-- Start block content -->
+                {# Start Block content #}
                 {% block content %}
-				
                 {% endblock %}
-                <!-- End block content -->
+				{# End Block content #}
 			</div>
 		<!-- End article container -->
 	</div>
