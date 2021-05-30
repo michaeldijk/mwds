@@ -7,7 +7,7 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, EditProfileForm
 
 
 # if local env. import env.py, otherwise not
@@ -30,7 +30,7 @@ mongo = PyMongo(app)
 # Default route (index/homepage)
 # stories route (goes to homepage)
 @app.route("/")
-@app.route("/get_stories")  
+@app.route("/get_stories")
 def get_stories():
     # find stories db, and assign it to variable stories
     stories = mongo.db.stories.find()
@@ -168,19 +168,35 @@ def profile(username):
 
 
 # profile edit template route
-@app.route("/profile/<username>/edit")
+@app.route("/profile/<username>/edit", methods=["GET", "POST"])
 def profile_edit(username):
-    form = RegisterForm()
+    form = EditProfileForm()
     # grab the session users username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    # grab the session users username ID from the db
+    username_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
+    # grab the session users username about_me details from the db
+    username_default_value_about_me = mongo.db.users.find_one(
+        {"username": session["user"]})["about_me"]
+    # grab the session users username avatar from the db
+    username_default_value_avatar = mongo.db.users.find_one(
+        {"username": session["user"]})["avatar"]
+
+# I had issues with using set, and the following page helped me find a solution to this:
+# https://stackoverflow.com/questions/29837370/pymongo-update-one-syntax-error
+    if form.validate_on_submit():
+        mongo.db.users.update({"_id": ObjectId(username_id)},
+                              {"$set":
+                              {"about_me": form.about_me.data or username_default_value_about_me,
+                               "avatar": form.avatar.data or username_default_value_avatar}})
+        return redirect(url_for("profile", username=session["user"]))
 
     return render_template("profile_edit.html", username=username, form=form)
 
 
-
 # logout template route
-@app.route("/logout")
+@ app.route("/logout")
 def logout():
     # remove user from session cookie
     flash("You have succesfully been logged out!")
