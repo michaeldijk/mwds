@@ -36,3 +36,12 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
+
+class EditProfileForm(FlaskForm):
+    about_me = StringField('About Yourself', validators=[Optional()])
+    avatar = StringField("Your Avatar", validators=[Optional(),
+                                                    Length(
+        min=5, max=150, message="Avatar URL Maximum 150 characters."),
+        URL(require_tld=True, message="Avatar is not an domain.")])
+    
+    submit = SubmitField("Update")
