@@ -72,12 +72,13 @@
 				<h5 class="card-title">Register an account</h5>
 				<p>To post messages to MWDS, you need to create an account, to post comments, you also need to have an account.</p>
 				<p>Use the form below, to register, to start using MWDS.</p>
-				<em><p class="alert"><i class="fas fa-exclamation-triangle"></i> Username & Password can only contain a-z characters, and numbers, and exist out of five characters or more.</p></em>
+				<em><p class="alert"><i class="fas fa-exclamation-triangle"></i> Username & Password can only contain a-z characters & numbers, and exist out of five characters or more.</p></em>
+				<em><p class="alert"><i class="fas fa-exclamation-triangle"></i> Fields marked with an (*) asterisk, are mandatory.</p></em>
 				<form method="POST" action="{{ url_for("register") }}" class="row">
 					{{ form.hidden_tag() }}
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
-							Your Username:
+							* Your Username:
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							{{ form.username }}
@@ -85,7 +86,7 @@
 					</div>
 					<div class="row pt-3">
 						<div class="col-sm-12 col-lg-6">
-							Your Email Address:
+							* Your Email Address:
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							{{ form.email_address }}
@@ -93,7 +94,7 @@
 					</div>
 					<div class="row pt-3">
 						<div class="col-sm-12 col-lg-6">
-							Your Password:
+							* Your Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							{{ form.password }}
@@ -101,7 +102,7 @@
 					</div>
 					<div class="row pt-3">
 						<div class="col-sm-12 col-lg-6">
-							Confirm Password:
+							* Confirm Password:
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							{{ form.password_confirm }}
