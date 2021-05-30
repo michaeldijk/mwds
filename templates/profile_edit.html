@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Created by Michael Dijk -->
+<!-- Milestone 3 project, Code Institute -->
+<!-- App build with Flask, MongoDB Atlas, Bootstrap and some Googleness -->
+
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
+		<div class="card h-100">
+			<div class="card-body">
+				<h4 class="card-title"><em>{{ username }}'s</em> Profile </h4>
+				<p>Edit your profile settings here below, users will be able to view the details you've specified here below.</p>
+				<div class="row">
+					<div class="col">
+						<form method="POST" action="#" class="row">
+							{{ form.hidden_tag() }}
+							<div class="row">
+								<div class="col-sm-12 col-lg-6">
+									About yourself:
+								</div>
+								<div class="col-sm-12 col-lg-6">
+									{{ form.about_me }}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 col-lg-6">
+									Your profile avatar:
+								</div>
+								<div class="col-sm-12 col-lg-6">
+									{{ form.avatar }}
+								</div>
+							</div>
+							<div class="col-12 pt-3">
+								{{ form.submit(class_="btn btn-primary") }}
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
