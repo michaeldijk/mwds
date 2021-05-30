@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- Created by Michael Dijk -->
-<!-- Milestone 3 project, Code Institute -->
-<!-- App build with Flask, MongoDB Atlas, Bootstrap and some Googleness -->
-
 				<!-- Start intro message, for users not logged on -->
 				{% if session.user == anonymous %}
 					<div class="row justify-content-center pt-3 pb-3">
@@ -37,7 +33,7 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-2">
-								<!-- Ed Bradley, CI lead, helped me solve the link between story/avatar -->
+								{# Ed Bradley, CI lead, helped me solve the link between story/avatar #}
 								{% for user in users if user.username == story.username %}
                                         <img src="{{ user.avatar }}" class="avatar-stories" />
                                     {% endfor %}
@@ -48,11 +44,14 @@
 							</div>
 						</div>
 						<h5 class="card-title">{{ story.story_title }}</h5>
-						<!-- 
+						{# 
 							Found help for the excerpt, on  
 							https://stackoverflow.com/questions/26030590/how-do-i-provide-a-blog-excerpt-without-having-to-show-html-code-using-jinja2-te 
-						-->
+						#}
+
 						<p class="card-text">{{ story.story_description|truncate(200, True) }}</p> 
+
+						{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
 						{% if session.user == anonymous %}
 							<a href="{{ url_for("login") }}" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
 						{% else %}
