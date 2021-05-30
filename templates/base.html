@@ -68,9 +68,8 @@
 	<!-- Start main Container -->
 	<!-- Placed container inside container, as fluid container contains full-width background colour for sections -->
 	<div class="container-fluid main-container">
+		<div class="container">
 		<!-- Start article container -->
-			<div class="container">
-
 				<!-- Start flash messages -->
 				<div class="row justify-content-center pt-3 pb-3">
 					<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
@@ -89,9 +88,26 @@
 					</div>
 				</div>
 				<!-- End flash messages -->
+				
+				<!-- Start intro message, for users not logged on -->
+				{% if session.user == anonymous %}
+					<div class="row justify-content-center pt-3 pb-3">
+						<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
+							<div class="card h-100">
+								<div class="card-body">
+									<h5 class="card-title">Welcome to My WebDev Story</h5>
+									<p>This site is designed for creators, users, coders..</p>
+									<p>Please create an account to post, comment and view full messages</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+				<!-- End intro message, for users not logged on -->
 
                 <!-- Start block content -->
                 {% block content %}
+				
                 {% endblock %}
                 <!-- End block content -->
 			</div>
