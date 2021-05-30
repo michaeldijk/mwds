@@ -53,7 +53,11 @@
 							https://stackoverflow.com/questions/26030590/how-do-i-provide-a-blog-excerpt-without-having-to-show-html-code-using-jinja2-te 
 						-->
 						<p class="card-text">{{ story.story_description|truncate(200, True) }}</p> 
-						<a href="#" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
+						{% if session.user == anonymous %}
+							<a href="{{ url_for("login") }}" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
+						{% else %}
+							<a href="{{ url_for("single_story", story_id=story._id) }}" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
