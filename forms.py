@@ -19,7 +19,7 @@ class RegisterForm(FlaskForm):
         message="Please type a correct email address", granular_message=False, check_deliverability=False, allow_smtputf8=True, allow_empty_local=False)])
     about_me = StringField("About Yourself", validators=[Optional(), Length(
         min=10, max=150, message="About yourself, minimum 10 characters, max 150 characters.")])
-    avatar = StringField("Your Avatar", validators=[DataRequired(),
+    avatar = StringField("Your Avatar", validators=[Optional(),
                                                     Length(
         min=5, max=150, message="Avatar URL Maximum 150 characters."),
         URL(require_tld=True, message="Avatar is not an domain.")])
