@@ -41,6 +41,13 @@ def get_stories():
     return render_template("stories.html", stories=stories, users=users)
 
 
+# single story route
+@app.route("/single_story/<story_id>")
+def single_story(story_id):
+    story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
+    return render_template("single_story.html", story=story)
+
+
 # New story template route
 @app.route("/new_story", methods=["GET", "POST"])
 def new_story():
