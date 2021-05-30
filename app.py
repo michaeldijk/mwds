@@ -134,7 +134,7 @@ def register():
             "username": form.username.data.lower(),
             "email_address": form.email_address.data.lower(),
             "about_me": form.about_me.data.lower() or None,
-            "avatar": form.avatar.data.lower(),
+            "avatar": form.avatar.data.lower() or None,
             "password": generate_password_hash(form.password.data),
 
         }
