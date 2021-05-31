@@ -142,8 +142,8 @@ def register():
             "email_address": form.email_address.data.lower(),
             "about_me": form.about_me.data.lower() or "Edit profile, if you want to enter a small bio",
             "avatar": form.avatar.data.lower() or "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
-            "password": generate_password_hash(form.password.data),
-
+            "tandc": form.terms_and_conditions.data,
+            "password": generate_password_hash(form.password.data)
         }
         mongo.db.users.insert_one(register)
 
