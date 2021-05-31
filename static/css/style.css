@@ -93,3 +93,9 @@ background-color: #322f3d;
 .avatar-posted-by {
     margin: 0;
 }
+
+
+
+.modal-title, .modal-body p, .modal-body h5 {
+    color: black !important;
+}
