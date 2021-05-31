@@ -10,6 +10,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegisterForm, LoginForm, EditProfileForm
 
 
+# test update, for branch update
+
+
 # if local env. import env.py, otherwise not
 if os.path.exists("env.py"):
     import env
