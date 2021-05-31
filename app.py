@@ -1,5 +1,6 @@
 import os
 import re
+from dns.query import receive_udp
 from flask import (Flask, flash, render_template,
                    redirect, request, session, url_for)
 import flask
@@ -8,6 +9,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegisterForm, LoginForm, EditProfileForm
+from flask_paginate import Pagination, get_page_parameter
 
 
 # test update, for branch update
@@ -35,13 +37,25 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_stories")
 def get_stories():
+
+    page = int(request.args.get('page', 1))
+    per_page = 1
+    offset = (page - 1) * per_page
+
+    search = False
+    q = request.args.get("q")
+    if q:
+        search = True
+    # Pagination from flask: https://pythonhosted.org/Flask-paginate/
+    page = request.args.get(get_page_parameter(), type=int, default=1)
     # find stories db, and assign it to variable stories
     stories = mongo.db.stories.find()
+    pagination = Pagination(page=page, total=stories.count(), search=search, record_name="stories")
     # Ed Bradley, CI lead, helped me find a solution to filtering user avatars against stories written.
     users = list(mongo.db.users.find())
     # use variable stories, and assign it to stories
     # user variable users, assign it to users, to find avatars from users
-    return render_template("stories.html", stories=stories, users=users)
+    return render_template("stories.html", stories=stories, users=users, pagination=pagination)
 
 
 # single story route
