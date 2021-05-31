@@ -39,7 +39,12 @@
                                     {% endfor %}
 							</div>
 							<div class="col-10">
-								<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile", username=story.username) }}">{{ story.username }}</a></em></p>
+								{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
+								{% if session.user == anonymous %}
+									<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("login") }}">{{ story.username }}</a></em></p>
+								{% else %}
+									<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile", username=story.username) }}">{{ story.username }}</a></em></p>
+								{% endif %}
 								<p>Main language discussed: <em>{{ story.language_name }}</em></p>
 							</div>
 						</div>
