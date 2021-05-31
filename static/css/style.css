@@ -99,3 +99,8 @@ background-color: #322f3d;
 .modal-title, .modal-body p, .modal-body h5 {
     color: black !important;
 }
+
+.doge_img {
+    max-width: 100%;
+    height: auto;
+}
