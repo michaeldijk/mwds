@@ -174,6 +174,20 @@ def profile(username):
     return redirect(url_for("login"))
 
 
+# public profile template route
+@app.route("/profile/public/<username>")
+def public_profile(username):
+    # grab username's about me
+    username_about_me = mongo.db.users.find_one(
+        {"username": username})["about_me"]
+    # grab username's avatar
+    username_avatar = mongo.db.users.find_one(
+        {"username": username})["avatar"]
+
+    return render_template("profile_public.html", username=username, username_avatar=username_avatar, username_about_me=username_about_me)
+    
+
+
 # profile edit template route
 @app.route("/profile/<username>/edit", methods=["GET", "POST"])
 def profile_edit(username):
@@ -200,6 +214,24 @@ def profile_edit(username):
         return redirect(url_for("profile", username=session["user"]))
 
     return render_template("profile_edit.html", username=username, form=form)
+
+
+# Error 403 template route
+@ app.errorhandler(403)
+def internal_error(error):
+    return render_template('errors/403.html'), 403
+
+
+# Error 404 template route
+@ app.errorhandler(404)
+def not_found(error):
+    return render_template('errors/404.html'), 404
+
+
+# Error 500 template route
+@ app.errorhandler(500)
+def not_found(error):
+    return render_template('errors/500.html'), 500
 
 
 # logout template route
