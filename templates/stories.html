@@ -25,9 +25,15 @@
 				{% endif %}
 			{# End intro message, for users not logged on #}
 
+			<div class="row pt-3 pb-3">
+				<div class="col-12">
+					{{ pagination.info }}
+					{{ pagination.links }}
+				</div>
+			</div>
 
 <div class="row pt-3 pb-3">
-	{% for story in stories|sort(reverse=true, attribute="_id") %}
+	{% for story in stories %}
 			<div class="col-sm-12 col-lg-6 p-3">
 				<div class="card h-100">
 					<div class="card-body">
