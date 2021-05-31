@@ -39,7 +39,7 @@
                                     {% endfor %}
 							</div>
 							<div class="col-10">
-								<p class="avatar-posted-by">Posted by: <em>{{ story.username }}</em></p>
+								<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile", username=story.username) }}">{{ story.username }}</a></em></p>
 								<p>Main language discussed: <em>{{ story.language_name }}</em></p>
 							</div>
 						</div>
