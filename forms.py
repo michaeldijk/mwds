@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 # Import DataRequired for required field, length for max length,
 # EqualTo for equal to password field, Regexp for checking for input,
 # and NoneOf for removing certain user accounts
@@ -28,7 +28,7 @@ class RegisterForm(FlaskForm):
     password_confirm = PasswordField(
         "Confirm Password", validators=[DataRequired(),
                                         EqualTo("password", message="Passwords do not match.")])
-
+    terms_and_conditions = BooleanField('Agree?', validators=[DataRequired(), ])
     submit = SubmitField("Register")
 
 
