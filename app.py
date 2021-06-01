@@ -39,7 +39,7 @@ mongo = PyMongo(app)
 def get_stories():
 
     page = int(request.args.get('page', 1))
-    per_page = 1
+    per_page = 10
     offset = (page - 1) * per_page
 
     search = False
@@ -47,15 +47,19 @@ def get_stories():
     if q:
         search = True
     # Pagination from flask: https://pythonhosted.org/Flask-paginate/
+    # Found solution to showing correct values from: 
+    # https://stackoverflow.com/questions/54053873/implementation-of-pagination-using-flask-paginate-pymongo
     page = request.args.get(get_page_parameter(), type=int, default=1)
     # find stories db, and assign it to variable stories
     stories = mongo.db.stories.find()
+    # filter stories, with pages, and assign it to all_stories
+    all_stories = mongo.db.stories.find().skip((page - 1) * per_page).limit(per_page)
     pagination = Pagination(page=page, total=stories.count(), search=search, record_name="stories")
     # Ed Bradley, CI lead, helped me find a solution to filtering user avatars against stories written.
     users = list(mongo.db.users.find())
     # use variable stories, and assign it to stories
     # user variable users, assign it to users, to find avatars from users
-    return render_template("stories.html", stories=stories, users=users, pagination=pagination)
+    return render_template("stories.html", stories=all_stories, users=users, pagination=pagination)
 
 
 # single story route
