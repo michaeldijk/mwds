@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-			{# Start intro message, for users not logged on #}
-				{% if session.user == anonymous %}
-					<div class="row justify-content-center pt-3 pb-3">
-						<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
-							<div class="card h-100">
-								<div class="card-body">
-									<h5 class="card-title">Welcome to My WebDev Story</h5>
-									<p>This site is designed for creators, users, coders..</p>
-									<p>Please create an account to post, comment and view full messages, or login</p>
-									<div class="row">
-										<div class="col-12 col-md-6 p-2">
-											<a href="{{ url_for("register") }}" class="btn btn-primary">Register an account</a>
-										</div>
-										<div class="col-12 col-md-6 p-2">
-											<a href="{{ url_for("login") }}" class="btn btn-primary">Log In to your account</a>
-										</div>
-									</div>
-								</div>
-							</div>
+	{# Start intro message, for users not logged on #}
+	{% if session.user == anonymous %}
+	<div class="row justify-content-center pt-3 pb-3">
+		<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
+			<div class="card h-100">
+				<div class="card-body">
+					<h5 class="card-title">Welcome to My WebDev Story</h5>
+					<p>This site is designed for creators, users, coders..</p>
+					<p>Please create an account to post, comment and view full messages, or login</p>
+					<div class="row">
+						<div class="col-12 col-md-6 p-2">
+							<a href="{{ url_for("register") }}" class="btn btn-primary">Register an account</a>
+						</div>
+						<div class="col-12 col-md-6 p-2">
+							<a href="{{ url_for("login") }}" class="btn btn-primary">Log In to your account</a>
 						</div>
 					</div>
-				{% endif %}
-			{# End intro message, for users not logged on #}
-<div class="container-fluid container-infinite-scroll">
-<div class="row pt-3 pb-3" id="infinite-scroll">
-	{% for story in stories %}
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	{# End intro message, for users not logged on #}
+
+	<!--Start container fluid, for infinite scroll, as it needs a container  -->
+	<div class="container-fluid container-infinite-scroll">
+		<div class="row pt-3 pb-3" id="infinite-scroll">
+			{% for story in stories %}
 			<div class="col-sm-12 col-lg-6 p-3">
 				<div class="card h-100">
 					<div class="card-body">
@@ -33,42 +35,50 @@
 							<div class="col-2">
 								{# Ed Bradley, CI lead, helped me solve the link between story/avatar #}
 								{% for user in users if user.username == story.username %}
-                                        <img src="{{ user.avatar }}" class="avatar-stories" />
-                                    {% endfor %}
+								<img src="{{ user.avatar }}" class="avatar-stories" />
+								{% endfor %}
 							</div>
 							<div class="col-10">
 								{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
 								{% if session.user == anonymous %}
-									<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("login") }}">{{ story.username }}</a></em></p>
+								<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("login") }}">{{
+											story.username }}</a></em></p>
 								{% else %}
-									<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile", username=story.username) }}" target="_blank">{{ story.username }}</a></em></p>
+								<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile",
+											username=story.username) }}" target="_blank">{{ story.username }}</a></em></p>
 								{% endif %}
 								<p>Main language discussed: <em>{{ story.language_name }}</em></p>
 							</div>
 						</div>
 						<h5 class="card-title">{{ story.story_title }}</h5>
-						{# 
-							Found help for the excerpt, on  
-							https://stackoverflow.com/questions/26030590/how-do-i-provide-a-blog-excerpt-without-having-to-show-html-code-using-jinja2-te 
+						{#
+						Found help for the excerpt, on
+						https://stackoverflow.com/questions/26030590/how-do-i-provide-a-blog-excerpt-without-having-to-show-html-code-using-jinja2-te
 						#}
-
-						<p class="card-text">{{ story.story_description|truncate(200, True) }}</p> 
-
+	
+						<p class="card-text">{{ story.story_description|truncate(200, True) }}</p>
+	
 						{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
 						{% if session.user == anonymous %}
-							<a href="{{ url_for("login") }}" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
+						<a href="{{ url_for("login") }}" class="btn btn-primary"><i class="fas fa-angle-double-right"></i>
+							Read More</a>
 						{% else %}
-							<a href="{{ url_for("single_story", story_id=story._id) }}" target="_blank" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
+						<a href="{{ url_for("single_story", story_id=story._id) }}" target="_blank"
+							class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
 						{% endif %}
 					</div>
 				</div>
 			</div>
-	  {% endfor %}	
-</div>
-</div>
+			{% endfor %}
+		</div>
+	</div>
+	<!--End container fluid, for infinite scroll, as it needs a container  -->
+
+<!-- Start Pagination row/col -->
 <div class="row justify-content-center align-items-center">
 	<div class="col pagination-col">
 	  {{ pagination.links }}
 	</div>
 </div>
+<!-- End Pagination row/col -->
 {% endblock %}
