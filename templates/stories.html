@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
 			{# Start intro message, for users not logged on #}
 				{% if session.user == anonymous %}
 					<div class="row justify-content-center pt-3 pb-3">
@@ -42,7 +41,7 @@
 								{% if session.user == anonymous %}
 									<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("login") }}">{{ story.username }}</a></em></p>
 								{% else %}
-									<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile", username=story.username) }}">{{ story.username }}</a></em></p>
+									<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile", username=story.username) }}" target="_blank">{{ story.username }}</a></em></p>
 								{% endif %}
 								<p>Main language discussed: <em>{{ story.language_name }}</em></p>
 							</div>
@@ -59,7 +58,7 @@
 						{% if session.user == anonymous %}
 							<a href="{{ url_for("login") }}" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
 						{% else %}
-							<a href="{{ url_for("single_story", story_id=story._id) }}" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
+							<a href="{{ url_for("single_story", story_id=story._id) }}" target="_blank" class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
 						{% endif %}
 					</div>
 				</div>
@@ -67,11 +66,9 @@
 	  {% endfor %}	
 </div>
 </div>
-<div class="row pt-3 pb-3">
-	<div class="col-12">
-		{{ pagination.info }}
-		{{ pagination.links }}
+<div class="row justify-content-center align-items-center">
+	<div class="col pagination-col">
+	  {{ pagination.links }}
 	</div>
 </div>
-
 {% endblock %}
