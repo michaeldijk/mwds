@@ -5,17 +5,17 @@
 	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
 		<div class="card h-100">
 			<div class="card-body">
-			<h4 class="card-title">404404404404404</h4>
-			<div class="row align-items-center">
-				<div class="col-sm-6 col-md-3">
-					<img src="../../static/images/doge_transparent.png" alt="Doge dog error" class="doge_img">
+				<h4 class="card-title">404404404404404</h4>
+				<div class="row align-items-center">
+					<div class="col-sm-6 col-md-3">
+						<img src="{{ url_for("static", filename="images/doge_transparent.png") }}" alt="Doge dog error" class="doge_img">
+					</div>
+					<div class="col-sm-12 col-md-9">
+						<h4>ERRRRR....</h4>
+						<p>You broke the internet.. The page you're looking for, does not exist</p>
+						<p><a href="{{ url_for("get_stories") }}" class="btn btn-primary">Go Home</a></p>
+					</div>
 				</div>
-				<div class="col-sm-12 col-md-9">
-					<h4>ERRRRR....</h4>
-				<p>You broke the internet.. The page you're looking for, does not exist</p>
-				<p><a href="{{ url_for("get_stories") }}" class="btn btn-primary">Go Home</a></p>
-				</div>
-			</div>
 			</div>
 		</div>
 	</div>

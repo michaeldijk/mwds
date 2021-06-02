@@ -5,125 +5,150 @@
 <!-- App build with Flask, MongoDB Atlas, Bootstrap and some Googleness -->
 
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<!-- Own CSS -->
 	<link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}">
-	
-    <title>My WebDev Story</title>
-  </head>
-  <body>
 
-<!-- Start of header (navbar) -->
-<header>
-	<nav class="navbar navbar-expand-lg">
-	  <div class="container">
-	    <a class="navbar-brand" href="{{ url_for("get_stories") }}">MWDS</a>
-	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-	      <span class="navbar-toggler-fa-icon"><i class="fas fa-bars"></i></span>
-	    </button>
-	    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <!-- Start navbar links -->
-	      <ul class="navbar-nav ms-auto">
-	        <li class="nav-item">
-	          <a class="nav-link" href="{{ url_for("get_stories") }}">Home</a>
-	        </li>
-			{% if session.user %}
-	        <li class="nav-item">
-	          <a class="nav-link" href="{{ url_for("profile", username=session["user"]) }}">Profile</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="{{ url_for("new_story") }}">New Story</a>
-	        </li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{ url_for("logout") }}">Log Out</a>
-			  </li>
-			{% else %}
-	        <li class="nav-item">
-	          <a class="nav-link" href="{{ url_for("login") }}">Log In</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="{{ url_for("register") }}">Register</a>
-	        </li>
-			{% endif %}
-	      </ul>
-          <!-- End navbar links -->
-	    </div>
-	  </div>
-	</nav>
-</header>
-<!-- End of header (navbar) -->
+	<title>My WebDev Story</title>
+</head>
 
-<!-- Start main content -->
-<main>
-	<!-- Start main Container -->
-	<!-- Placed container inside container, as fluid container contains full-width background colour for sections -->
-	<div class="container-fluid main-container">
-		<div class="container">
-		<!-- Start article container -->
+<body>
+
+	<!-- Start of header (navbar) -->
+	<header>
+		<nav class="navbar navbar-expand-lg">
+			<div class="container">
+				<a class="navbar-brand" href="{{ url_for("get_stories") }}">MWDS</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-fa-icon"><i class="fas fa-bars"></i></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<!-- Start navbar links -->
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for("get_stories") }}">Home</a>
+						</li>
+						{% if session.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for("profile", username=session["user"]) }}">Profile</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for("new_story") }}">New Story</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for("logout") }}">Log Out</a>
+						</li>
+						{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for("login") }}">Log In</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for("register") }}">Register</a>
+						</li>
+						{% endif %}
+					</ul>
+					<!-- End navbar links -->
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End of header (navbar) -->
+
+	<!-- Start main content -->
+	<main>
+		<!-- Start main Container -->
+		<!-- Placed container inside container, as fluid container contains full-width background colour for sections -->
+		<div class="container-fluid main-container">
+			<div class="container">
+				<!-- Start article container -->
 				{# Start flashed messages row/column #}
 				<div class="row justify-content-center pt-3 pb-3">
 					<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
 						{# Start flashed messages #}
-							{% with messages = get_flashed_messages() %}
-								{% if messages %}
-										{% for message in messages %}
-											<div class="alert alert-warning alert-dismissible fade show" role="alert">
-												<h2 class="text-danger">{{ message }}</h2>
-												<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-											</div>
-										{% endfor %}
-								{% endif %}
-							{% endwith %}
+						{% with messages = get_flashed_messages() %}
+						{% if messages %}
+						{% for message in messages %}
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							<h2 class="text-danger">{{ message }}</h2>
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+						{% endfor %}
+						{% endif %}
+						{% endwith %}
 						{# End flashed messages #}
 					</div>
 				</div>
 				{# End flashed messages row/column #}
 
-                {# Start Block content #}
-                {% block content %}
-                {% endblock %}
+				{# Start Block content #}
+				{% block content %}
+				{% endblock %}
 				{# End Block content #}
 			</div>
-		<!-- End article container -->
-	</div>
-	<!-- End main Container -->
-</main>
-<!-- End main content -->
+			<!-- End article container -->
+		</div>
+		<!-- End main Container -->
+	</main>
+	<!-- End main content -->
 
-<!-- Start Footer -->
-<footer>
-	<div class="container-fluid footer-container">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-lg-6">
-					<h2>MyWebDev Story</h2>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur vel sit consequuntur beatae at cumque nemo velit nostrum, quis accusantium voluptate tempore a optio soluta porro perferendis sapiente molestiae, earum.</p>
-				</div>
-				<div class="col-sm-12 col-lg-6">
-					<h2>Our Socials</h2>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae voluptatibus, error laborum ullam neque aliquid iste delectus deleniti, esse saepe eligendi non totam excepturi iure rerum perspiciatis pariatur quibusdam accusantium?</p>
+	<!-- Start Footer -->
+	<footer>
+		<div class="container-fluid footer-container">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-lg-6">
+						<h2>MyWebDev Story</h2>
+						<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur vel sit consequuntur
+							beatae
+							at cumque nemo velit nostrum, quis accusantium voluptate tempore a optio soluta porro
+							perferendis sapiente molestiae, earum.</p>
+					</div>
+					<div class="col-sm-12 col-lg-6">
+						<h2>Our Socials</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae voluptatibus, error laborum
+							ullam
+							neque aliquid iste delectus deleniti, esse saepe eligendi non totam excepturi iure rerum
+							perspiciatis pariatur quibusdam accusantium?</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</footer>
-<!-- End Footer -->
+	</footer>
+	<!-- End Footer -->
 
-    <!-- Bootstrap scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-    
-    <!-- Own Script(s) -->
-    <script src="{{ url_for("static", filename="js/script.js") }}"></script>
-  </body>
+	<!-- Bootstrap scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+		integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+		crossorigin="anonymous"></script>
+
+	<!-- JQuery script -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+	<!-- Infinite scroll script -->
+	<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
+
+	<!-- Own Script(s) -->
+	<script src="{{ url_for("static", filename="js/script.js") }}"></script>
+</body>
+
 </html>
