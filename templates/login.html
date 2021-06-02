@@ -6,7 +6,8 @@
 		<div class="card h-100">
 			<div class="card-body">
 				<h5 class="card-title">Login to your account</h5>
-				<p>Login to your account, to view user's their profile, post new stories, comment on users their stories, and update your own profile.</p>
+				<p>Login to your account, to view user's their profile, post new stories, comment on users their
+					stories, and update your own profile.</p>
 				<form method="POST" action="{{ url_for("login") }}" class="row">
 					{{ form.hidden_tag() }}
 					<div class="row">
@@ -26,7 +27,8 @@
 						</div>
 					</div>
 					<div class="col-12 pt-3">
-						{{ form.submit(class_="btn btn-primary") }}
+						{{ form.submit(class="btn btn-primary") }}
+						{# Found solution to add classes from https://stackoverflow.com/questions/61714589/add-css-classes-to-jinja-template-for-form #}
 					</div>
 					<div class="col-12 pt-3">
 						<p>Forgot Password?</p>

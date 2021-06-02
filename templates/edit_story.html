@@ -15,12 +15,13 @@
 						<div class="col-sm-12 col-lg-6">
 							<select id="language_name" name="language_name" required>
 								{% for language in languages %}
-									{% if language.language_name == story.language_name %}
-                    					<option value="{{ language.language_name }}" selected>{{ language.language_name }}</option>
-									{% else %}
-										<option value="{{ language.language_name }}">{{ language.language_name }}</option>
-									{% endif %}
-                				{% endfor %}
+								{% if language.language_name == story.language_name %}
+								<option value="{{ language.language_name }}" selected>{{ language.language_name }}
+								</option>
+								{% else %}
+								<option value="{{ language.language_name }}">{{ language.language_name }}</option>
+								{% endif %}
+								{% endfor %}
 							</select>
 						</div>
 						<!-- End col language selection -->
@@ -32,9 +33,11 @@
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							{% if story.story_title == story.story_title %}
-								<input type="text" id="story_title" name="story_title" value="{{ story.story_title }}" minlength="5" maxlength="55" required>
+							<input type="text" id="story_title" name="story_title" value="{{ story.story_title }}"
+								minlength="5" maxlength="55" required>
 							{% else %}
-								<input type="text" id="story_title" name="story_title" placeholder="Enter Title" minlength="5" maxlength="55" required>
+							<input type="text" id="story_title" name="story_title" placeholder="Enter Title"
+								minlength="5" maxlength="55" required>
 							{% endif %}
 						</div>
 						<!-- End col Story title field -->
@@ -44,16 +47,19 @@
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							{% if story.story_description == story.story_description %}
-								<textarea id="story_description" name="story_description" rows="10" cols="30" required>{{ story.story_description }}</textarea>
+							<textarea id="story_description" name="story_description" rows="10" cols="30"
+								required>{{ story.story_description }}</textarea>
 							{% else %}
-								<textarea id="story_description" name="story_description" rows="10" cols="30" placeholder="The cat was coding an app in the garden."></textarea>
+							<textarea id="story_description" name="story_description" rows="10" cols="30"
+								placeholder="The cat was coding an app in the garden."></textarea>
 							{% endif %}
 						</div>
 						<!-- End col Story Description field -->
 					</div>
 					<!-- Start col Submit button -->
 					<div class="col-12 pt-3">
-						<input type="submit" value="Edit Story" class="btn btn-primary"> <a href="{{ url_for("profile", username=session["user"]) }}" class="btn btn-primary">Cancel</a>
+						<input type="submit" value="Edit Story" class="btn btn-primary"> <a href="{{ url_for("profile",
+							username=session["user"]) }}" class="btn btn-primary">Cancel</a>
 					</div>
 					<!-- End col Submit button -->
 				</form>

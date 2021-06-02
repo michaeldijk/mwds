@@ -15,8 +15,8 @@
 						<div class="col-sm-12 col-lg-6">
 							<select id="language_name" name="language_name" required>
 								{% for language in languages %}
-                    				<option value="{{ language.language_name }}">{{ language.language_name }}</option>
-                				{% endfor %}
+								<option value="{{ language.language_name }}">{{ language.language_name }}</option>
+								{% endfor %}
 							</select>
 						</div>
 						<!-- End col language selection -->
@@ -27,7 +27,8 @@
 							Story Title:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="text" id="story_title" name="story_title" placeholder="Enter Title" minlength="5" maxlength="55" required>
+							<input type="text" id="story_title" name="story_title" placeholder="Enter Title"
+								minlength="5" maxlength="55" required>
 						</div>
 						<!-- End col Story title field -->
 						<!-- Start col Story Description field -->
@@ -35,13 +36,14 @@
 							Story:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<textarea id="story_description" name="story_description" rows="10" cols="30" placeholder="The cat was coding an app in the garden."></textarea>
+							<textarea id="story_description" name="story_description" rows="10" cols="30"
+								placeholder="The cat was coding an app in the garden."></textarea>
 						</div>
 						<!-- End col Story Description field -->
 					</div>
 					<!-- Start col Submit button -->
 					<div class="col-12 pt-3">
-						<input type="submit" value="Submit Story" class="btn btn-primary"> 
+						<input type="submit" value="Submit Story" class="btn btn-primary">
 					</div>
 					<!-- End col Submit button -->
 				</form>
