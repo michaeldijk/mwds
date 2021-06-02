@@ -53,14 +53,13 @@ def get_stories():
     # find stories db, and assign it to variable stories
     stories = mongo.db.stories.find()
     # filter stories, with pages, and assign it to all_stories
-    all_stories = mongo.db.stories.find().skip((page - 1) * per_page).limit(per_page)
-    pagination = Pagination(page=page, total=stories.count(), search=search, record_name="stories")
+    all_stories = mongo.db.stories.find().sort("_id", -1).skip((page - 1) * per_page).limit(per_page)
+    pagination = Pagination(page=page, total=stories.count(), search=search, record_name="stories", css_framework='bootstrap4')
     # Ed Bradley, CI lead, helped me find a solution to filtering user avatars against stories written.
     users = list(mongo.db.users.find())
     # use variable stories, and assign it to stories
     # user variable users, assign it to users, to find avatars from users
     return render_template("stories.html", stories=all_stories, users=users, pagination=pagination)
-
 
 # single story route
 @app.route("/single_story/<story_id>")
