@@ -7,3 +7,5 @@ $('.container-infinite-scroll').infiniteScroll({
   hideNav: '.pagination', // hide pagination navigation links
   history: true,
 });
+
+// Help found with last child selector from https://api.jquery.com/last-child-selector/
