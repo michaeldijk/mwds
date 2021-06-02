@@ -1,8 +1,9 @@
-// Using https://infinite-scroll.com/, under GPLv3, personal websites
-// init Infinite Scroll
+// // Using https://infinite-scroll.com/, under GPLv3, personal websites
+// // init Infinite Scroll
 $('.container-infinite-scroll').infiniteScroll({
-  path: '.next > a',
-  append: '#infinite-scroll',
-  status: '.scroller-status',
-  hideNav: '.pagination',
+  // options
+  path: '.pagination > li:last-child > a', // selecting last list child, or pagination class, to target the next link
+  append: '#infinite-scroll', // Add to container with id infinite-scroll
+  hideNav: '.pagination', // hide pagination navigation links
+  history: true,
 });
