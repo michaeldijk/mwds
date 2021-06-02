@@ -156,6 +156,12 @@ def register():
         if existing_user:
             flash("Username is already present, please choose another one...")
             return redirect(url_for("register"))
+        # check if email is already present in db
+        existing_email_address = mongo.db.users.find_one(
+            {"email_address": form.email_address.data.lower()})
+        if existing_email_address:
+            flash("Email address is already present, please choose another one, or reset password...")
+            return redirect(url_for("register"))
 
         register = {
             "username": form.username.data.lower(),
