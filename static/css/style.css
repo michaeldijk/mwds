@@ -120,3 +120,7 @@ background-color: #322f3d;
     padding: .1em .25em;
     font-size: 150%;
 }
+
+.pagination-col {
+    padding-left: 28px;
+}
