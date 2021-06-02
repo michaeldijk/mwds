@@ -12,7 +12,7 @@ from forms import RegisterForm, LoginForm, EditProfileForm
 from flask_paginate import Pagination, get_page_parameter
 
 
-# test update, for branch update
+# test update, for branch update1
 
 
 # if local env. import env.py, otherwise not
