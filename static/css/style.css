@@ -125,7 +125,7 @@ background-color: #322f3d;
     padding-left: 28px;
 }
 
-.card-footer-text {
+.welcome-card-footer-text, .bottom-footer-text {
     margin: 0;
     color: #322f3d;
 }
