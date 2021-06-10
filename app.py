@@ -242,6 +242,30 @@ def profile_edit(username):
     return render_template("profile_edit.html", username=username, form=form)
 
 
+# About template route
+@app.route("/about")
+def about():
+    return render_template("about_pages/about.html")
+
+
+# About template route
+@app.route("/terms")
+def terms():
+    return render_template("about_pages/terms.html")
+
+
+# About template route
+@app.route("/contact")
+def contact():
+    return render_template("about_pages/contact.html")
+
+
+# About template route
+@app.route("/languages")
+def languages():
+    return render_template("about_pages/languages.html")
+
+
 # Error 403 template route
 @ app.errorhandler(403)
 def internal_error(error):
