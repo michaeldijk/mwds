@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
+		<div class="card h-100">
+			<div class="card-body">
+				<h5 class="card-title">Why does My WebDev Story exists</h5>
+				<p>My WebDev story, is a project created as an exam project, for Code Institute, in Ireland.</p>
+				<p>This site is created for developers, creators, and people who want to share their love for coding, by allowing users to post content, ranging from code, to images, to comments on each others posts.</p>
+				<p>There are a lot of social networks, for generic goals, but with My WebDev Story in mind, I want to focus specifically on coders, creators and developers alike.</p>
+				<hr>
+				<img src="{{ url_for("static", filename="images/about/why_wait.png") }}" alt="Girl, thinking why wait..." class="img-fluid">
+				<!-- Image found on https://pixabay.com/photos/confused-hands-up-unsure-perplexed-2681507/ -->
+				<h5>So, why wait?</h5>
+				<p>Create an account, and start sharing your knowledge with the community, and answer any questions users posts on each others stories. This site is created for the community, and with the community in mind, this site could become the new Facebook for coders.</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.fields.simple import TextAreaField
 # Import DataRequired for required field, length for max length,
 # EqualTo for equal to password field, Regexp for checking for input,
 # and NoneOf for removing certain user accounts
@@ -7,6 +8,8 @@ from wtforms.validators import DataRequired, Email, Length, EqualTo, Regexp, Non
 
 
 # Found help for using WTForms, from: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms
+
+
 class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(),
                                                    Length(
@@ -43,5 +46,15 @@ class EditProfileForm(FlaskForm):
                                                     Length(
         min=5, max=150, message="Avatar URL Maximum 150 characters."),
         URL(require_tld=True, message="Avatar is not an domain.")])
-    
     submit = SubmitField("Update")
+
+
+class ContactForm(FlaskForm):
+    username = StringField("Username", validators=[DataRequired()])
+    email_address = StringField("Email Address", validators=[DataRequired(), Email(
+        message="Please type a correct email address", granular_message=False, check_deliverability=False, allow_smtputf8=True, allow_empty_local=False)])
+    subject = StringField("About Yourself", validators=[Optional(), Length(
+        min=10, max=150, message="About yourself, minimum 10 characters, max 150 characters.")])
+    description = TextAreaField("Username", validators=[DataRequired()])
+    submit = SubmitField("Send message")
+    

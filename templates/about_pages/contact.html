@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
+		<div class="card h-100">
+			<div class="card-body">
+				<h5 class="card-title">Submit a request</h5>
+				<form method="POST" action="#" class="row">
+					{{ form.hidden_tag() }}
+					<div class="row">
+						<div class="col-sm-12 col-lg-6">
+							Your Username:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.username }}
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-sm-12 col-lg-6">
+							Your Email Address:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.email_address }}
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-sm-12 col-lg-6">
+							Subject:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.subject }}
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-sm-12 col-lg-6">
+							Description:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.description }}
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-12 pt-3">
+							{{ form.submit(class_="btn btn-primary") }}
+						</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

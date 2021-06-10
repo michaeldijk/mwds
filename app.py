@@ -8,11 +8,9 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm, EditProfileForm
+from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm
 from flask_paginate import Pagination, get_page_parameter
-
-
-# test update, for branch update1
+from flask_mail import Mail, Message
 
 
 # if local env. import env.py, otherwise not
@@ -31,6 +29,16 @@ app.secret_key = os.environ.get("SECRET_KEY")
 # Setup instance of PyMongo linking to Flask App
 mongo = PyMongo(app)
 
+# Mail settings below
+mail = Mail()
+
+app.config["MAIL_SERVER"] = os.environ.get("MAIL_SERVER")
+app.config["MAIL_PORT"] = os.environ.get("MAIL_PORT")
+app.config["MAIL_USE_SSL"] = os.environ.get("MAIL_USE_SSL")
+app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
+app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
+ 
+mail.init_app(app)
 
 # Default route (index/homepage)
 # stories route (goes to homepage)
@@ -213,7 +221,6 @@ def public_profile(username):
     return render_template("profile_public.html", username=username, username_avatar=username_avatar, username_about_me=username_about_me)
     
 
-
 # profile edit template route
 @app.route("/profile/<username>/edit", methods=["GET", "POST"])
 def profile_edit(username):
@@ -240,6 +247,47 @@ def profile_edit(username):
         return redirect(url_for("profile", username=session["user"]))
 
     return render_template("profile_edit.html", username=username, form=form)
+
+
+# About template route
+@app.route("/about")
+def about():
+    return render_template("about_pages/about.html")
+
+
+# Terms template route
+@app.route("/terms")
+def terms():
+    return render_template("about_pages/terms.html")
+
+
+# Found help, for using flask-mail from 
+# https://code.tutsplus.com/tutorials/intro-to-flask-adding-a-contact-page--net-28982
+# Contact template route
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    form = ContactForm()
+
+    if request.method == "POST":
+        msg = Message(form.subject.data, sender=form.email_address.data, recipients=['michaeldijk@outlook.com'])
+        msg.body = """
+        From: %s <%s>
+        Subject: %s 
+        Description: %s
+        """ % (form.username.data, form.email_address.data, form.subject.data, form.description.data)
+        mail.send(msg)
+ 
+        flash("Thank you for your message! We'll get back to you shortly")
+        return render_template("about_pages/contact.html", form=form)
+
+
+    return render_template("about_pages/contact.html", form=form)
+
+
+# Languages template route
+@app.route("/languages")
+def languages():
+    return render_template("about_pages/languages.html")
 
 
 # Error 403 template route
