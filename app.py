@@ -8,8 +8,9 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm, EditProfileForm
+from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm
 from flask_paginate import Pagination, get_page_parameter
+from flask.ext.mail import Message, Mail
 
 
 # test update, for branch update1
@@ -248,19 +249,20 @@ def about():
     return render_template("about_pages/about.html")
 
 
-# About template route
+# Terms template route
 @app.route("/terms")
 def terms():
     return render_template("about_pages/terms.html")
 
 
-# About template route
-@app.route("/contact")
+# Contact template route
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("about_pages/contact.html")
+    form = ContactForm()
+    return render_template("about_pages/contact.html", form=form)
 
 
-# About template route
+# Languages template route
 @app.route("/languages")
 def languages():
     return render_template("about_pages/languages.html")
