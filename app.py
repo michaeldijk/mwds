@@ -221,7 +221,6 @@ def public_profile(username):
     return render_template("profile_public.html", username=username, username_avatar=username_avatar, username_about_me=username_about_me)
     
 
-
 # profile edit template route
 @app.route("/profile/<username>/edit", methods=["GET", "POST"])
 def profile_edit(username):
@@ -262,6 +261,8 @@ def terms():
     return render_template("about_pages/terms.html")
 
 
+# Found help, for using flask-mail from 
+# https://code.tutsplus.com/tutorials/intro-to-flask-adding-a-contact-page--net-28982
 # Contact template route
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
