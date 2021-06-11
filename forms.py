@@ -63,6 +63,10 @@ class EditStoryForm(FlaskForm):
     story = TextAreaField("Story", validators=[DataRequired(), Length(min=5, max=15, message="Cannot post story, if story is blank.")])
     submit = SubmitField("Update story")
 
+class EditLanguageForm(FlaskForm):
+    language = StringField("Language", validators=[DataRequired(), Length(min=3, max=150, message="Cannot update language, language needs to be 3 to 150chars.")])
+    submit = SubmitField("Update language")
+
 class ContactForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     email_address = StringField("Email Address", validators=[DataRequired(), Email(
