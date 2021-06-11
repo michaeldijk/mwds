@@ -115,7 +115,8 @@ def new_story():
 @app.route("/edit_story/<story_id>", methods=["GET", "POST"])
 def edit_story(story_id):
         if "user" in session:
-            if session["user"]:
+            story_username = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["username"]
+            if session["user"] == story_username:
                 # Get values from database below
                 story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
                 language = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["language_name"]
@@ -326,7 +327,9 @@ def contact():
             msg = Message(form.subject.data, sender=form.email_address.data, recipients=['michaeldijk@outlook.com'])
             msg.body = """
             From: %s <%s>
+            ----
             Subject: %s 
+            ----
             Description: %s
             """ % (form.username.data, form.email_address.data, form.subject.data, form.description.data)
             mail.send(msg)
