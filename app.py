@@ -396,16 +396,30 @@ def logout():
 # ######################################################
 
 
-# edit categories template route
-@app.route("/admin/edit_categories")
-def edit_categories():
+# manage languages template route
+@app.route("/admin/manage_languages")
+def manage_languages():
     if "user" in session:
             if session["user"] == "admin":
-                return render_template("admin/edit_categories.html")
+
+                languages = mongo.db.languages.find().sort("_id", -1)
+
+                return render_template("admin/manage_languages.html", languages=languages)
     
     flash("Access denied!", "error")
     return redirect(url_for("login"))
 
+
+# edit language template route
+@app.route("/admin/edit/edit_language")
+def edit_language():
+    if "user" in session:
+            if session["user"] == "admin":
+
+                return render_template("admin/edit/edit_language.html")
+    
+    flash("Access denied!", "error")
+    return redirect(url_for("login"))
 
 
 # edit categories template route
