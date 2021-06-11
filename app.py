@@ -8,7 +8,7 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm
+from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm
 from flask_paginate import Pagination, get_page_parameter
 from flask_mail import Mail, Message
 
@@ -99,22 +99,30 @@ def new_story():
 # Edit story template route - coming from profile page
 @app.route("/edit_story/<story_id>", methods=["GET", "POST"])
 def edit_story(story_id):
-    # If form is submitted, then post the following values
-    if request.method == "POST":
-        submit = {
+    # Get values from database below
+    story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
+    language = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["language_name"]
+    story_title = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_title"]
+    story_description = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_description"]
+    languages = mongo.db.languages.find().sort("language_name", 1)
+    # Form with values from above
+    form = EditStoryForm(languages=language, title=story_title, story=story_description)
+    # Populate languages from database in alphabetic order
+    form.languages.choices = [(item["language_name"]) for item in mongo.db.languages.find().sort("language_name", 1)]
+    
+    if form.validate_on_submit():
+        story = {
             "username": session["user"],
-            "language_name": request.form.get("language_name"),
-            "story_title": request.form.get("story_title"),
-            "story_description": request.form.get("story_description")
+            "language_name": form.languages.data,
+            "story_title": form.title.data,
+            "story_description": form.story.data
         }
-        mongo.db.stories.update({"_id": ObjectId(story_id)}, submit)
+        mongo.db.stories.update({"_id": ObjectId(story_id)}, story)
         flash("Story has succesfully been updated!")
         return redirect(url_for("profile", username=session["user"]))
-
+    
     # if page is opened, find values, and post to form
-    story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
-    languages = mongo.db.languages.find().sort("language_name", 1)
-    return render_template("edit_story.html", story=story, languages=languages)
+    return render_template("edit_story.html", story=story, form=form)
 
 
 # delete story template route - coming from profile page
