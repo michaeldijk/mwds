@@ -391,6 +391,29 @@ def logout():
     return redirect(url_for("login"))
 
 
+# ######################################################
+# ################### ADMIN SECTION BELOW ##############
+# ######################################################
+
+
+# edit categories template route
+@app.route("/edit_categories")
+def edit_categories():
+    return render_template("admin/edit_categories.html")
+
+
+# edit categories template route
+@app.route("/manage_stories")
+def manage_stories():
+    return render_template("admin/manage_stories.html")
+
+
+# edit categories template route
+@app.route("/manage_users")
+def manage_users():
+    return render_template("admin/manage_users.html")
+
+
 # run app, with environment variables from env.py local,
 # otherwise from settings in Heroku
 if __name__ == "__main__":
