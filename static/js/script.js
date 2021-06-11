@@ -8,3 +8,8 @@ $('.container-infinite-scroll').infiniteScroll({
   history: true,
 });
 // Help found with last child selector from https://api.jquery.com/last-child-selector/
+
+// Summernote WYSIWYG editor, loading on page ready
+$(document).ready(function() {
+  $('#summernote').summernote();
+});
