@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.fields.simple import TextAreaField
 # Import DataRequired for required field, length for max length,
 # EqualTo for equal to password field, Regexp for checking for input,
@@ -40,6 +40,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
+
 class EditProfileForm(FlaskForm):
     about_me = TextAreaField('About Yourself', validators=[Optional()])
     avatar = StringField("Your Avatar", validators=[Optional(),
@@ -48,6 +49,12 @@ class EditProfileForm(FlaskForm):
         URL(require_tld=True, message="Avatar is not an domain.")])
     submit = SubmitField("Update")
 
+
+class NewStoryForm(FlaskForm):
+    languages = SelectField(u'Programming Language', choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
+    title = StringField("Title", validators=[DataRequired()])
+    story = TextAreaField('Story', validators=[DataRequired()])
+    submit = SubmitField("Submit Story")
 
 class ContactForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
