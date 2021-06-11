@@ -8,7 +8,7 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm, EditLanguageForm
+from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm, EditLanguageForm, AddLanguageForm
 from flask_paginate import Pagination, get_page_parameter
 from flask_mail import Mail, Message
 from datetime import datetime
@@ -397,14 +397,22 @@ def logout():
 
 
 # manage languages template route
-@app.route("/admin/manage_languages")
+@app.route("/admin/manage_languages", methods=["GET", "POST"])
 def manage_languages():
     if "user" in session:
             if session["user"] == "admin":
+                form = AddLanguageForm()
+                if form.validate_on_submit():
+                    language = {
+                        "language_name": form.language.data
+                    }
+                    mongo.db.languages.insert_one(language)
+                    flash("language succesfully added!!")
+                    return redirect(url_for("manage_languages"))
 
                 languages = mongo.db.languages.find().sort("_id", -1)
 
-                return render_template("admin/manage_languages.html", languages=languages)
+                return render_template("admin/manage_languages.html", languages=languages, form=form)
     
     flash("Access denied!", "error")
     return redirect(url_for("login"))
@@ -429,6 +437,19 @@ def edit_language(language_id):
                 return render_template("admin/edit/edit_language.html", form=form, language=language)
     
     flash("Access denied!", "error")
+    return redirect(url_for("login"))
+
+
+# delete language template route - coming from manage language page
+@app.route("/admin/edit/delete_language/<language_id>")
+def delete_language(language_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                mongo.db.languages.remove({"_id": ObjectId(language_id)})
+                flash("Language succesfully removed from database!")
+                return redirect(url_for("manage_languages"))
+        
+    flash("Access denied.", "error")
     return redirect(url_for("login"))
 
 
