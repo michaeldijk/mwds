@@ -397,21 +397,37 @@ def logout():
 
 
 # edit categories template route
-@app.route("/edit_categories")
+@app.route("/admin/edit_categories")
 def edit_categories():
-    return render_template("admin/edit_categories.html")
+    if "user" in session:
+            if session["user"] == "admin":
+                return render_template("admin/edit_categories.html")
+    
+    flash("Access denied!", "error")
+    return redirect(url_for("login"))
+
 
 
 # edit categories template route
-@app.route("/manage_stories")
+@app.route("/admin/manage_stories")
 def manage_stories():
-    return render_template("admin/manage_stories.html")
+    if "user" in session:
+        if session["user"] == "admin":
+            return render_template("admin/manage_stories.html")
+
+    flash("Access denied!", "error")
+    return redirect(url_for("login"))
 
 
 # edit categories template route
-@app.route("/manage_users")
+@app.route("/admin/manage_users")
 def manage_users():
-    return render_template("admin/manage_users.html")
+    if "user" in session:
+        if session["user"] == "admin":
+            return render_template("admin/manage_users.html")
+    
+    flash("Access denied!", "error")
+    return redirect(url_for("login"))
 
 
 # run app, with environment variables from env.py local,
