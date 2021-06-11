@@ -7,17 +7,14 @@
 			<div class="card-body">
 				<h5 class="card-title">Post a new story</h5>
 				<form method="POST" action="{{ url_for("new_story") }}" class="row">
+					{{ form.hidden_tag() }}
 					<div class="row">
 						<!-- Start col language selection -->
 						<div class="col-sm-12 col-lg-6">
 							Select language discussed:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<select id="language_name" name="language_name" required>
-								{% for language in languages %}
-								<option value="{{ language.language_name }}">{{ language.language_name }}</option>
-								{% endfor %}
-							</select>
+							{{ form.languages }}
 						</div>
 						<!-- End col language selection -->
 					</div>
@@ -27,8 +24,7 @@
 							Story Title:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<input type="text" id="story_title" name="story_title" placeholder="Enter Title"
-								minlength="5" maxlength="55" required>
+							{{ form.title }}
 						</div>
 						<!-- End col Story title field -->
 						<!-- Start col Story Description field -->
@@ -36,14 +32,13 @@
 							Story:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<textarea id="summernote" name="story_description" rows="10" cols="30"
-								placeholder="The cat was coding an app in the garden."></textarea>
+							{{ form.story(id="summernote") }}
 						</div>
 						<!-- End col Story Description field -->
 					</div>
 					<!-- Start col Submit button -->
 					<div class="col-12 pt-3">
-						<input type="submit" value="Submit Story" class="btn btn-primary">
+						{{ form.submit(class="btn btn-primary") }}
 					</div>
 					<!-- End col Submit button -->
 				</form>
