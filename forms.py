@@ -67,6 +67,11 @@ class EditLanguageForm(FlaskForm):
     language = StringField("Language", validators=[DataRequired(), Length(min=3, max=150, message="Cannot update language, language needs to be 3 to 150chars.")])
     submit = SubmitField("Update language")
 
+
+class AddLanguageForm(FlaskForm):
+    language = StringField("Language", validators=[DataRequired(), Length(min=3, max=150, message="Cannot update language, language needs to be 3 to 150chars.")])
+    submit = SubmitField("Add language")
+
 class ContactForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     email_address = StringField("Email Address", validators=[DataRequired(), Email(
