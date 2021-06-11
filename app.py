@@ -261,27 +261,53 @@ def terms():
     return render_template("about_pages/terms.html")
 
 
+# Contact template route
 # Found help, for using flask-mail from 
 # https://code.tutsplus.com/tutorials/intro-to-flask-adding-a-contact-page--net-28982
-# Contact template route
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
-    form = ContactForm()
+    # Could not find a solution to if user or not user, with help of Robinz Alumni from Slack, this was solved
+    # https://code-institute-room.slack.com/archives/C7JQY2RHC/p1605556229478600?thread_ts=1605556092.478500&cid=C7JQY2RHC
+    if 'user' in session:
+        # Get username values from db
+        username = mongo.db.users.find_one({"username": session["user"]})["username"]
+        email_address = mongo.db.users.find_one({"username": session["user"]})["email_address"]
+        # Could not find a solution directly for passing values, found help from:
+        # https://stackoverflow.com/questions/51027440/how-do-i-set-a-value-for-a-hidden-field-in-a-flask-form-using-wtf-quick-form
+        # Get ContactForm from forms.py, insert username and email address
+        form = ContactForm(username=username, email_address=email_address)
 
-    if request.method == "POST":
-        msg = Message(form.subject.data, sender=form.email_address.data, recipients=['michaeldijk@outlook.com'])
-        msg.body = """
-        From: %s <%s>
-        Subject: %s 
-        Description: %s
-        """ % (form.username.data, form.email_address.data, form.subject.data, form.description.data)
-        mail.send(msg)
- 
-        flash("Thank you for your message! We'll get back to you shortly")
+        if request.method == "POST":
+            msg = Message(form.subject.data, sender=form.email_address.data, recipients=['michaeldijk@outlook.com'])
+            msg.body = """
+            From: %s <%s>
+            Subject: %s 
+            Description: %s
+            """ % (form.username.data, form.email_address.data, form.subject.data, form.description.data)
+            mail.send(msg)
+    
+            flash("Thank you for your message! We'll get back to you shortly")
+            return render_template("about_pages/contact.html", form=form)
+        
         return render_template("about_pages/contact.html", form=form)
+    # If user is not logged in, return default values
+    else:
+        # Get ContactForm from forms.py
+        form = ContactForm()
+        if request.method == "POST":
+            msg = Message(form.subject.data, sender=form.email_address.data, recipients=['michaeldijk@outlook.com'])
+            msg.body = """
+            From: %s <%s>
+            Subject: %s
+            ---
+            Description: %s
+            """ % (form.username.data, form.email_address.data, form.subject.data, form.description.data)
+            mail.send(msg)
 
-
-    return render_template("about_pages/contact.html", form=form)
+            flash("Thank you for your message! We'll get back to you shortly")
+            return render_template("about_pages/contact.html", form=form)
+        
+        return render_template("about_pages/contact.html", form=form)
 
 
 # Languages template route
