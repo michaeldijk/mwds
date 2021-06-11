@@ -1,12 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- Start error messages Form -->
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
+		<!-- Start error message title -->
+		{% for error in form.language.errors %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<h2 class="text-danger">{{ error }}</h2>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		{% endfor %}
+		<!-- End error message title -->
+	</div>
+</div>
+<!-- End error messages Form -->
+
 <div class="row justify-content-center pt-3 pb-3">
 	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
 		<div class="card h-100">
 			<div class="card-body">
 				<h4 class="card-title"><em>Edit Language</h4>
-					<p>edit language comes here</p>
+					<form method="POST" action="{{ url_for("edit_language", language_id=language._id) }}" class="row">
+						{{ form.hidden_tag() }}
+						<div class="row">
+							<!-- Start col language selection -->
+							<div class="col-sm-12 col-lg-6">
+								Update language:
+							</div>
+							<div class="col-sm-12 col-lg-6">
+								{{ form.language }}
+							</div>
+							<!-- End col language selection -->
+						</div>
+						<div class="row">
+							<!-- Start col Submit button -->
+							<div class="col-12 pt-3">
+								{{ form.submit(class="btn btn-primary") }} 
+								<a href="{{ url_for("manage_languages") }}" class="btn btn-primary">Cancel</a>
+							</div>
+						</div>
 			</div>
 		</div>
 	</div>
