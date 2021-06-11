@@ -12,7 +12,7 @@
 					</div>
 					<div class="col-9">
 						<h5>About me</h5>
-						<p>{{ about_me }}</p>
+						<p>{{ about_me|safe }}</p>
 						<div class="col">
 							<a href="{{ url_for("profile_edit", username=session["user"]) }}"
 								class="btn btn-primary"><i class="fas fa-user-edit"></i> Edit Profile</a>
