@@ -6,7 +6,7 @@
 		<div class="card h-100">
 			<div class="card-body">
 				<h4 class="card-title">{{ story.story_title }}</h4>
-				<p>{{ story.story_description }}</p>
+				<p>{{ story.story_description|safe }}</p>
 			</div>
 		</div>
 	</div>
