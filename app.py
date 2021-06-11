@@ -11,6 +11,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm
 from flask_paginate import Pagination, get_page_parameter
 from flask_mail import Mail, Message
+from datetime import datetime
 
 
 # if local env. import env.py, otherwise not
@@ -74,10 +75,11 @@ def get_stories():
 def single_story(story_id):
         if "user" in session:
             if session["user"]:
+                users = list(mongo.db.users.find())
                 story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
-                return render_template("single_story.html", story=story)
+                return render_template("single_story.html", story=story, users=users)
         
-        flash("Access denied. Create an account to view stories", "error")
+        flash("Access denied. Create an account to view full stories", "error")
         flash("Or, login with your credentials below")
         return redirect(url_for("login"))
 
@@ -95,7 +97,8 @@ def new_story():
                         "username": session["user"],
                         "language_name": form.languages.data,
                         "story_title": form.title.data.lower(),
-                        "story_description": form.story.data.lower()
+                        "story_description": form.story.data.lower(),
+                        "posted_date": str(datetime.today())
                     }
                     mongo.db.stories.insert_one(story)
                     flash("Story succesfully submitted!!")

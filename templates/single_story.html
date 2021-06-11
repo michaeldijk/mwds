@@ -5,8 +5,23 @@
 	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
 		<div class="card h-100">
 			<div class="card-body">
-				<h4 class="card-title">{{ story.story_title }}</h4>
-				<p>{{ story.story_description|safe }}</p>
+				<div class="row">
+					<div class="col-2">
+						{# Ed Bradley, CI lead, helped me solve the link between story/avatar #}
+						{% for user in users if user.username == story.username %}
+							<img src="{{ user.avatar }}" class="avatar-stories" />
+						{% endfor %}
+					</div>
+					<div class="col-10">
+						<h4 class="card-title">{{ story.story_title }}</h4>
+						<p>Posted on: {{ story.posted_date|truncate(13, false, "") }}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<p>{{ story.story_description|safe }}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

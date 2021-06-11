@@ -45,10 +45,10 @@
 							{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
 							{% if session.user == anonymous %}
 							<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("login") }}">{{
-										story.username }}</a></em> | Date: 20/01/2021</p>
+										story.username }}</a></em> | {{ story.posted_date|truncate(13, false, "") }}</p>
 							{% else %}
 							<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile",
-										username=story.username) }}" target="_blank">{{ story.username }}</a></em> | Date: 20/01/2021</p>
+										username=story.username) }}" target="_blank">{{ story.username }}</a></em> | {{ story.posted_date|truncate(13, false, "") }}</p>
 							{% endif %}
 							<p>Main language discussed: <em>{{ story.language_name }}</em></p>
 						</div>
