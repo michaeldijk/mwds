@@ -7,22 +7,14 @@
 			<div class="card-body">
 				<h5 class="card-title">Edit story</h5>
 				<form method="POST" action="{{ url_for("edit_story", story_id=story._id) }}" class="row">
+					{{ form.hidden_tag() }}
 					<div class="row">
 						<!-- Start col language selection -->
 						<div class="col-sm-12 col-lg-6">
 							Select language discussed:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							<select id="language_name" name="language_name" required>
-								{% for language in languages %}
-								{% if language.language_name == story.language_name %}
-								<option value="{{ language.language_name }}" selected>{{ language.language_name }}
-								</option>
-								{% else %}
-								<option value="{{ language.language_name }}">{{ language.language_name }}</option>
-								{% endif %}
-								{% endfor %}
-							</select>
+							{{ form.languages }}
 						</div>
 						<!-- End col language selection -->
 					</div>
@@ -32,13 +24,7 @@
 							Story Title:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							{% if story.story_title == story.story_title %}
-							<input type="text" id="story_title" name="story_title" value="{{ story.story_title }}"
-								minlength="5" maxlength="55" required>
-							{% else %}
-							<input type="text" id="story_title" name="story_title" placeholder="Enter Title"
-								minlength="5" maxlength="55" required>
-							{% endif %}
+							{{ form.title }}
 						</div>
 						<!-- End col Story title field -->
 						<!-- Start col Story Description field -->
@@ -46,20 +32,14 @@
 							Story:
 						</div>
 						<div class="col-sm-12 col-lg-6">
-							{% if story.story_description == story.story_description %}
-							<textarea id="summernote" name="story_description" rows="10" cols="30"
-								required>{{ story.story_description }}</textarea>
-							{% else %}
-							<textarea id="story_description" name="story_description" rows="10" cols="30"
-								placeholder="The cat was coding an app in the garden."></textarea>
-							{% endif %}
+							{{ form.story(id="summernote") }}
 						</div>
 						<!-- End col Story Description field -->
 					</div>
 					<!-- Start col Submit button -->
 					<div class="col-12 pt-3">
-						<input type="submit" value="Edit Story" class="btn btn-primary"> <a href="{{ url_for("profile",
-							username=session["user"]) }}" class="btn btn-primary">Cancel</a>
+						{{ form.submit(class="btn btn-primary") }} 
+						<a href="{{ url_for("profile", username=session["user"]) }}" class="btn btn-primary">Cancel</a>
 					</div>
 					<!-- End col Submit button -->
 				</form>
