@@ -87,59 +87,77 @@ def single_story(story_id):
 # New story template route
 @app.route("/new_story", methods=["GET", "POST"])
 def new_story():
-    form = NewStoryForm()
-    # Found help populating choices, from https://stackoverflow.com/questions/28133859/how-to-populate-wtform-select-field-using-mongokit-pymongo
-    form.languages.choices = [(item["language_name"]) for item in mongo.db.languages.find().sort("language_name", 1)]
-    if form.validate_on_submit():
-        story = {
-            "username": session["user"],
-            "language_name": form.languages.data,
-            "story_title": form.title.data.lower(),
-            "story_description": form.story.data.lower(),
-            "posted_date": str(datetime.today())
-        }
-        mongo.db.stories.insert_one(story)
-        flash("Story succesfully submitted!!")
-        return redirect(url_for("get_stories"))
+        if "user" in session:
+            if session["user"]:
+                form = NewStoryForm()
+                # Found help populating choices, from https://stackoverflow.com/questions/28133859/how-to-populate-wtform-select-field-using-mongokit-pymongo
+                form.languages.choices = [(item["language_name"]) for item in mongo.db.languages.find().sort("language_name", 1)]
+                if form.validate_on_submit():
+                    story = {
+                        "username": session["user"],
+                        "language_name": form.languages.data,
+                        "story_title": form.title.data.lower(),
+                        "story_description": form.story.data.lower(),
+                        "posted_date": str(datetime.today())
+                    }
+                    mongo.db.stories.insert_one(story)
+                    flash("Story succesfully submitted!!")
+                    return redirect(url_for("get_stories"))
 
-    return render_template("new_story.html", form=form)
+                return render_template("new_story.html", form=form)
+        
+        flash("Access denied. Create an account to post new stories", "error")
+        flash("Or, login with your credentials below")
+        return redirect(url_for("login"))
 
 
 # Edit story template route - coming from profile page
 @app.route("/edit_story/<story_id>", methods=["GET", "POST"])
 def edit_story(story_id):
-    # Get values from database below
-    story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
-    language = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["language_name"]
-    story_title = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_title"]
-    story_description = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_description"]
-    languages = mongo.db.languages.find().sort("language_name", 1)
-    # Form with values from above
-    form = EditStoryForm(languages=language, title=story_title, story=story_description)
-    # Populate languages from database in alphabetic order
-    form.languages.choices = [(item["language_name"]) for item in mongo.db.languages.find().sort("language_name", 1)]
+        if "user" in session:
+            if session["user"]:
+                # Get values from database below
+                story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
+                language = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["language_name"]
+                story_title = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_title"]
+                story_description = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_description"]
+                languages = mongo.db.languages.find().sort("language_name", 1)
+                # Form with values from above
+                form = EditStoryForm(languages=language, title=story_title, story=story_description)
+                # Populate languages from database in alphabetic order
+                form.languages.choices = [(item["language_name"]) for item in mongo.db.languages.find().sort("language_name", 1)]
+                
+                if form.validate_on_submit():
+                    story = {
+                        "username": session["user"],
+                        "language_name": form.languages.data,
+                        "story_title": form.title.data,
+                        "story_description": form.story.data
+                    }
+                    mongo.db.stories.update({"_id": ObjectId(story_id)}, story)
+                    flash("Story has succesfully been updated!")
+                    return redirect(url_for("profile", username=session["user"]))
+                
+                # if page is opened, find values, and post to form
+                return render_template("edit_story.html", story=story, form=form)
     
-    if form.validate_on_submit():
-        story = {
-            "username": session["user"],
-            "language_name": form.languages.data,
-            "story_title": form.title.data,
-            "story_description": form.story.data
-        }
-        mongo.db.stories.update({"_id": ObjectId(story_id)}, story)
-        flash("Story has succesfully been updated!")
-        return redirect(url_for("profile", username=session["user"]))
-    
-    # if page is opened, find values, and post to form
-    return render_template("edit_story.html", story=story, form=form)
+        flash("Access denied. Create an account to edit stories", "error")
+        flash("Or, login with your credentials below")
+        return redirect(url_for("login"))
 
 
 # delete story template route - coming from profile page
 @app.route("/delete_story/<story_id>")
 def delete_story(story_id):
-    mongo.db.stories.remove({"_id": ObjectId(story_id)})
-    flash("Story succesfully removed from database!")
-    return redirect(url_for("profile", username=session["user"]))
+        if "user" in session:
+            if session["user"]:
+                mongo.db.stories.remove({"_id": ObjectId(story_id)})
+                flash("Story succesfully removed from database!")
+                return redirect(url_for("profile", username=session["user"]))
+        
+        flash("Access denied. You are not allowed to remove this story", "error")
+        flash("Login with your credentials below, to edit/remove stories")
+        return redirect(url_for("login"))
 
 
 # Login template route
@@ -210,20 +228,22 @@ def register():
 # profile template route
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    # grab the session users username from the db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    avatar = mongo.db.users.find_one(
-        {"username": session["user"]})["avatar"]
-    about_me = mongo.db.users.find_one(
-        {"username": session["user"]})["about_me"]
-
-    if session["user"]:
-        # Find stories written by user, and return to page
-        stories_written = mongo.db.stories.find(
-            {"username": session["user"]}).sort("_id", -1)
-        return render_template("profile.html", stories_written=stories_written, username=username, about_me=about_me, avatar=avatar)
-
+    if "user" in session:
+        if session["user"]:
+            # grab the session users username from the db
+            username = mongo.db.users.find_one(
+                {"username": session["user"]})["username"]
+            avatar = mongo.db.users.find_one(
+                {"username": session["user"]})["avatar"]
+            about_me = mongo.db.users.find_one(
+                {"username": session["user"]})["about_me"]
+            # Find stories written by user, and return to page
+            stories_written = mongo.db.stories.find(
+                {"username": session["user"]}).sort("_id", -1)
+            return render_template("profile.html", stories_written=stories_written, username=username, about_me=about_me, avatar=avatar)
+    
+    flash("Access denied. Create an account to view profiles and your profile", "error")
+    flash("Or, login with your credentials below")
     return redirect(url_for("login"))
 
 
@@ -243,29 +263,35 @@ def public_profile(username):
 # profile edit template route
 @app.route("/profile/<username>/edit", methods=["GET", "POST"])
 def profile_edit(username):
-    # grab the session users username from the db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    # grab the session users username ID from the db
-    username_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
-    # grab the session users username about_me details from the db
-    username_default_value_about_me = mongo.db.users.find_one(
-        {"username": session["user"]})["about_me"]
-    # grab the session users username avatar from the db
-    username_default_value_avatar = mongo.db.users.find_one(
-        {"username": session["user"]})["avatar"]
-    form = EditProfileForm(about_me=username_default_value_about_me, avatar=username_default_value_avatar)
+        if "user" in session:
+            if session["user"]:
+                # grab the session users username from the db
+                username = mongo.db.users.find_one(
+                    {"username": session["user"]})["username"]
+                # grab the session users username ID from the db
+                username_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
+                # grab the session users username about_me details from the db
+                username_default_value_about_me = mongo.db.users.find_one(
+                    {"username": session["user"]})["about_me"]
+                # grab the session users username avatar from the db
+                username_default_value_avatar = mongo.db.users.find_one(
+                    {"username": session["user"]})["avatar"]
+                form = EditProfileForm(about_me=username_default_value_about_me, avatar=username_default_value_avatar)
 
-# I had issues with using set, and the following page helped me find a solution to this:
-# https://stackoverflow.com/questions/29837370/pymongo-update-one-syntax-error
-    if form.validate_on_submit():
-        mongo.db.users.update({"_id": ObjectId(username_id)},
-                              {"$set":
-                              {"about_me": form.about_me.data or username_default_value_about_me,
-                               "avatar": form.avatar.data or username_default_value_avatar}})
-        return redirect(url_for("profile", username=session["user"]))
+            # I had issues with using set, and the following page helped me find a solution to this:
+            # https://stackoverflow.com/questions/29837370/pymongo-update-one-syntax-error
+                if form.validate_on_submit():
+                    mongo.db.users.update({"_id": ObjectId(username_id)},
+                                        {"$set":
+                                        {"about_me": form.about_me.data or username_default_value_about_me,
+                                        "avatar": form.avatar.data or username_default_value_avatar}})
+                    return redirect(url_for("profile", username=session["user"]))
 
-    return render_template("profile_edit.html", username=username, form=form)
+                return render_template("profile_edit.html", username=username, form=form)
+    
+        flash("Access denied. Create an account to edit your profile", "error")
+        flash("Or, login with your credentials below")
+        return redirect(url_for("login"))
 
 
 # About template route
