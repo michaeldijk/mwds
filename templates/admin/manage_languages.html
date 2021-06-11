@@ -9,7 +9,7 @@
 					<ul class="admin-lists">
 						{% for language in languages %}
 						<li>
-							<a href="{{ url_for("edit_language") }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+							<a href="{{ url_for("edit_language", language_id=language._id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
 							<a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
 							{{ language.language_name }}
 						</li>
