@@ -115,7 +115,8 @@ def new_story():
 @app.route("/edit_story/<story_id>", methods=["GET", "POST"])
 def edit_story(story_id):
         if "user" in session:
-            if session["user"]:
+            story_username = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["username"]
+            if session["user"] == story_username:
                 # Get values from database below
                 story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
                 language = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["language_name"]
