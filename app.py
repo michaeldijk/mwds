@@ -8,7 +8,7 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm
+from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm
 from flask_paginate import Pagination, get_page_parameter
 from flask_mail import Mail, Message
 
@@ -79,19 +79,21 @@ def single_story(story_id):
 # New story template route
 @app.route("/new_story", methods=["GET", "POST"])
 def new_story():
-    if request.method == "POST":
+    form = NewStoryForm()
+    # Found help populating choices, from https://stackoverflow.com/questions/28133859/how-to-populate-wtform-select-field-using-mongokit-pymongo
+    form.languages.choices = [(item["language_name"]) for item in mongo.db.languages.find().sort("language_name", 1)]
+    if form.validate_on_submit():
         story = {
             "username": session["user"],
-            "language_name": request.form.get("language_name"),
-            "story_title": request.form.get("story_title"),
-            "story_description": request.form.get("story_description")
+            "language_name": form.languages.data,
+            "story_title": form.title.data.lower(),
+            "story_description": form.story.data.lower()
         }
         mongo.db.stories.insert_one(story)
         flash("Story succesfully submitted!!")
         return redirect(url_for("get_stories"))
 
-    languages = mongo.db.languages.find().sort("language_name", 1)
-    return render_template("new_story.html", languages=languages)
+    return render_template("new_story.html", form=form)
 
 
 # Edit story template route - coming from profile page
