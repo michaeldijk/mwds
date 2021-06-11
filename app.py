@@ -201,20 +201,22 @@ def register():
 # profile template route
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    # grab the session users username from the db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    avatar = mongo.db.users.find_one(
-        {"username": session["user"]})["avatar"]
-    about_me = mongo.db.users.find_one(
-        {"username": session["user"]})["about_me"]
-
-    if session["user"]:
-        # Find stories written by user, and return to page
-        stories_written = mongo.db.stories.find(
-            {"username": session["user"]}).sort("_id", -1)
-        return render_template("profile.html", stories_written=stories_written, username=username, about_me=about_me, avatar=avatar)
-
+    if "user" in session:
+        if session["user"]:
+            # grab the session users username from the db
+            username = mongo.db.users.find_one(
+                {"username": session["user"]})["username"]
+            avatar = mongo.db.users.find_one(
+                {"username": session["user"]})["avatar"]
+            about_me = mongo.db.users.find_one(
+                {"username": session["user"]})["about_me"]
+            # Find stories written by user, and return to page
+            stories_written = mongo.db.stories.find(
+                {"username": session["user"]}).sort("_id", -1)
+            return render_template("profile.html", stories_written=stories_written, username=username, about_me=about_me, avatar=avatar)
+    
+    flash("Access denied. Create an account to view profiles and your profile", "error")
+    flash("Or, login with your credentials below")
     return redirect(url_for("login"))
 
 
