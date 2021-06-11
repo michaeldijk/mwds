@@ -6,7 +6,7 @@
 		<div class="card h-100">
 			<div class="card-body">
 				<h4 class="card-title"><em>{{ username }}'s</em> Profile </h4>
-				{{ username_about_me }}
+				{{ username_about_me|safe }}
 				<img src="{{ username_avatar }}" width="75px">
 			</div>
 		</div>
