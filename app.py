@@ -327,7 +327,9 @@ def contact():
             msg = Message(form.subject.data, sender=form.email_address.data, recipients=['michaeldijk@outlook.com'])
             msg.body = """
             From: %s <%s>
+            ----
             Subject: %s 
+            ----
             Description: %s
             """ % (form.username.data, form.email_address.data, form.subject.data, form.description.data)
             mail.send(msg)
