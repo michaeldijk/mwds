@@ -28,8 +28,8 @@
 {# End intro message, for users not logged on #}
 
 <!--Start container fluid, for infinite scroll, as it needs a container  -->
-<div class="container-fluid container-infinite-scroll">
-	<div class="row pt-3 pb-3" id="infinite-scroll">
+<div class="container-fluid container-infinite-scroll" id="infinite-scroll">
+	<div class="row pt-3 pb-3">
 		{% for story in stories %}
 		<div class="col-sm-12 col-lg-6 p-3">
 			<div class="card h-100">
@@ -45,31 +45,42 @@
 							{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
 							{% if session.user == anonymous %}
 							<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("login") }}">{{
-										story.username }}</a></em></p>
+										story.username }}</a></em> | Date: 20/01/2021</p>
 							{% else %}
 							<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("public_profile",
-										username=story.username) }}" target="_blank">{{ story.username }}</a></em></p>
+										username=story.username) }}" target="_blank">{{ story.username }}</a></em> | Date: 20/01/2021</p>
 							{% endif %}
 							<p>Main language discussed: <em>{{ story.language_name }}</em></p>
 						</div>
 					</div>
-					<h5 class="card-title">{{ story.story_title }}</h5>
-
-					{#
-					Found help for the excerpt, on
-					https://stackoverflow.com/questions/26030590/how-do-i-provide-a-blog-excerpt-without-having-to-show-html-code-using-jinja2-te
-					#}
-
-					<p class="card-text">{{ story.story_description|truncate(200, True) }}</p>
-
-					{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
-					{% if session.user == anonymous %}
-					<a href="{{ url_for("login") }}" class="btn btn-primary"><i class="fas fa-angle-double-right"></i>
-						Read More</a>
-					{% else %}
-					<a href="{{ url_for("single_story", story_id=story._id) }}" target="_blank"
-						class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
-					{% endif %}
+					<div class="row">
+						<div class="col-12">
+							<h5 class="card-title">{{ story.story_title }}</h5>
+						</div>
+					</div>
+					<div class="row">
+						{#
+							Overlay gradient div, to create a nice overlayed color difuser, to entice users to read more.
+							As truncate broke the divs, used this as an alternative
+						#}
+						<div class="overlay-gradient"></div>
+						<div class="col-12 stories-col">
+							{{ story.story_description|safe }}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 pt-3">
+							{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
+							{% if session.user == anonymous %}
+							<a href="{{ url_for("login") }}" class="btn btn-primary"><i
+									class="fas fa-angle-double-right"></i>
+								Read More</a>
+							{% else %}
+							<a href="{{ url_for("single_story", story_id=story._id) }}" target="_blank"
+								class="btn btn-primary"><i class="fas fa-angle-double-right"></i> Read More</a>
+							{% endif %}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
