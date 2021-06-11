@@ -10,7 +10,12 @@
 					{{ form.hidden_tag() }}
 					<div class="row">
 						<div class="col-sm-12 col-lg-6">
-							Your Username:
+							{# added if-else for name/username form label #}
+							{% if session.user %}
+								Your Username:
+							{% else %}
+								Your Name:
+							{% endif %}
 						</div>
 						<div class="col-sm-12 col-lg-6">
 							{{ form.username }}
