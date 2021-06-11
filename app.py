@@ -224,7 +224,6 @@ def public_profile(username):
 # profile edit template route
 @app.route("/profile/<username>/edit", methods=["GET", "POST"])
 def profile_edit(username):
-    form = EditProfileForm()
     # grab the session users username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -236,6 +235,7 @@ def profile_edit(username):
     # grab the session users username avatar from the db
     username_default_value_avatar = mongo.db.users.find_one(
         {"username": session["user"]})["avatar"]
+    form = EditProfileForm(about_me=username_default_value_about_me, avatar=username_default_value_avatar)
 
 # I had issues with using set, and the following page helped me find a solution to this:
 # https://stackoverflow.com/questions/29837370/pymongo-update-one-syntax-error
