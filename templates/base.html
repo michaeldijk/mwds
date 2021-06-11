@@ -19,9 +19,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
 		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<!-- Summernote WYSIWYG Editor CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 	<!-- Own CSS -->
-	<link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}">
+	<link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}" rel="stylesheet">
 
 	<!-- Favicons -->
 	<!-- Generated through https://www.favicon-generator.org/, created with Photoshop -->
@@ -169,6 +172,9 @@
 
 	<!-- Infinite scroll script -->
 	<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
+
+	<!-- Summernote script -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 	<!-- Own Script(s) -->
 	<script src="{{ url_for("static", filename="js/script.js") }}"></script>
