@@ -41,7 +41,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class EditProfileForm(FlaskForm):
-    about_me = StringField('About Yourself', validators=[Optional()])
+    about_me = TextAreaField('About Yourself', validators=[Optional()])
     avatar = StringField("Your Avatar", validators=[Optional(),
                                                     Length(
         min=5, max=150, message="Avatar URL Maximum 150 characters."),
