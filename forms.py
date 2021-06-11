@@ -51,10 +51,17 @@ class EditProfileForm(FlaskForm):
 
 
 class NewStoryForm(FlaskForm):
-    languages = SelectField(u'Programming Language', choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
+    languages = SelectField('Programming Language', choices=[])
     title = StringField("Title", validators=[DataRequired()])
     story = TextAreaField('Story', validators=[DataRequired()])
     submit = SubmitField("Submit Story")
+
+
+class EditStoryForm(FlaskForm):
+    languages = SelectField('Programming Language', choices=[])
+    title = StringField("Title", validators=[DataRequired()])
+    story = TextAreaField('Story', validators=[DataRequired()])
+    submit = SubmitField("Update story")
 
 class ContactForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
