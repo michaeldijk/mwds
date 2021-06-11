@@ -72,8 +72,14 @@ def get_stories():
 # single story route
 @app.route("/single_story/<story_id>")
 def single_story(story_id):
-    story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
-    return render_template("single_story.html", story=story)
+        if "user" in session:
+            if session["user"]:
+                story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
+                return render_template("single_story.html", story=story)
+        
+        flash("Access denied. Create an account to view stories", "error")
+        flash("Or, login with your credentials below")
+        return redirect(url_for("login"))
 
 
 # New story template route
