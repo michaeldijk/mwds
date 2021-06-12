@@ -8,7 +8,7 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm
+from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm, EditLanguageForm, AddLanguageForm
 from flask_paginate import Pagination, get_page_parameter
 from flask_mail import Mail, Message
 from datetime import datetime
@@ -97,7 +97,7 @@ def new_story():
                         "username": session["user"],
                         "language_name": form.languages.data,
                         "story_title": form.title.data.lower(),
-                        "story_description": form.story.data.lower(),
+                        "story_description": form.story.data,
                         "posted_date": str(datetime.today())
                     }
                     mongo.db.stories.insert_one(story)
@@ -286,6 +286,7 @@ def profile_edit(username):
                                         {"$set":
                                         {"about_me": form.about_me.data or username_default_value_about_me,
                                         "avatar": form.avatar.data or username_default_value_avatar}})
+                    flash("Profile succesfully updated!")
                     return redirect(url_for("profile", username=session["user"]))
 
                 return render_template("profile_edit.html", username=username, form=form)
@@ -388,6 +389,165 @@ def logout():
     # remove user from session cookie
     flash("You have succesfully been logged out!")
     session.pop("user")
+    return redirect(url_for("login"))
+
+
+# ######################################################
+# ################ ADMIN SECTION BELOW #################
+# ######################################################
+
+
+# manage languages template route
+@app.route("/admin/manage_languages", methods=["GET", "POST"])
+def manage_languages():
+    if "user" in session:
+            if session["user"] == "admin":
+                form = AddLanguageForm()
+                if form.validate_on_submit():
+                    language = {
+                        "language_name": form.language.data
+                    }
+                    mongo.db.languages.insert_one(language)
+                    flash("language succesfully added!!")
+                    return redirect(url_for("manage_languages"))
+
+                languages = mongo.db.languages.find().sort("_id", -1)
+
+                return render_template("admin/manage_languages.html", languages=languages, form=form)
+    
+    flash("Access denied!", "error")
+    return redirect(url_for("login"))
+
+
+# edit language template route
+@app.route("/admin/edit/edit_language/<language_id>", methods=["GET", "POST"])
+def edit_language(language_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                language = mongo.db.languages.find_one({"_id": ObjectId(language_id)})
+                form = EditLanguageForm(language=language["language_name"])
+
+                if form.validate_on_submit():
+                    language = {
+                        "language_name": form.language.data
+                    }
+                    mongo.db.languages.update({"_id": ObjectId(language_id)}, language)
+                    flash("Language has succesfully been updated!")
+                    return redirect(url_for("manage_languages"))
+
+                return render_template("admin/edit/edit_language.html", form=form, language=language)
+    
+    flash("Access denied!", "error")
+    return redirect(url_for("login"))
+
+
+# delete language template route - coming from manage language page
+@app.route("/admin/edit/delete_language/<language_id>")
+def delete_language(language_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                mongo.db.languages.remove({"_id": ObjectId(language_id)})
+                flash("Language succesfully removed from database!")
+                return redirect(url_for("manage_languages"))
+        
+    flash("Access denied.", "error")
+    return redirect(url_for("login"))
+
+
+# manage stories template route
+@app.route("/admin/manage_stories")
+def manage_stories():
+    if "user" in session:
+        if session["user"] == "admin":
+            stories = mongo.db.stories.find().sort("_id", -1)
+
+            return render_template("admin/manage_stories.html", stories=stories)
+
+    flash("Access denied!", "error")
+    return redirect(url_for("login"))
+
+
+# edit story admin template route
+@app.route("/admin/edit/edit_story/<story_id>", methods=["GET", "POST"])
+def admin_edit_story(story_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
+                language = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["language_name"]
+                story_title = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_title"]
+                story_description = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_description"]
+                languages = mongo.db.languages.find().sort("language_name", 1)
+                username_default_value_about_me = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["username"]
+                # Form with values from above
+                form = EditStoryForm(languages=language, title=story_title, story=story_description)
+                # Populate languages from database in alphabetic order
+                form.languages.choices = [(item["language_name"]) for item in mongo.db.languages.find().sort("language_name", 1)]
+                
+                if form.validate_on_submit():
+                    story = {
+                        "username": username_default_value_about_me,
+                        "language_name": form.languages.data,
+                        "story_title": form.title.data,
+                        "story_description": form.story.data
+                    }
+                    mongo.db.stories.update({"_id": ObjectId(story_id)}, story)
+                    flash("Story has succesfully been updated!")
+                    return redirect(url_for("manage_stories"))
+                
+                # if page is opened, find values, and post to form
+                return render_template("admin/edit/edit_story.html", story=story, form=form)
+    
+    flash("Access denied.", "error")
+    return redirect(url_for("login"))
+
+
+# delete story admin template route - coming from manage stories page
+@app.route("/admin/edit/delete_story/<story_id>")
+def admin_delete_story(story_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                mongo.db.stories.remove({"_id": ObjectId(story_id)})
+                flash("Story succesfully removed from database!")
+                return redirect(url_for("manage_stories"))
+        
+    flash("Access denied.", "error")
+    return redirect(url_for("login"))
+
+
+# manage users template route
+@app.route("/admin/manage_users")
+def manage_users():
+    if "user" in session:
+        if session["user"] == "admin":
+            users = mongo.db.users.find()
+            return render_template("admin/manage_users.html", users=users)
+    
+    flash("Access denied!", "error")
+    return redirect(url_for("login"))
+
+
+# delete users admin template route - coming from manage users page
+@app.route("/admin/edit/delete_user/<user_id>")
+def delete_user(user_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                mongo.db.users.remove({"_id": ObjectId(user_id)})
+                flash("User succesfully removed from database!")
+                return redirect(url_for("manage_users"))
+        
+    flash("Access denied.", "error")
+    return redirect(url_for("login"))
+
+# delete user's stories admin template route - coming from manage users page
+@app.route("/admin/edit/delete_user_stories/<username>")
+def delete_user_stories(username):
+    if "user" in session:
+            if session["user"] == "admin":
+                mongo.db.stories.delete_many({"username": (username)})
+                flash("Stories of user succesfully removed from database!")
+                return redirect(url_for("manage_users"))
+        
+    flash("Access denied.", "error")
     return redirect(url_for("login"))
 
 

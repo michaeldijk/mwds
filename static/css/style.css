@@ -69,12 +69,12 @@ background-color: #322f3d;
     color: yellow;
 }
 
-.profile-list {
+.profile-list, .admin-lists {
     list-style: none;
     padding: 0 0 0 0;
 }
 
-.profile-list li {
+.profile-list li, .admin-lists li {
     padding-top: 5px;
 }
 

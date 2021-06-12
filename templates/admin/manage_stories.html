@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
+		<div class="card h-100">
+			<div class="card-body">
+				<h4 class="card-title"><em>Manage Stories</h4>
+					<ul class="admin-lists">
+						{% for story in stories %}
+						<li>
+							<a href="{{ url_for("admin_edit_story", story_id=story._id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+							<a href="{{ url_for("admin_delete_story", story_id=story._id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+							{{ story.story_title }} - Posted by: {{ story.username }}
+						</li>
+				{% endfor %}
+					</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

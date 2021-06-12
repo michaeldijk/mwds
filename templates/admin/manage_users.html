@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
+		<div class="card h-100">
+			<div class="card-body">
+				<h4 class="card-title"><em>Manage users</h4>
+					<ul class="admin-lists">
+						{% for user in users %}
+						<li>
+							<a href="{{ url_for("delete_user", user_id=user._id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete user {{ user.username }}</a>
+							<a href="{{ url_for("delete_user_stories", username=user.username) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete stories of {{ user.username }}</a>
+						</li>
+				{% endfor %}
+					</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

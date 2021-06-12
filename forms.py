@@ -52,16 +52,25 @@ class EditProfileForm(FlaskForm):
 
 class NewStoryForm(FlaskForm):
     languages = SelectField('Programming Language', choices=[])
-    title = StringField("Title", validators=[DataRequired(), Length(min=5, max=15, message="Cannot post story, if title is blank.")])
-    story = TextAreaField('Story', validators=[DataRequired(), Length(min=5, max=15, message="Cannot post story, if story is blank.")])
+    title = StringField("Title", validators=[DataRequired(), Length(min=5, max=50, message="Cannot post story, if title is shorter than 5chars.")])
+    story = TextAreaField('Story', validators=[DataRequired()])
     submit = SubmitField("Submit Story")
 
 
 class EditStoryForm(FlaskForm):
     languages = SelectField('Programming Language', choices=[])
     title = StringField("Title", validators=[DataRequired(), Length(min=5, max=150, message="Cannot update story, if title field is blank.")])
-    story = TextAreaField("Story", validators=[DataRequired(), Length(min=5, max=15, message="Cannot post story, if story is blank.")])
+    story = TextAreaField("Story", validators=[DataRequired()])
     submit = SubmitField("Update story")
+
+class EditLanguageForm(FlaskForm):
+    language = StringField("Language", validators=[DataRequired(), Length(min=3, max=150, message="Cannot update language, language needs to be 3 to 150chars.")])
+    submit = SubmitField("Update language")
+
+
+class AddLanguageForm(FlaskForm):
+    language = StringField("Language", validators=[DataRequired(), Length(min=3, max=150, message="Cannot update language, language needs to be 3 to 150chars.")])
+    submit = SubmitField("Add language")
 
 class ContactForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
