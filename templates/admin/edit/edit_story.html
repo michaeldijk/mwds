@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Start error messages Form -->
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3 text-center">
+		<!-- Start error message title -->
+		{% for error in form.title.errors %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<h2 class="text-danger">{{ error }}</h2>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		{% endfor %}
+		<!-- End error message title -->
+	</div>
+</div>
+<!-- End error messages Form -->
+
+<div class="row justify-content-center pt-3 pb-3">
+	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
+		<div class="card h-100">
+			<div class="card-body">
+				<h5 class="card-title">Edit story</h5>
+				<form method="POST" action="{{ url_for("admin_edit_story", story_id=story._id) }}" class="row">
+					{{ form.hidden_tag() }}
+					<div class="row">
+						<!-- Start col language selection -->
+						<div class="col-sm-12 col-lg-6">
+							Select language discussed:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.languages }}
+						</div>
+						<!-- End col language selection -->
+					</div>
+					<div class="row pt-3">
+						<!-- Start col Story title field -->
+						<div class="col-sm-12 col-lg-6">
+							Story Title:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.title }}
+						</div>
+						<!-- End col Story title field -->
+						<!-- Start col Story Description field -->
+						<div class="col-sm-12 col-lg-6">
+							Story:
+						</div>
+						<div class="col-sm-12 col-lg-6">
+							{{ form.story(id="summernote") }}
+						</div>
+						<!-- End col Story Description field -->
+					</div>
+					<!-- Start col Submit button -->
+					<div class="col-12 pt-3">
+						{{ form.submit(class="btn btn-primary") }} 
+						<a href="{{ url_for("manage_stories") }}" class="btn btn-primary">Cancel</a>
+					</div>
+					<!-- End col Submit button -->
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
