@@ -278,3 +278,8 @@ Some of the other features added to the site
 * [GitHub](https://www.github.com) for online version control
 * [Heroku](https://heroku.com/) Heroku for deploying the finished site
 
+### Testing
+#### User Story Testing
+I created a separate markdown file, for user story testing, please click following link:
+* [User Stories](#)
+
