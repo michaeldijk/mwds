@@ -281,5 +281,18 @@ Some of the other features added to the site
 ### Testing
 #### User Story Testing
 I created a separate markdown file, for user story testing, please click following link:
-* [User Stories](#)
+* [User Stories](https://github.com/michaeldijk/mwds/blob/main/readme_files/user_story_files/USER_STORIES.md)
+
+#### Manual testing across devices / browsers
+I tested the site with different devices and browsers, see my notes below for each test:
+* Mobile: I discovered that while testing it on an iPhone, the overlay for stories, was distorted, so I adjusted this with a change in the CSS
+![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/manual_testing/iphone_testing.jpg)
+* Opened the site on different browsers: Chrome, Safari, Opera, Edge, to make sure all the functions where working and visuals where displaying correctly.
+* Opened the site on several different browsers, to confirm useability across those, and there where no issues present:
+    * Chrome
+    * Opera
+    * Safari
+    * Brave
+    * Edge
+    * Vivaldi
 
