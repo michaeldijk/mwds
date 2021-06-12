@@ -69,14 +69,10 @@
 				<p>To post messages to MWDS, you need to create an account, to post comments, you also need to have an
 					account.</p>
 				<p>Use the form below, to register, to start using MWDS.</p>
-				<em>
 					<p class="alert"><i class="fas fa-exclamation-triangle"></i> Username & Password can only contain
 						a-z characters & numbers, and exist out of five characters or more.</p>
-				</em>
-				<em>
 					<p class="alert"><i class="fas fa-exclamation-triangle"></i> Fields marked with an (*) asterisk, are
 						mandatory.</p>
-				</em>
 				<form method="POST" action="{{ url_for("register") }}" class="row">
 					{{ form.hidden_tag() }}
 					<div class="row">
