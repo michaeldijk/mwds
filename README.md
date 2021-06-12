@@ -18,19 +18,20 @@ It is also a place where users can just share snippets, of certain things, or, c
 	* [Structure Plane](https://github.com/michaeldijk/mwds#structure-plane)
 	* [Skeleton Plane](https://github.com/michaeldijk/mwds#skeleton-plane)
     * [Surface Plane](https://github.com/michaeldijk/mwds#surface-plane)
-* [Features](#)
-	* [Home](#)
-    * [Log In](#)
-    * [Register](#)
-    * [Profile](#)
-    * [New Story](#)
-* [Features for admin user](#)
-    * [Manage Languages](#)
-    * [Manage Users](#)
-    * [Manage Stories](#)
-* [Other features](#)
-    * [404](#)
-    * [Features left to implement](#)
+* [Features](https://github.com/michaeldijk/mwds#features)
+	* [Home](https://github.com/michaeldijk/mwds#home)
+    * [Log In](https://github.com/michaeldijk/mwds#login)
+    * [Register](https://github.com/michaeldijk/mwds#register)
+    * [Profile](https://github.com/michaeldijk/mwds#profile)
+    * [New Story](https://github.com/michaeldijk/mwds#new-story)
+* [Features for admin user](https://github.com/michaeldijk/mwds#features-for-admin-user)
+    * [Manage Languages](https://github.com/michaeldijk/mwds#manage-languages)
+    * [Manage Users](https://github.com/michaeldijk/mwds#manage-users)
+    * [Manage Stories](https://github.com/michaeldijk/mwds#manage-stories)
+* [Other features](https://github.com/michaeldijk/mwds#other-features)
+    * [404](https://github.com/michaeldijk/mwds#404-page)
+    * [Search](https://github.com/michaeldijk/mwds#search-page)
+    * [Features left to implement](https://github.com/michaeldijk/mwds#features-left-to-implement)
 * [Technologies Used](#)
 * [Testing](#)
     * [User Story Testing](#)
@@ -244,7 +245,7 @@ The following features, are only available for the admin user
 * when deleting the user profile, it prompts before deletion takes place
 * When deleting bulk stories, it prompts before deletion takes place
 
-#### Manage Users
+#### Manage Stories
 * This page, allows admin user, to manage stories, and delete stories of a all users individually
 * This page also allows admin user, to edit a processed story, if for instance it needs to be sensorred
 
@@ -254,6 +255,9 @@ Some of the other features added to the site
 #### 404 page
 * There is a custom 404 page, in line with coding, and coders, it uses a doge meme image
 * The 404 page, then has a link, to "Go Home"
+
+#### search page
+* Search is only visible to logged in users, and only accessible to logged in users
 
 #### Features left to implement
 * Comment system, to allow users to comment on other stories
