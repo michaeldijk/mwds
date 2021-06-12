@@ -8,7 +8,7 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm, EditLanguageForm, AddLanguageForm
+from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm, EditLanguageForm, AddLanguageForm, SearchForm
 from flask_paginate import Pagination, get_page_parameter
 from flask_mail import Mail, Message
 from datetime import datetime
@@ -46,7 +46,7 @@ mail.init_app(app)
 @app.route("/")
 @app.route("/get_stories")
 def get_stories():
-
+    form = SearchForm()
     page = int(request.args.get('page', 1))
     per_page = 10
     offset = (page - 1) * per_page
@@ -68,7 +68,23 @@ def get_stories():
     users = list(mongo.db.users.find())
     # use variable stories, and assign it to stories
     # user variable users, assign it to users, to find avatars from users
-    return render_template("stories.html", stories=all_stories, users=users, pagination=pagination)
+    return render_template("stories.html", stories=all_stories, users=users, pagination=pagination, form=form)
+
+
+# Search route
+@app.route("/search", methods=["GET", "POST"])
+def search():
+        if "user" in session:
+            if session["user"]:
+                form = SearchForm()
+                query = form.search.data
+                stories = list(mongo.db.stories.find({"$text": {"$search": query}}))
+                users = list(mongo.db.users.find())
+                return render_template("stories_search.html", stories=stories, users=users, form=form)
+        
+        flash("Access denied. Create an account to search", "error")
+        flash("Or, login with your credentials below")
+        return redirect(url_for("login"))
 
 # single story route
 @app.route("/single_story/<story_id>")
