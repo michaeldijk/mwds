@@ -264,3 +264,17 @@ Some of the other features added to the site
 * Tag system, to allow users to add tags of a certain category(ies)
 * Create an upvote system, when some stories are downvoted to much, remove them from the site
 
+### Technologies used
+* [HTML5](https://en.wikipedia.org/wiki/HTML) for markup
+* [CSS3](https://en.wikipedia.org/wiki/CSS) for styling
+* [Bootstrap 5](https://getbootstrap.com) as HTML framework
+* [JQuery](https://jquery.com/) Javascript (JQuery) for some interaction
+* [Python3](https://www.python.org/) As backend language
+* [Flask](https://flask.palletsprojects.com/en/2.0.x/) Flask (Micro web framework written in Python)
+* [MongoDB](https://www.mongodb.com) MongoDB Atlas as database
+* [Google Fonts](https://fonts.google.com/) for font useage
+* [Font Awesome](https://fontawesome.com/) for the icons
+* [Git](https://git-scm.com/) for local version control
+* [GitHub](https://www.github.com) for online version control
+* [Heroku](https://heroku.com/) Heroku for deploying the finished site
+
