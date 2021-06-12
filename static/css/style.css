@@ -143,3 +143,25 @@ background-color: #322f3d;
     width: 99%;
     position: absolute;
 }
+
+/* Menu WYSIWYG */
+
+.note-dropdown-item:hover {
+    background-color: #87556f;
+}
+
+.note-editor .note-toolbar .note-dropdown-menu, .note-popover .popover-content .note-dropdown-menu {
+    min-width: 160px;
+    background-color: #322f3d;
+    color: #FFFFFF;
+}
+
+a.note-dropdown-item, a.note-dropdown-item:hover {
+    margin: 5px 0;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.note-group-select-from-files {
+    display: none;
+  }
