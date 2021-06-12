@@ -12,8 +12,8 @@ It is also a place where users can just share snippets, of certain things, or, c
 ## Table of contents
 * [Who is the website for?](https://github.com/michaeldijk/mwds#who-is-the-website-for)
 * [Who is the owner?](https://github.com/michaeldijk/mwds#who-is-the-owner)
-* [UX Planes](#)
-	* [Strategy Plane](#)
+* [UX Planes](https://github.com/michaeldijk/mwds#ux-planes)
+	* [Strategy Plane](https://github.com/michaeldijk/mwds#strategy-plane)
 	* [Scope Plane](#)
 	* [Structure Plane](#)
 	* [Skeleton Plane](#)
@@ -86,4 +86,4 @@ For users, they can expect an audience reading their content, their solutions to
 | 6  | Create a database, and app with Mongo + Flask  | 5  | 5  |
 | 7  | Create a login system with Mongo + Flask  | 5  | 5  |
 
-![image](https://raw.githubusercontent.com/michaeldijk/breakingbadme/main/assets/readMeFiles/other_files/viabilityFeasibility.png)
+![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/other_files/viabilityFeasibility.png)
