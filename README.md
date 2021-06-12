@@ -177,3 +177,16 @@ Admin user requires all collections, to adjust these details through the admin p
 
 ![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/structure_files/db_structure.png)
 
+#### Skeleton Plane
+The site is designed with mobile-first approach. And as we're using mostly bootstraps features, we didn't need to adjust much in terms of resizing for mobile.
+
+- [Wireframes: &#40;`index`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/homepage.png)
+- [Wireframes: &#40;`admin edit users`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/admin_edit_users.png)
+- [Wireframes: &#40;`admin manage categories`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/admin_manage_categories.png)
+- [Wireframes: &#40;`admin manage stories`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/admin_manage_stories.png)
+- [Wireframes: &#40;`login page`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/login_page.png)
+- [Wireframes: &#40;`menus`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/menus.png)
+- [Wireframes: &#40;`story page`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/story_page.png)
+- [Wireframes: &#40;`user new story`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/user_new_story.png)
+- [Wireframes: &#40;`user profile`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/user_profile.png)
+
