@@ -24,9 +24,11 @@ It is also a place where users can just share snippets, of certain things, or, c
     * [Register](#)
     * [Profile](#)
     * [New Story](#)
+* [Features for admin user](#)
     * [Manage Languages](#)
     * [Manage Users](#)
     * [Manage Stories](#)
+* [Other features](#)
     * [404](#)
     * [Features left to implement](#)
 * [Technologies Used](#)
@@ -198,4 +200,63 @@ As I am colour-blind, I have some issues with matching colours, nonetheless, we 
 
 I used [Color Hunt](https://colorhunt.co/palette/195877) for helping me choose the correct colours, and making sure that they matched.
 I used [Contrast Checker](https://contrastchecker.com/) for making sure, that the colours matched ranging from small to large, and with foreground and background colours.
+
+### Features
+The site incorporates many different features, and uses clever ways of having users login to the site, in order to make full use of the site itself.
+#### Home
+* shows a welcome banner (card) on top, when users are not logged in, this banner allows users to directly click to register account, or, login, also, this allows users to read more about the site, terms and conditions, contact site owner, and, see what languages are covered.
+* the stories are posted here, and, small snippet is visible for users, if they click read more, they have to login if not logged in, or, register
+* the stories are displayed with pagination, but uses clever way of "infinite scrolling", from [infinite-scroll.com](https://infinite-scroll.com/), to allow seamless viewing experience, if they reach the end of the page, inifinte scroll loads a new page immediate thereafter, making the experience for the user smooth, without them knowing this is taking place.
+* you can also click on the profile (username) of the poster, and this brings you to the user's public profile (if you are logged in, if you are not, it brings you to the login page)
+
+#### Login
+* The login page, does it's job well, it allows users to login to the site
+* It also allows users to request a reset password, by clicking on the link
+* and, it allows users to register an account, if not registered yet, by clicking on the link
+
+#### Register
+* Register allows users to register to the site
+* It also brings users, if they have an account, to the login page, if they click the link
+* It also brings users to reset password, if they've forgotten the password.
+
+* Register checks on several fields: username, email address, password. If the username is already taken, it will prompt so, if password does not conform the required settings, it will also report this back to user.
+* Usernames like "admin", "root", "superuser", "adminaccount", "Administrator", "administrator", are not allowed, and it will return users to register page again.
+
+#### Profile
+* Profile page allows users to edit their "profile", by default it sets it to a value of "Edit profile, if you want to enter a small bio".
+* The proile page also allows users to set an avatar. By default it sets it to a silouette
+* The profile page, also has a link, to post a new story, if they want to go from here, as this page will the opened up, when user logs in
+
+#### New Story
+* This is the page, where users post a new story, it has three fields: Language discussed, story title, story itself.
+* The story itself, is a WYSIWYG editor, and allows users to enter info, like they do using word
+
+### Features for admin user
+The following features, are only available for the admin user
+
+#### Manage Languages
+* This page, allows admin user, to manage languages, and edit the language if a type-o has been made
+* Admin user can also add directly a new language from this page
+* When clicking on delete, it prompts user before deletion
+
+#### Manage Users
+* This page, allows admin user, to manage users, and delete stories of a user in bulk
+* when deleting the user profile, it prompts before deletion takes place
+* When deleting bulk stories, it prompts before deletion takes place
+
+#### Manage Users
+* This page, allows admin user, to manage stories, and delete stories of a all users individually
+* This page also allows admin user, to edit a processed story, if for instance it needs to be sensorred
+
+### Other features
+Some of the other features added to the site
+
+#### 404 page
+* There is a custom 404 page, in line with coding, and coders, it uses a doge meme image
+* The 404 page, then has a link, to "Go Home"
+
+#### Features left to implement
+* Comment system, to allow users to comment on other stories
+* Tag system, to allow users to add tags of a certain category(ies)
+* Create an upvote system, when some stories are downvoted to much, remove them from the site
 
