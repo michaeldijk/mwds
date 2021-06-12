@@ -81,4 +81,7 @@ class ContactForm(FlaskForm):
     reason = SelectField('Reason for contact', choices=[('Other'), ('Password Reset'), ('Working with MWDS')])
     description = TextAreaField("Username", validators=[DataRequired()])
     submit = SubmitField("Send message")
-    
+
+class SearchForm(FlaskForm):
+    search = StringField("Search", validators=[DataRequired()])
+    submit = SubmitField("Search")
