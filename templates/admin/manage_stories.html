@@ -10,7 +10,7 @@
 						{% for story in stories %}
 						<li>
 							<a href="{{ url_for("admin_edit_story", story_id=story._id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-							<a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+							<a href="{{ url_for("admin_delete_story", story_id=story._id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
 							{{ story.story_title }} - Posted by: {{ story.username }}
 						</li>
 				{% endfor %}
