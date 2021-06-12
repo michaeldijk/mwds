@@ -32,19 +32,16 @@ It is also a place where users can just share snippets, of certain things, or, c
     * [404](https://github.com/michaeldijk/mwds#404-page)
     * [Search](https://github.com/michaeldijk/mwds#search-page)
     * [Features left to implement](https://github.com/michaeldijk/mwds#features-left-to-implement)
-* [Technologies Used](#)
-* [Testing](#)
-    * [User Story Testing](#)
-    * [Manual testing across devices / browsers](#)
-    * [HTML](#)
-    * [CSS](#)
-    * [JavaScript](#)
-    * [Unsolved issues](#)
-* [Version Control](#)
+* [Technologies Used](https://github.com/michaeldijk/mwds#technologies-used)
+* [Testing](https://github.com/michaeldijk/mwds#testing)
+    * [User Story Testing](https://github.com/michaeldijk/mwds#user-story-testing)
+    * [Manual testing across devices / browsers](https://github.com/michaeldijk/mwds#manual-testing-across-devices--browsers)
+    * [HTML](https://github.com/michaeldijk/mwds#html-testing)
+    * [CSS](https://github.com/michaeldijk/mwds#css-testing)
+    * [JavaScript](https://github.com/michaeldijk/mwds#javascript-testing)
+    * [Python](https://github.com/michaeldijk/mwds#python-testing)
+* [Version Control & deployment](#)
 * [Project barriers & Solutions](#)
-    * [Project barriers & Solutions - General](#)
-* [Deployment](#)
-* [How to run this project locally](#)
 * [Credits](#)
     * [Code](#)
     * [Content](#)
@@ -313,3 +310,63 @@ When I completed the site, I carried out validation tests, using [PEP8 online](h
 There where also some additional errors, due to lines to long, but these are errors present due to commenting in the code, and breaking them, would not show the comments in the appropriate way.
 ![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/manual_testing/pep8.png)
 
+Furthermore, each section that I wrote, was tested extensively, by first allowing the route, to open a page, and slowly building the routes up from there. Making sure that any get and post requests, accurately handled the responses.
+
+### Version Control & deployment
+This website, and application was developed using VS-Code, version control was locally maintained with Git, and online with GitHub.<br>
+While developing the site, I incorporated the use of several brances, to work on features, and only implementing these to the main branch, if the feature was complete.<br>
+While using branches, initially, I made a small mistake by mixing them up, but I quickly adapted and adjusted using this, and I really enjoy developing this way, as this allows clear separation between features.<br>
+
+#### Deployment
+Deployment was achieved by:
+1. Pushing code from my IDE to GitHub, via Git, with Git terminal in VS-Code
+2. Creating an app on Heroku, and then therafter deploying it from Heroku
+3. In Heroku "Deploy Tab" deployment was setup so that any new update to GitHub, would automatically populate to Heroku, and thereafter update the app itself.
+    1. Sometimes, I would change branch, to test if something worked across the board, from local to remote
+4. The completed deployment can be found on [Visit the site on Heroku - MWDS](http://mwds.herokuapp.com/)
+
+#### Cloning the repository
+1. Select the repository from GitHub [GitHub Repo Link](https://github.com/michaeldijk/mwds)
+2. Click on "Clone or download" from the Code button in just slightly below top right
+3. Click on the clipboard icon, to copy the GIT url
+4. Open your IDE, and open the terminal window, navigating to the correct location where you want the cloned repo being saved to
+5. Paste the GIT url, and follow your IDE instructions to clone further and work on it locally
+
+### Project barriers & Solutions
+* Initially I had a lot of problems with Imposter syndrome, feeling like I couldn't do it, but once I made a start, things started flowing by itself
+* Currently, my partner is affected with COVID, and this made studying quite hard, this combined with work requirements, but I am really proud of what I have achieved
+* Most of my answers to any questions I had, or have, where found on [Stack Overflow](https://stackoverflow.com)
+
+### Credits
+The following, are credits, to any code that I may have used, or any help that I have received. I am very proud of what I have build and accomplished, and I hope to expand only further from here onwards
+
+#### Code
+* Form fields, and how to use WTForms [Moguel Grinberg, Flask Mega Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms)
+* WTForms, Noneof, and how to use apply it [Stack Overflow](https://stackoverflow.com/questions/58464698/anyof-validation-in-flask)
+* How to use Excerpts [Stack Overflow](https://stackoverflow.com/questions/26030590/how-do-i-provide-a-blog-excerpt-without-having-to-show-html-code-using-jinja2-te)
+* Ed Bradley, from Slack, helped me with applying a filter for avatar image on stories view [Ed Bradley](https://github.com/Edb83)
+* Found help, for the About section, where an update, if no value added, errored the form, how to solve this, with using default values [Stack Overflow](https://stackoverflow.com/questions/21831216/get-none-from-a-fields-data-in-instead-of-an-empty-string)
+* Found a solution to using $set, as I wasn't sure how to implement set, but this helped a lot [Stack Overflow](https://stackoverflow.com/questions/29837370/pymongo-update-one-syntax-error) & [MongoDB](https://docs.mongodb.com/manual/reference/operator/update/set/)
+* Found a solution to using pagination, and showing correct values from [Stack Overflow](https://stackoverflow.com/questions/54053873/implementation-of-pagination-using-flask-paginate-pymongo)
+* Found solution for infinite scroll, with the help of :last-child-selector [jQuery](https://api.jquery.com/last-child-selector/)
+* Found a solution, how to add a class to Jinja templates [Stack Overflow](https://stackoverflow.com/questions/61714589/add-css-classes-to-jinja-template-for-form)
+* Found help, for using the contact form, and implementing email sending [EnvatoTuts+](https://code.tutsplus.com/tutorials/intro-to-flask-adding-a-contact-page--net-28982)
+* Found help, for pass values to dropdown [Stack Overflow](https://stackoverflow.com/questions/51027440/how-do-i-set-a-value-for-a-hidden-field-in-a-flask-form-using-wtf-quick-form)
+* Found solution, to remove file upload from Summernote WYSIWYG [Stack Overflow](https://stackoverflow.com/questions/33615669/disable-image-upload-in-summernote/33659947)
+
+#### Media
+* Found doge meme picture on [PNG Arts](https://www.pngarts.com/explore/216324)
+* Found about image on [Pixabay](https://pixabay.com/photos/confused-hands-up-unsure-perplexed-2681507/)
+* Found country flags image on [Pixabay](https://pixabay.com/vectors/flags-russia-usa-germany-china-1722052/)
+
+#### Content
+* Found HTML history from [Washington EDU](https://www.washington.edu/accesscomputing/webd2/student/unit1/module3/html_history.html)
+* Found CSS history from [Wikipedia](https://en.wikipedia.org/wiki/CSS)
+* Found Priorities, from [Level Up](https://levelup.gitconnected.com/the-funny-side-of-a-programmers-life-44cab153edf9)
+* Found if it works, from [Level Up](https://levelup.gitconnected.com/the-funny-side-of-a-programmers-life-44cab153edf9)
+
+### Acknowledgements
+I have to first and foremost, acknowledge myself for persistence and perseverence.<br>
+All Code Institute Tutors, and mentors, who are always avaialble online<br>
+Slack community<br>
+Coffee, lots and lots of coffee
