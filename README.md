@@ -14,9 +14,9 @@ It is also a place where users can just share snippets, of certain things, or, c
 * [Who is the owner?](https://github.com/michaeldijk/mwds#who-is-the-owner)
 * [UX Planes](https://github.com/michaeldijk/mwds#ux-planes)
 	* [Strategy Plane](https://github.com/michaeldijk/mwds#strategy-plane)
-	* [Scope Plane](#)
-	* [Structure Plane](#)
-	* [Skeleton Plane](#)
+	* [Scope Plane](https://github.com/michaeldijk/mwds#scope-plane)
+	* [Structure Plane](https://github.com/michaeldijk/mwds#structure-plane)
+	* [Skeleton Plane](https://github.com/michaeldijk/mwds#skeleton-plane)
     * [Surface Plane](#)
 * [Features](#)
 	* [Home](#)
@@ -189,4 +189,13 @@ The site is designed with mobile-first approach. And as we're using mostly boots
 - [Wireframes: &#40;`story page`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/story_page.png)
 - [Wireframes: &#40;`user new story`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/user_new_story.png)
 - [Wireframes: &#40;`user profile`&#41;](https://github.com/michaeldijk/mwds/blob/main/readme_files/wireframes_files/user_profile.png)
+
+#### Surface Plane
+As I am colour-blind, I have some issues with matching colours, nonetheless, we went with several shades of colours, that matched each other, and colours that match my "feelings".
+
+![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/surface_files/colours.png)
+![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/surface_files/colours1.png)
+
+I used [Color Hunt](https://colorhunt.co/palette/195877) for helping me choose the correct colours, and making sure that they matched.
+I used [Contrast Checker](https://contrastchecker.com/) for making sure, that the colours matched ranging from small to large, and with foreground and background colours.
 
