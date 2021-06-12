@@ -10,8 +10,8 @@ MWDS is, a site / community, where others can leave their story, in web developm
 It is also a place where users can just share snippets, of certain things, or, code. Or, just post general information to others.
 
 ## Table of contents
-* [Who is the website for?](#)
-* [Who is the owner?](#)
+* [Who is the website for?](https://github.com/michaeldijk/mwds#who-is-the-website-for)
+* [Who is the owner?](https://github.com/michaeldijk/mwds#who-is-the-owner)
 * [UX Planes](#)
 	* [Strategy Plane](#)
 	* [Scope Plane](#)
@@ -67,4 +67,23 @@ Michael's goals where:
 * Building full CRUD functionality
 * Creating a place for an online community
 
+### UX Planes
+The following parts, describe the different planes and how I incorporated them into my project
 
+#### Strategy Plane
+The audience is geared towards developers, creators, coders, and anyone who feel like sharing stories, coding techniques, and handy knowhows. 
+We're making a site for people to share their story, and be able to read other stories, search by tags, and or the story itself.
+The site allows users to share excitement regarding coding, to the world, and the community MWDS is.
+For users, they can expect an audience reading their content, their solutions to problems, and, being able to be part of a “community” of like-minded people.
+
+| #  | Opportunity/Problem |  Importance | Viability/Feasibility |
+| ------------- | ------------- | ------------- | ------------- |
+| 1  | Create an online community for users, to sign up, login and share their stories   | 5  | 5  |
+| 2  | Create a voting system to vote on stories  | 3  | 3  |
+| 3  | Create a comment system, for users to allow comments on stories  | 5  | 3  |
+| 4  | Allow tagging of “tags”, for languages covered  | 5  | 2  |
+| 5  | Allow users to create an enticing profile, with details about themselves  | 5  | 3  |
+| 6  | Create a database, and app with Mongo + Flask  | 5  | 5  |
+| 7  | Create a login system with Mongo + Flask  | 5  | 5  |
+
+![image](https://raw.githubusercontent.com/michaeldijk/breakingbadme/main/assets/readMeFiles/other_files/viabilityFeasibility.png)
