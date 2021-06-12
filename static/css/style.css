@@ -5,29 +5,10 @@
 /* font-family: 'Source Code Pro', monospace; weight: 900
 font-family: 'PT Mono', monospace; < Everything else */
 
+/* General */
 body {
     font-family: 'PT Mono', monospace;
     background-color: #59405c;
-}
-
-.navbar-brand {
-    /* font-family: 'Fredoka One', cursive; */
-    font-family: 'Source Code Pro', monospace; 
-    font-weight: 900;
-    font-size: 30px;
-}
-
-.navbar-collapse {
-    text-align: right;
-    padding-right: 10px;
-}
-
-.navbar-toggler-fa-icon {
-    color: #FFFFFF;
-}
-
-.navbar-toggler:focus {
-    box-shadow: unset;
 }
 
 .card h4 {
@@ -44,10 +25,7 @@ h2 {
 p, h2, .navbar-nav, .nav-link, .navbar-brand, h5 {
     color: #FFFFFF;
 }
-    
-.navbar {
-background-color: #322f3d;
-}
+
     
 .card {
     background-color: #87556f;
@@ -94,7 +72,24 @@ background-color: #322f3d;
     margin: 0;
 }
 
+.welcome-card-footer-text, .bottom-footer-text {
+    margin: 0;
+    color: #322f3d;
+}
 
+.stories-col {
+    /* Overflow hidden, to hide the full story, to allow users to go and read further when clicking "READ MODE" */
+    overflow: hidden;
+    height: 200px;
+}
+
+/* Overlay gradient, to overlay the text to read more */
+.overlay-gradient {
+    background: linear-gradient(180deg, rgb(2 0 36 / 0%) 0%, rgba(9,9,121,0) 0%, rgb(135 85 111) 100%);
+    height: 200px;
+    width: 99%;
+    position: absolute;
+}
 
 .modal-title, .modal-body p, .modal-body h5 {
     color: black !important;
@@ -105,6 +100,51 @@ background-color: #322f3d;
     height: auto;
 }
 
+.social-list {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+}
+
+.social-list li {
+    padding: 5px;
+    font-size: 50px;
+    margin: 0;
+    transition: font-size 1s;
+}
+
+.social-list li:hover {
+    padding: 5px;
+    font-size: 75px;
+    margin: 0;
+}
+
+/* Navigation */
+.navbar-brand {
+    /* font-family: 'Fredoka One', cursive; */
+    font-family: 'Source Code Pro', monospace; 
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.navbar-collapse {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.navbar-toggler-fa-icon {
+    color: #FFFFFF;
+}
+
+.navbar-toggler:focus {
+    box-shadow: unset;
+}
+    
+.navbar {
+background-color: #322f3d;
+}
+
+/* Pagination (only needed if infinite-scroll is broken) */
 .pagination-page-info {
     padding: .6em;
     padding-left: 0;
@@ -125,27 +165,7 @@ background-color: #322f3d;
     padding-left: 28px;
 }
 
-.welcome-card-footer-text, .bottom-footer-text {
-    margin: 0;
-    color: #322f3d;
-}
-
-.stories-col {
-    /* Overflow hidden, to hide the full story, to allow users to go and read further when clicking "READ MODE" */
-    overflow: hidden;
-    height: 200px;
-}
-
-/* Overlay gradient, to overlay the text to read more */
-.overlay-gradient {
-    background: linear-gradient(180deg, rgb(2 0 36 / 0%) 0%, rgba(9,9,121,0) 0%, rgb(135 85 111) 100%);
-    height: 200px;
-    width: 99%;
-    position: absolute;
-}
-
 /* Menu WYSIWYG */
-
 .note-dropdown-item:hover {
     background-color: #87556f;
 }
@@ -165,25 +185,6 @@ a.note-dropdown-item, a.note-dropdown-item:hover {
 /* Found solution to removing file upload, from https://stackoverflow.com/questions/33615669/disable-image-upload-in-summernote/33659947 */
 .note-group-select-from-files {
     display: none;
-}
-
-.social-list {
-    display: inline-flex;
-    list-style: none;
-    padding: 0;
-}
-
-.social-list li {
-    padding: 5px;
-    font-size: 50px;
-    margin: 0;
-    transition: font-size 1s;
-}
-
-.social-list li:hover {
-    padding: 5px;
-    font-size: 75px;
-    margin: 0;
 }
 
 /* link styling */
