@@ -58,7 +58,7 @@ The audience is geared towards developers, creators, coders, and anyone who feel
 Michael Dijk, is the site's owner and developer.
 
 Michael's aim with this site was first and foremost, to show the ability to create a site with CRUD functionality. And secondly, to create a community where users can share their stories, and align with other people of same interest.
-The idea was brought to live, as Michael, enjoys using the site Quora, and some of it's features are designed and created as an hommage to this site.
+The idea was brought to live, as Michael, enjoys using the site [Quora](https://quora.com), and some of it's features are designed and created as an hommage to this site.
 
 Michael's goals where:
 * Showcasing the skills to build a front/backend project.
