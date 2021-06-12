@@ -453,12 +453,14 @@ def delete_language(language_id):
     return redirect(url_for("login"))
 
 
-# edit categories template route
+# manage stories template route
 @app.route("/admin/manage_stories")
 def manage_stories():
     if "user" in session:
         if session["user"] == "admin":
-            return render_template("admin/manage_stories.html")
+            stories = mongo.db.stories.find().sort("_id", -1)
+
+            return render_template("admin/manage_stories.html", stories=stories)
 
     flash("Access denied!", "error")
     return redirect(url_for("login"))
