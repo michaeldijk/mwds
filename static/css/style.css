@@ -162,6 +162,9 @@ a.note-dropdown-item, a.note-dropdown-item:hover {
     text-decoration: none;
 }
 
+/* Found solution to removing file upload, from https://stackoverflow.com/questions/33615669/disable-image-upload-in-summernote/33659947 */
 .note-group-select-from-files {
     display: none;
-  }
+}
+
+.
