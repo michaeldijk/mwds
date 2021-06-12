@@ -500,6 +500,19 @@ def admin_edit_story(story_id):
     return redirect(url_for("login"))
 
 
+# delete story admin template route - coming from manage stories page
+@app.route("/admin/edit/delete_story/<story_id>")
+def admin_delete_story(story_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                mongo.db.stories.remove({"_id": ObjectId(story_id)})
+                flash("Story succesfully removed from database!")
+                return redirect(url_for("manage_stories"))
+        
+    flash("Access denied.", "error")
+    return redirect(url_for("login"))
+
+
 # edit categories template route
 @app.route("/admin/manage_users")
 def manage_users():
