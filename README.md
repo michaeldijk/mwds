@@ -40,13 +40,13 @@ It is also a place where users can just share snippets, of certain things, or, c
     * [CSS](https://github.com/michaeldijk/mwds#css-testing)
     * [JavaScript](https://github.com/michaeldijk/mwds#javascript-testing)
     * [Python](https://github.com/michaeldijk/mwds#python-testing)
-* [Version Control & deployment](#)
-* [Project barriers & Solutions](#)
-* [Credits](#)
-    * [Code](#)
-    * [Content](#)
-    * [Media](#)
-* [Acknowledgements](#)
+* [Version Control & deployment](https://github.com/michaeldijk/mwds#version-control--deployment)
+* [Project barriers & Solutions](https://github.com/michaeldijk/mwds#project-barriers--solutions)
+* [Credits](https://github.com/michaeldijk/mwds#credits)
+    * [Code](https://github.com/michaeldijk/mwds#code)
+    * [Media](https://github.com/michaeldijk/mwds#media)
+    * [Content](https://github.com/michaeldijk/mwds#content)
+* [Acknowledgements](https://github.com/michaeldijk/mwds#acknowledgements)
 
 ---
 
