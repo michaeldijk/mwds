@@ -296,3 +296,7 @@ I tested the site with different devices and browsers, see my notes below for ea
     * Edge
     * Vivaldi
 
+#### HTML testing
+##### Code validator
+When I completed all my HTML code, I carried out several validation tests, by using [W3C Markup Validation Service](https://validator.w3.org/), which is a worldwide recognized validator created by the WWC, that allows checking HTML and XHTML code, to check if markup was documented correctly, and correct any errors along the way.
+
