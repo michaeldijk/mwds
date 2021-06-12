@@ -314,6 +314,12 @@ There where also some additional errors, due to lines to long, but these are err
 
 Furthermore, each section that I wrote, was tested extensively, by first allowing the route, to open a page, and slowly building the routes up from there. Making sure that any get and post requests, accurately handled the responses.
 
+#### Defensive design
+* All pages where users are not allowed to go to, or, when they need to be logged in, return back with values of the error
+* All admin pages, can only and only with the "admin" credential opened
+* When users login, or, when a form is not correctly processed, it reports an error
+
+
 ### Version Control & deployment
 This website, and application was developed using VS-Code, version control was locally maintained with Git, and online with GitHub.<br>
 While developing the site, I incorporated the use of several brances, to work on features, and only implementing these to the main branch, if the feature was complete.<br>
@@ -338,6 +344,7 @@ Deployment was achieved by:
 * Initially I had a lot of problems with Imposter syndrome, feeling like I couldn't do it, but once I made a start, things started flowing by itself
 * Currently, my partner is affected with COVID, and this made studying quite hard, this combined with work requirements, but I am really proud of what I have achieved
 * Most of my answers to any questions I had, or have, where found on [Stack Overflow](https://stackoverflow.com)
+* Currently, I am using [Summernote WYSIWYG Editor](https://summernote.org/), and unfortunately, field validation does not work on this, I wanted to implement some JS for validation, but was a bit constraint with time. Further besides this field, all other fields are validated before submittion
 
 ### Credits
 The following, are credits, to any code that I may have used, or any help that I have received. I am very proud of what I have build and accomplished, and I hope to expand only further from here onwards
