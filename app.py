@@ -328,11 +328,10 @@ def contact():
             msg = Message(form.subject.data, sender=form.email_address.data, recipients=['michaeldijk@outlook.com'])
             msg.body = """
             From: %s <%s>
-            ----
             Subject: %s 
-            ----
+            Reason: %s
             Description: %s
-            """ % (form.username.data, form.email_address.data, form.subject.data, form.description.data)
+            """ % (form.username.data, form.email_address.data, form.subject.data, form.reason.data, form.description.data)
             mail.send(msg)
     
             flash("Thank you for your message! We'll get back to you shortly")
@@ -348,9 +347,9 @@ def contact():
             msg.body = """
             From: %s <%s>
             Subject: %s
-            ---
+            Reason: %s
             Description: %s
-            """ % (form.username.data, form.email_address.data, form.subject.data, form.description.data)
+            """ % (form.username.data, form.email_address.data, form.subject.data, form.reason.data, form.description.data)
             mail.send(msg)
 
             flash("Thank you for your message! We'll get back to you shortly")
