@@ -68,13 +68,13 @@
 			<div class="card h-100">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-2">
+						<div class="col-sm-12 col-md-2">
 							{# Ed Bradley, CI lead, helped me solve the link between story/avatar #}
 							{% for user in users if user.username == story.username %}
 							<img src="{{ user.avatar }}" class="avatar-stories" />
 							{% endfor %}
 						</div>
-						<div class="col-10">
+						<div class="col-sm-12 col-md-10">
 							{# if session is not logged on, redirect to logon, otherwise, open single_story view #}
 							{% if session.user == anonymous %}
 							<p class="avatar-posted-by">Posted by: <em><a href="{{ url_for("login") }}">{{
