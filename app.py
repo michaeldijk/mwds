@@ -466,6 +466,40 @@ def manage_stories():
     return redirect(url_for("login"))
 
 
+# edit story admin template route
+@app.route("/admin/edit/edit_story/<story_id>", methods=["GET", "POST"])
+def admin_edit_story(story_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
+                language = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["language_name"]
+                story_title = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_title"]
+                story_description = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["story_description"]
+                languages = mongo.db.languages.find().sort("language_name", 1)
+                username_default_value_about_me = mongo.db.stories.find_one({"_id": ObjectId(story_id)})["username"]
+                # Form with values from above
+                form = EditStoryForm(languages=language, title=story_title, story=story_description)
+                # Populate languages from database in alphabetic order
+                form.languages.choices = [(item["language_name"]) for item in mongo.db.languages.find().sort("language_name", 1)]
+                
+                if form.validate_on_submit():
+                    story = {
+                        "username": username_default_value_about_me,
+                        "language_name": form.languages.data,
+                        "story_title": form.title.data,
+                        "story_description": form.story.data
+                    }
+                    mongo.db.stories.update({"_id": ObjectId(story_id)}, story)
+                    flash("Story has succesfully been updated!")
+                    return redirect(url_for("manage_stories"))
+                
+                # if page is opened, find values, and post to form
+                return render_template("admin/edit/edit_story.html", story=story, form=form)
+    
+    flash("Access denied.", "error")
+    return redirect(url_for("login"))
+
+
 # edit categories template route
 @app.route("/admin/manage_users")
 def manage_users():
