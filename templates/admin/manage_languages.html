@@ -32,9 +32,27 @@
 								{% for language in languages %}
 								<li>
 									<a href="{{ url_for("edit_language", language_id=language._id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-									<a href="{{ url_for("delete_language", language_id=language._id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+									<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-delete{{ language._id }}">Delete</button>
 									{{ language.language_name }}
 								</li>
+								<!-- Modal Delete Story -->
+								<div id="modal-delete{{ language._id }}" class="modal fade" tabindex="-1" aria-labelledby="modal-deleteLabel-{{ language._id }}" aria-hidden="true">
+									<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+										Are you sure you want to delete <em><strong>{{ language.language_name }}</em></strong>?
+										</div>
+										<div class="modal-footer">
+										<button type="button" class="btn btn-alert" data-bs-dismiss="modal">Close</button>
+										<a href="{{ url_for("delete_language", language_id=language._id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+										</div>
+									</div>
+									</div>
+								</div>
 						{% endfor %}
 							</ul>
 						</div>
