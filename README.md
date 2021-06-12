@@ -40,6 +40,7 @@ It is also a place where users can just share snippets, of certain things, or, c
     * [CSS](https://github.com/michaeldijk/mwds#css-testing)
     * [JavaScript](https://github.com/michaeldijk/mwds#javascript-testing)
     * [Python](https://github.com/michaeldijk/mwds#python-testing)
+    * [Defensive Design](https://github.com/michaeldijk/mwds#defensive-design)
 * [Version Control & deployment](https://github.com/michaeldijk/mwds#version-control--deployment)
 * [Project barriers & Solutions](https://github.com/michaeldijk/mwds#project-barriers--solutions)
 * [Credits](https://github.com/michaeldijk/mwds#credits)
