@@ -67,7 +67,7 @@
 						<div class="col-2">
 							{# Ed Bradley, CI lead, helped me solve the link between story/avatar #}
 							{% for user in users if user.username == story.username %}
-							<img src="{{ user.avatar }}" class="avatar-stories" />
+							<img src="{{ user.avatar }}" class="avatar-stories" alt="User Avatar">
 							{% endfor %}
 						</div>
 						<div class="col-10">
