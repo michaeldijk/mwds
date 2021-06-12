@@ -513,14 +513,40 @@ def admin_delete_story(story_id):
     return redirect(url_for("login"))
 
 
-# edit categories template route
+# manage users template route
 @app.route("/admin/manage_users")
 def manage_users():
     if "user" in session:
         if session["user"] == "admin":
-            return render_template("admin/manage_users.html")
+            users = mongo.db.users.find()
+            return render_template("admin/manage_users.html", users=users)
     
     flash("Access denied!", "error")
+    return redirect(url_for("login"))
+
+
+# delete users admin template route - coming from manage users page
+@app.route("/admin/edit/delete_user/<user_id>")
+def delete_user(user_id):
+    if "user" in session:
+            if session["user"] == "admin":
+                mongo.db.users.remove({"_id": ObjectId(user_id)})
+                flash("User succesfully removed from database!")
+                return redirect(url_for("manage_users"))
+        
+    flash("Access denied.", "error")
+    return redirect(url_for("login"))
+
+# delete user's stories admin template route - coming from manage users page
+@app.route("/admin/edit/delete_user_stories/<username>")
+def delete_user_stories(username):
+    if "user" in session:
+            if session["user"] == "admin":
+                mongo.db.stories.delete_many({"username": (username)})
+                flash("Stories of user succesfully removed from database!")
+                return redirect(url_for("manage_users"))
+        
+    flash("Access denied.", "error")
     return redirect(url_for("login"))
 
 
