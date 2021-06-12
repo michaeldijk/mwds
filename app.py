@@ -97,7 +97,7 @@ def new_story():
                         "username": session["user"],
                         "language_name": form.languages.data,
                         "story_title": form.title.data.lower(),
-                        "story_description": form.story.data.lower(),
+                        "story_description": form.story.data,
                         "posted_date": str(datetime.today())
                     }
                     mongo.db.stories.insert_one(story)
@@ -286,6 +286,7 @@ def profile_edit(username):
                                         {"$set":
                                         {"about_me": form.about_me.data or username_default_value_about_me,
                                         "avatar": form.avatar.data or username_default_value_avatar}})
+                    flash("Profile succesfully updated!")
                     return redirect(url_for("profile", username=session["user"]))
 
                 return render_template("profile_edit.html", username=username, form=form)
