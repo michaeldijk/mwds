@@ -74,11 +74,17 @@ def get_stories():
 # Search route
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    form = SearchForm()
-    query = form.search.data
-    stories = list(mongo.db.stories.find({"$text": {"$search": query}}))
-    users = list(mongo.db.users.find())
-    return render_template("stories_search.html", stories=stories, users=users, form=form)
+        if "user" in session:
+            if session["user"]:
+                form = SearchForm()
+                query = form.search.data
+                stories = list(mongo.db.stories.find({"$text": {"$search": query}}))
+                users = list(mongo.db.users.find())
+                return render_template("stories_search.html", stories=stories, users=users, form=form)
+        
+        flash("Access denied. Create an account to search", "error")
+        flash("Or, login with your credentials below")
+        return redirect(url_for("login"))
 
 # single story route
 @app.route("/single_story/<story_id>")

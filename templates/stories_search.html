@@ -27,7 +27,6 @@
 {% endif %}
 {# End intro message, for users not logged on #}
 
-{% if session.user != anonymous %}
 <div class="row justify-content-center pt-3 pb-3">
 	<div class="col-sm-12 col-md-10 col-lg-8 pb-3 text-center">
 		<div class="card h-100">
@@ -58,7 +57,6 @@
 		</div>
 	</div>
 </div>
-{% endif %}
 
 <!--Start container fluid, for infinite scroll, as it needs a container  -->
 <div class="container-fluid container-infinite-scroll" id="infinite-scroll">
@@ -121,12 +119,4 @@
 	</div>
 </div>
 <!--End container fluid, for infinite scroll, as it needs a container  -->
-
-<!-- Start Pagination row/col -->
-<div class="row justify-content-center align-items-center">
-	<div class="col pagination-col">
-		{{ pagination.links }}
-	</div>
-</div>
-<!-- End Pagination row/col -->
 {% endblock %}
