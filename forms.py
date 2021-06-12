@@ -78,6 +78,7 @@ class ContactForm(FlaskForm):
         message="Please type a correct email address", granular_message=False, check_deliverability=False, allow_smtputf8=True, allow_empty_local=False)])
     subject = StringField("About Yourself", validators=[Optional(), Length(
         min=10, max=150, message="About yourself, minimum 10 characters, max 150 characters.")])
+    reason = SelectField('Reason for contact', choices=[('Other'), ('Password Reset'), ('Working with MWDS')])
     description = TextAreaField("Username", validators=[DataRequired()])
     submit = SubmitField("Send message")
     
