@@ -11,5 +11,20 @@ $('.container-infinite-scroll').infiniteScroll({
 
 // Summernote WYSIWYG editor, loading on page ready
 $(document).ready(function() {
-  $('#summernote').summernote();
+  $('#summernote').summernote({
+    styleTags: [
+      'p', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+    ],
+    toolbar: [
+      // [groupName, [list of button]]
+      ['style', ['bold', 'italic', 'underline', 'clear', 'pre']],
+      ['font', ['strikethrough', 'superscript', 'subscript']],
+      ['fontsize', ['fontsize']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['insert', ['picture', 'link', 'video']],
+      ['help', ['help']],
+      ['style', ['style']],
+    ]
+  });
 });
