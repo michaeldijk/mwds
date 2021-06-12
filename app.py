@@ -8,10 +8,11 @@ from flask.templating import render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm, EditProfileForm, ContactForm, NewStoryForm, EditStoryForm, EditLanguageForm, AddLanguageForm, SearchForm
 from flask_paginate import Pagination, get_page_parameter
 from flask_mail import Mail, Message
 from datetime import datetime
+from forms import (RegisterForm, LoginForm, EditProfileForm, ContactForm,
+NewStoryForm, EditStoryForm, EditLanguageForm, AddLanguageForm, SearchForm)
 
 
 # if local env. import env.py, otherwise not
@@ -72,7 +73,8 @@ def get_stories():
     users = list(mongo.db.users.find())
     # use variable stories, and assign it to stories
     # user variable users, assign it to users, to find avatars from users
-    return render_template("stories.html", stories=all_stories, users=users, pagination=pagination, form=form)
+    return render_template("stories.html", stories=all_stories,
+                           users=users, pagination=pagination, form=form)
 
 
 # Search route
@@ -85,7 +87,8 @@ def search():
             stories = list(mongo.db.stories.find(
                 {"$text": {"$search": query}}))
             users = list(mongo.db.users.find())
-            return render_template("stories_search.html", stories=stories, users=users, form=form)
+            return render_template("stories_search.html",
+                                   stories=stories, users=users, form=form)
 
     flash("Access denied. Create an account to search", "error")
     flash("Or, login with your credentials below")
@@ -100,7 +103,8 @@ def single_story(story_id):
         if session["user"]:
             users = list(mongo.db.users.find())
             story = mongo.db.stories.find_one({"_id": ObjectId(story_id)})
-            return render_template("single_story.html", story=story, users=users)
+            return render_template("single_story.html",
+                                   story=story, users=users)
 
     flash("Access denied. Create an account to view full stories", "error")
     flash("Or, login with your credentials below")
@@ -243,8 +247,10 @@ def register():
         register = {
             "username": form.username.data.lower(),
             "email_address": form.email_address.data.lower(),
-            "about_me": form.about_me.data.lower() or "Edit profile, if you want to enter a small bio",
-            "avatar": form.avatar.data.lower() or "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
+            "about_me": form.about_me.data.lower() or
+            "Edit profile, if you want to enter a small bio",
+            "avatar": form.avatar.data.lower() or
+            "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
             "tandc": form.terms_and_conditions.data,
             "password": generate_password_hash(form.password.data)
         }
@@ -272,7 +278,8 @@ def profile(username):
             # Find stories written by user, and return to page
             stories_written = mongo.db.stories.find(
                 {"username": session["user"]}).sort("_id", -1)
-            return render_template("profile.html", stories_written=stories_written, username=username, about_me=about_me, avatar=avatar)
+            return render_template("profile.html", stories_written=stories_written,
+                                   username=username, about_me=about_me, avatar=avatar)
 
     flash("Access denied. Create an account to view profiles and your profile", "error")
     flash("Or, login with your credentials below")
@@ -289,7 +296,9 @@ def public_profile(username):
     username_avatar = mongo.db.users.find_one(
         {"username": username})["avatar"]
 
-    return render_template("profile_public.html", username=username, username_avatar=username_avatar, username_about_me=username_about_me)
+    return render_template("profile_public.html", username=username,
+                           username_avatar=username_avatar,
+                           username_about_me=username_about_me)
 
 
 # profile edit template route
@@ -310,19 +319,23 @@ def profile_edit(username):
             username_default_value_avatar = mongo.db.users.find_one(
                 {"username": session["user"]})["avatar"]
             form = EditProfileForm(
-                about_me=username_default_value_about_me, avatar=username_default_value_avatar)
+                about_me=username_default_value_about_me,
+                avatar=username_default_value_avatar)
 
         # I had issues with using set, and the following page helped me find a solution to this:
         # https://stackoverflow.com/questions/29837370/pymongo-update-one-syntax-error
             if form.validate_on_submit():
                 mongo.db.users.update({"_id": ObjectId(username_id)},
                                       {"$set":
-                                       {"about_me": form.about_me.data or username_default_value_about_me,
-                                        "avatar": form.avatar.data or username_default_value_avatar}})
+                                       {"about_me": form.about_me.data or
+                                        username_default_value_about_me,
+                                        "avatar": form.avatar.data or
+                                        username_default_value_avatar}})
                 flash("Profile succesfully updated!")
                 return redirect(url_for("profile", username=session["user"]))
 
-            return render_template("profile_edit.html", username=username, form=form)
+            return render_template("profile_edit.html",
+                                   username=username, form=form)
 
     flash("Access denied. Create an account to edit your profile", "error")
     flash("Or, login with your credentials below")
@@ -360,14 +373,15 @@ def contact():
         form = ContactForm(username=username, email_address=email_address)
 
         if request.method == "POST":
-            msg = Message(form.subject.data, sender=form.email_address.data, recipients=[
-                          'michaeldijk@outlook.com'])
+            msg = Message(form.subject.data,
+                          sender=form.email_address.data, recipients=['michaeldijk@outlook.com'])
             msg.body = """
             From: %s <%s>
-            Subject: %s 
+            Subject: %s
             Reason: %s
             Description: %s
-            """ % (form.username.data, form.email_address.data, form.subject.data, form.reason.data, form.description.data)
+            """ % (form.username.data, form.email_address.data,
+                   form.subject.data, form.reason.data, form.description.data)
             mail.send(msg)
 
             flash("Thank you for your message! We'll get back to you shortly")
@@ -386,7 +400,8 @@ def contact():
             Subject: %s
             Reason: %s
             Description: %s
-            """ % (form.username.data, form.email_address.data, form.subject.data, form.reason.data, form.description.data)
+            """ % (form.username.data, form.email_address.data,
+                   form.subject.data, form.reason.data, form.description.data)
             mail.send(msg)
 
             flash("Thank you for your message! We'll get back to you shortly")
@@ -449,7 +464,8 @@ def manage_languages():
 
             languages = mongo.db.languages.find().sort("_id", -1)
 
-            return render_template("admin/manage_languages.html", languages=languages, form=form)
+            return render_template("admin/manage_languages.html",
+                                   languages=languages, form=form)
 
     flash("Access denied!", "error")
     return redirect(url_for("login"))
@@ -473,7 +489,8 @@ def edit_language(language_id):
                 flash("Language has succesfully been updated!")
                 return redirect(url_for("manage_languages"))
 
-            return render_template("admin/edit/edit_language.html", form=form, language=language)
+            return render_template("admin/edit/edit_language.html",
+                                   form=form, language=language)
 
     flash("Access denied!", "error")
     return redirect(url_for("login"))
@@ -539,7 +556,8 @@ def admin_edit_story(story_id):
                 return redirect(url_for("manage_stories"))
 
             # if page is opened, find values, and post to form
-            return render_template("admin/edit/edit_story.html", story=story, form=form)
+            return render_template("admin/edit/edit_story.html",
+                                   story=story, form=form)
 
     flash("Access denied.", "error")
     return redirect(url_for("login"))
