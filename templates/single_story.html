@@ -9,7 +9,7 @@
 					<div class="col-2">
 						{# Ed Bradley, CI lead, helped me solve the link between story/avatar #}
 						{% for user in users if user.username == story.username %}
-							<img src="{{ user.avatar }}" class="avatar-stories" />
+							<img src="{{ user.avatar }}" class="avatar-stories" alt="User Avatar">
 						{% endfor %}
 					</div>
 					<div class="col-10">
@@ -26,27 +26,4 @@
 		</div>
 	</div>
 </div>
-
-<!-- Start Comment post row/col -->
-<div class="row justify-content-center pt-3 pb-3">
-	<div class="col-sm-12 col-md-10 col-lg-8 p-3">
-		<div class="card h-100">
-			<div class="card-body">
-				<h4 class="card-title">No comments posted yet...</h4>
-				<p>Post a reply</p>
-				<hr>
-				<h5>Posted by: michaeldijk - date: 05/24/2021</h5>
-				<p>Text goes here</p>
-				<hr>
-				<h5>Posted by: michaeldijk - date: 05/24/2021</h5>
-				<p>Text goes here</p>
-				<hr>
-				<h5>Posted by: michaeldijk - date: 05/24/2021</h5>
-				<p>Text goes here</p>
-				<hr>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- End Comment post row/col -->
 {% endblock %}
