@@ -199,7 +199,9 @@ I used [Color Hunt](https://colorhunt.co/palette/195877) for helping me choose t
 I used [Contrast Checker](https://contrastchecker.com/) for making sure, that the colours matched ranging from small to large, and with foreground and background colours.
 
 ### Features
-The site incorporates many different features, and uses clever ways of having users login to the site, in order to make full use of the site itself.
+The site incorporates many different features, and uses clever ways of having users login to the site, in order to make full use of the site itself.<br>
+I have stories, open in a new page, as once the stories are filling up, I wanted to have a similar effect as what [Quora](https://quora.com/) does, where you have an infinite scroll on the main page, and stories load and load more, when you scroll down, and once you close the newly opened page, you return to the page you left off at.<br>
+
 #### Home
 * shows a welcome banner (card) on top, when users are not logged in, this banner allows users to directly click to register account, or, login, also, this allows users to read more about the site, terms and conditions, contact site owner, and, see what languages are covered.
 * the stories are posted here, and, small snippet is visible for users, if they click read more, they have to login if not logged in, or, register
