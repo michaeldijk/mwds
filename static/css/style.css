@@ -167,4 +167,58 @@ a.note-dropdown-item, a.note-dropdown-item:hover {
     display: none;
 }
 
-.
+.social-list {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+}
+
+.social-list li {
+    padding: 5px;
+    font-size: 50px;
+    margin: 0;
+    transition: font-size 1s;
+}
+
+.social-list li:hover {
+    padding: 5px;
+    font-size: 75px;
+    margin: 0;
+}
+
+/* link styling */
+/* unvisited link */
+a:link {
+color: #FFFFFF;
+text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+color: #FFFFFF;
+}
+
+/* mouse over link */
+a:hover {
+color: #FFFFFF;
+text-decoration: underline 2px black;
+}
+
+.btn-primary:hover {
+    text-decoration: none;
+}
+
+/* selected link */
+a:active {
+color: #FFFFFF;
+text-decoration: underline 2px black;
+}
+
+/* Navbar styling */
+.navbar-brand:hover {
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #FFFFFF;
+}
