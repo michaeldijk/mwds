@@ -87,3 +87,42 @@ For users, they can expect an audience reading their content, their solutions to
 | 7  | Create a login system with Mongo + Flask  | 5  | 5  |
 
 ![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/other_files/viabilityFeasibility.png)
+
+##### What can/could be covered?
+I had the following schedule in mind, to cover features:
+1. Create an online community for users, to sign up, login and share their stories
+6. Create a database, and app with Mongo + Flask
+7. Create a login system with Mongo + Flask
+
+Then once, the above three options are covered, we will focus on the following two:
+3. Create a comment system, for users to allow comments on stories
+5. Allow users to create an enticing profile, with details about themselves
+
+And, once these features are implemented, we will focus on the last sprint:
+4. Allow tagging of “tags”, for languages covered
+2. Create a voting system to vote on stories
+
+Due to circumstances with my partner, and contracting COVID, I was not able to push forward for a while, due to time constraints, but nonetheless, I covered most parts, bar the following:
+* Create a comment system, for users to allow comments on stories
+* Allow tagging of “tags”, for languages covered
+* Create a voting system to vote on stories
+
+The main features of the site are working, and, the functionality that I wanted to go for, which was incorporating full CRUD functions, are in place.
+I will continue to work on this, as a side project, as I am very fond of the outcome so far.
+
+Currently, the site brings value to the table, to allow users sharing stories. Not directly like a social media platform, but more like a platform geared towards a particular set of users, and these users are (web) developers, who feel like sharing their story, solution, or other things that are useful to be shared within the “community” of developers. With that in mind, I do hope this can grow to something bigger than just a study / exam project.
+
+#### Scope Plane
+In terms of features, as described in the Strategy plane, I have been able to cover most aspects of the site, and functionality is in place.
+
+The site had to bring a specific function in mind to the user, and be easy to navigate, to work on, on both mobile and desktop devices, it also needed to allow users to connect with others, which is present. The only real missing point at the moment, is the comment section, but this will be incorporated soon.
+
+##### User Stories/scopes
+| #  | Scenario |  Requirements |
+| ------------- | ------------- | ------------- |
+| 1 | Story | - Reqs | - Reqs |
+| 2 | Story | - Reqs | - Reqs |
+| 3 | Story | - Reqs | - Reqs |
+| 4 | Story | - Reqs | - Reqs |
+| 5 | Story | - Reqs | - Reqs |
+| 6 | Story | - Reqs | - Reqs |
