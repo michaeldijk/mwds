@@ -120,9 +120,60 @@ The site had to bring a specific function in mind to the user, and be easy to na
 ##### User Stories/scopes
 | #  | Scenario |  Requirements |
 | ------------- | ------------- | ------------- |
-| 1 | Story | - Reqs | - Reqs |
-| 2 | Story | - Reqs | - Reqs |
-| 3 | Story | - Reqs | - Reqs |
-| 4 | Story | - Reqs | - Reqs |
-| 5 | Story | - Reqs | - Reqs |
-| 6 | Story | - Reqs | - Reqs |
+| 1 | As a visitor, I want to find information about a certain topic | - Ability to search posts for a specific word, and to read more about it | - Ability to view the posters profile to know more about them |
+| 2 | As a visitor, I want to share my knowledge with the community | - Ability to create an account, and to post a story | - Ability to update my profile, with information about myself, and my knowlegde |
+| 3 | As a visitor, I want to be able to contact the site's owner | - Ability to contact site's owner | - Contact form easily findeable |
+| 4 | As a visitor, I want the site to be intuitive, and easy to navigate | - Well guided design, and menu | - Intuitive navigation from top to bottom |
+
+#### Structure Plane
+##### Front-end
+The website exists out of several pages, that interlink together. Several pages are only accessible for admin user, and, some pages are only accessible after a user has logged on to the site.
+
+![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/structure_files/navigation.png)
+
+- **Home** &#40;`stories.html`&#41;<br> the main page of the site, leading to all other pages. The page has all stories summarized with short view on full text, and if user is not logged on, they will need to login in order to read further. Furthermore, if a new user reaches the page, it welcomes them to either sign-up or register, and has several links to terms and conditions, contact, and languages page
+
+- **Single Story** &#40;`single_story.html`&#41;<br> This page, is visible, and available once users login to the site, and they are then able to read full stories, from the stories (index) page.
+
+- **Stories Search** &#40;`stories_search.html`&#41;<br> This page is visible, if users are logged in to the site, and once they have searched for criteria on the stories (index) page.
+
+- **register** &#40;`register.html`&#41;<br> This page is visible for everyone, if not logged in, allowing users to register, and this page also links to a reset password page (contact), and login page.
+
+- **profile** &#40;`profile.html`&#41;<br> This page is visible, once user logs in to the site, they are then able to view their profile, and from this page, they can then edit stories, edit profile.
+
+- **profile public** &#40;`profile_public.html`&#41;<br> This page is visible for all logged in users, once they click on username of the user that posted a story, they will see this page.
+
+- **profile edit** &#40;`profile_edit.html`&#41;<br> This page is only visible to the user that logged in, and allows them to edit the profile.
+
+- **new story** &#40;`new_story.html`&#41;<br> This page is visible to all logged in users, to allow to post new stories.
+
+- **login** &#40;`login.html`&#41;<br> This page, is visible to all not logged in users.
+
+- **edit story** &#40;`edit_story.html`&#41;<br> This page is visible to users logged in, from their profile page.
+
+
+There are several pages, only available to the admin user:
+- **manage languages** &#40;`manage_languages.html`&#41;<br> This page, is visible only to the administator, to manage languages, and add languages.
+
+- **manage stories** &#40;`manage_stories.html`&#41;<br> This page, is visible, only to the administrator, where it's possible to edit and delete stories.
+
+- **manage users** &#40;`manage_users.html`&#41;<br> This page is also only visible to admin user, allowing to delete users, and delete all user stories at once.
+
+There are two more pages, only available for admin user, that is available through manage languages and manage stories.
+- **edit language** &#40;`edit_language.html`&#41;<br> This page is only available through manage languages, and allows admin user to adjust language name.
+
+- **edit story** &#40;`edit_story.html`&#41;<br> This page is only available through manage stories, and allows admin user to adjust story posted.
+
+##### Back-end
+Users need an account to create new stories.
+Admin user needs to be able to add new languages.
+Users need to able to adjust their stories.
+
+Therefore, we decided on three collections, interlinking to each other.
+
+Stories uses users, for username, and stories itself for the data it populates for the stories view.
+Profile uses users about me and avatar fields.
+Admin user requires all collections, to adjust these details through the admin portal.
+
+![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/structure_files/db_structure.png)
+
