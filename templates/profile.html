@@ -25,10 +25,26 @@
 						<ul class="profile-list">
 							{% for stories in stories_written %}
 							<li><a href="{{ url_for("edit_story", story_id=stories._id) }}"
-									class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a> <a
-									href="{{ url_for("delete_story", story_id=stories._id) }}"
-									class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a> - {{
-								stories.story_title }}</li>
+									class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a> 
+									<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-delete{{ stories._id }}">Delete</button> - {{ stories.story_title }}</li>
+									<!-- Modal Delete Story -->
+									<div id="modal-delete{{ stories._id }}" class="modal fade" tabindex="-1" aria-labelledby="modal-deleteLabel-{{ stories._id }}" aria-hidden="true">
+										<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+											Are you sure you want to delete <em><strong>{{ stories.story_title }}</em></strong>?
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-alert" data-bs-dismiss="modal">Close</button>
+											<a href="{{ url_for("delete_story", story_id=stories._id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+											</div>
+										</div>
+										</div>
+									</div>
 							{% else %}
 							<li>No stories written yet..</li>
 							<li>Create a new story now: <a href="{{ url_for("new_story") }}"
