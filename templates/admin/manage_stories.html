@@ -10,7 +10,24 @@
 						{% for story in stories %}
 						<li>
 							<a href="{{ url_for("admin_edit_story", story_id=story._id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-							<a href="{{ url_for("admin_delete_story", story_id=story._id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+							<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-delete{{ story._id }}">Delete</button>
+							<div id="modal-delete{{ story._id }}" class="modal fade" tabindex="-1" aria-labelledby="modal-deleteLabel-{{ story._id }}" aria-hidden="true">
+								<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+									Are you sure you want to delete <em><strong>{{ story.story_title }} - Posted by: {{ story.username }}</em></strong>?
+									</div>
+									<div class="modal-footer">
+									<button type="button" class="btn btn-alert" data-bs-dismiss="modal">Close</button>
+									<a href="{{ url_for("admin_delete_story", story_id=story._id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+									</div>
+								</div>
+								</div>
+							</div>
 							{{ story.story_title }} - Posted by: {{ story.username }}
 						</li>
 				{% endfor %}
