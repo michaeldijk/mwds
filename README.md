@@ -37,7 +37,6 @@ It is also a place where users can just share snippets, of certain things, or, c
     * [User Story Testing](#)
     * [Manual testing across devices / browsers](#)
     * [HTML](#)
-    * [Lighthouse testing](#)
     * [CSS](#)
     * [JavaScript](#)
     * [Unsolved issues](#)
@@ -299,4 +298,18 @@ I tested the site with different devices and browsers, see my notes below for ea
 #### HTML testing
 ##### Code validator
 When I completed all my HTML code, I carried out several validation tests, by using [W3C Markup Validation Service](https://validator.w3.org/), which is a worldwide recognized validator created by the WWC, that allows checking HTML and XHTML code, to check if markup was documented correctly, and correct any errors along the way.
+
+#### css testing
+##### Code validator
+When I completed the site, I carried out validation tests, using [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/), and adjusted my code thereafter accordingly, to fix any errors that was present.
+
+#### Javascript testing
+##### Code validator
+When I completed the site, I carried out validation tests, using [JSHint](https://jshint.com/), for JS, there was no errors present.
+
+#### Python testing
+##### Code validator
+When I completed the site, I carried out validation tests, using [PEP8 online](http://pep8online.com/), there where some lines exceeding the character limit, which I fixed.<br>
+There where also some additional errors, due to lines to long, but these are errors present due to commenting in the code, and breaking them, would not show the comments in the appropriate way.
+![image](https://github.com/michaeldijk/mwds/blob/main/readme_files/manual_testing/pep8.png)
 
